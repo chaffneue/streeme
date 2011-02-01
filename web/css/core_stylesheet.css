@@ -1,0 +1,12 @@
+.core-timer
+{
+	position: absolute;
+	bottom:0;
+	right:0;
+	background-color: black;
+	color: white;
+	font-weight: bold;
+	font-size: 70%;
+	padding: 10px;
+	font-family: arial, sans-serif;
+}

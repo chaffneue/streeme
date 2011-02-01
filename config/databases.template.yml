@@ -1,0 +1,24 @@
+test:
+  doctrine:
+    class: sfDoctrineDatabase
+    param:
+      dsn: 'mysql:host=localhost;dbname=streemetest'
+      username: root
+      password: pass
+      encoding: utf8
+      attributes:
+        default_table_collate: utf8_general_ci
+        default_table_charset: utf8
+
+all:
+  doctrine:
+    class: sfDoctrineDatabase
+    param:
+      dsn: 'mysql:host=localhost;dbname=streeme'
+      username: root
+      password: pass
+      encoding: utf8
+      attributes:
+        default_table_collate: utf8_general_ci
+        default_table_charset: utf8
+      profiler: false

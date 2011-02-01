@@ -1,0 +1,171 @@
+Thanks for trying out Streeme. While in alpha phase, there's a few hurdles to getting up and running, but anyone familiar with
+using PHP or Google-fu should breeze through setting this stuff up quickly. 
+
+Minimum Requirements 
+---
+256M RAM 
+1GHz CPU 
+PHP 5.2.4 +
+Mysql 5.1.37+
+Apache 2.0+
+
+
+Web Server Installers
+---
+Mac please use macports / fink to roll your own Apache/PHP/MySQL - it will run on the default one too, but it's not very flexible
+PC http://www.apachefriends.org/en/xampp-windows.html
+Ubuntu 8+ https://help.ubuntu.com/community/ApacheMySQLPHP
+
+
+Mysql config - add to my.cnf - on Macs you may need to copy my.cnf from the mysql install to /etc/
+**Note: This app uses SQL specialized for MySQL
+---
+[mysqld]
+default-character-set = utf8
+default-collation = utf8_unicode_ci
+query_cache_type = 1
+query_cache_size  = 32M
+
+*if you have other projects using MySQL on this server, you may want to choose to ignore the query cache steps to 
+preserve compatibility with other projects
+
+
+Apache Config - edit in apache2.conf / httpd.conf usually in /etc/
+---
+add mod-rewrite    *required
+add mod-XSendFile  *optional
+add deflate_module *optional
+(or compile apache with this functionality if not using modules)
+
+choose the right timezone for php date.timezone flag make sure your PC clock is the same region and time 
+
+create a virtual host: 
+(It's highly recommended that you choose a random unused port between 1025-9800 )
+
+# This is the configuration for the streeme app communication path
+Listen *:8095
+
+# Be sure to only have this line once in your configuration
+NameVirtualHost *:8095
+
+<VirtualHost *:8095>
+  DocumentRoot "d:/web/streeme/web"
+  DirectoryIndex index.php
+  <Directory "d:/web/streeme/web">
+    AllowOverride All
+    Allow from All
+  </Directory>
+
+  Alias /sf "d:/web/streeme/lib/vendor/symfony/data/web/sf"
+  <Directory "d:/web/streeme/lib/vendor/symfony/data/web/sf">
+    AllowOverride All
+    Allow from All
+  </Directory>
+</VirtualHost>
+
+# This is the configuration for the music streamer
+Listen *:8096
+
+# Be sure to only have this line once in your configuration
+NameVirtualHost *:8096
+
+<VirtualHost *:8096>
+  DocumentRoot "d:/web/streeme/web"
+  DirectoryIndex index.php
+  <Directory "d:/web/streeme/web">
+    AllowOverride All
+    Allow from All
+  </Directory>
+</VirtualHost>
+
+#Disable SVN directory sniffing through apache
+<Directory ~ ".*\.svn"> 
+Order allow,deny 
+Deny from all 
+Satisfy All 
+</Directory> 
+
+
+PHP config - edit in php.ini and using the commandline for PEAR commands
+---
+turn off magic quotes gpc
+developers should turn off short_tags
+install PEAR - http://pear.php.net/manual/en/installation.php
+sandboxed servers like xampp for windows come with pear already so just type in the following commands
+  - pear install APC
+  - pear install HTTP_Download
+
+- increase max memory to 128M or higher in cli - 32MB or higher for web 
+- large libraries will demand more memory use during scanning and GD may need to process up to 10MP JPEG images for cover art
+curl required for cloudfusion: sudo apt-get install curl libcurl3 libcurl3-dev php5-curl 
+
+You should validate your PHP install went right by running 
+
+PHP MUST BE PART OF YOUR PATH!
+
+>php check_configuration.php
+
+in the root of this project  
+
+
+Streeme Installation
+---
+
+Checkout the symfony framework into lib/vendor/symfony
+pin your installation to a 1.4.8 tag: 
+cd lib/vendor/symfony
+svn co http://svn.symfony-project.com/tags/RELEASE_1_4_8/ .
+
+rename config/databases.template.yml -> config/databases.yml
+open config/databases.yml and fill in your database's username and password - grant privileges to create databases if you want auto setup
+streeme is a MySQL only app at this time
+
+rename apps/client/config/app.template.yml -> apps/client/config/app.yml
+Fill in the information about the application and paths
+
+permissions
+*nix users - chmod 777 cache log
+             in the project root folder, type: php symfony doctrine:build --all --and-load	
+
+Windows -    check that cache and log have write permissions
+             copy the symfony batch file from lib/vendor/symfony/data/bin/symfony.bat to the project root folder
+             in the project root folder, type: symfony doctrine:build --all --and-load
+	           copy the lib/vendor/symfony/data/web/sf folder to web/
+
+initialize the database as follows
+
+*nix
+cd path/to/streeme
+./symfony doctrine:build --all --and-load
+
+windows
+cd path/to/streeme
+php symfony doctrine:build --all --and-load
+
+tested on symfony 1.4.8 - 1.4.9-dev branch between September 28,2010 and  November 30, 2010
+
+
+FFMPEG
+---
+ubuntu: http://ubuntuforums.org/showthread.php?t=1117283 install ffmpeg from the medibuntu distro on ubuntu. You'll need medibuntu to enjoy mp3 support in chrome on ubuntu anyway.
+
+mac: use macports to build your very own ffmpeg - takes a good long time to build if you don't use macports on a regular basis. Please follow the directions at macports.org for more info about this package manager.
+
+>sudo port -v selfupdate
+
+>port search ffmpeg
+
+>sudo port install ffmpeg +gpl +lame +aac
+
+mac and ubuntu: make ffmpeg part of your path and enter "ffmpeg" in the entry for ffmpeg_executable and set allow_ffmpeg_transcoding: true
+ 
+windows: you'll need to find an appropriate FFMPEG client - they change all the time, so it's useless giving links - you need lame (mp3) and vorbis (ogg) support
+         Audacity, an open source sound editor, has a number of prebuilt FFMPEG libs
+         
+windows:  place the binaries in Your_Streeme_Project_Dir/bin/third_party/ffmpeg and set ffmpeg_executable: c:\path\to\ffmpeg.exe allow_ffmpeg_transcoding: true
+
+
+Amazon Art Scanning
+---
+Amazon offers significant detail about albums and advertising links for associates. Please keep in mind that your system clock must be within 15 minutes of the correct time for your time zone
+edit the cloudfusion config file in apps/client/config

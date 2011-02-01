@@ -1,0 +1,158 @@
+Album:
+  connection: doctrine
+  tableName: album
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    scan_id:
+      type: integer
+    name:
+      type: string(255)
+      unique: true
+    amazon_flagged:
+      type: integer(1)
+      default: 0
+    meta_flagged:
+      type: integer(1)
+      default: 0
+    folders_flagged:
+      type: integer(1)
+      default: 0
+    service_flagged:
+      type: integer(1)
+      default: 0   
+    has_art:
+      type: integer(1)
+      default: 0
+
+Artist:
+  connection: doctrine
+  tableName: artist
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    name:
+      type: string(255)
+     
+Genre:
+  connection: doctrine
+  tableName: genre
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    name:
+      type: string(255)
+      
+Playlist:
+  connection: doctrine
+  tableName: playlist
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    name:
+      type: string(255)
+
+PlaylistFiles:
+  connection: doctrine
+  tableName: playlist_files
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    playlist_id:
+      type: integer
+      default: 0
+    filename:
+      type: text
+
+Scan:
+  connection: doctrine
+  tableName: scan
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    scan_time:
+      type: string(255)
+    scan_type:
+      type: string(255)
+  indexes:
+    scan_type_index:
+      fields: [scan_type]
+      
+Song:
+  connection: doctrine
+  tableName: song
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    unique_id:
+      type: string(255)
+    artist_id:
+      type: integer
+      default: 0
+    album_id:
+      type: integer
+      default: 0
+    genre_id:
+      type: integer
+      default: 0
+    last_scan_id:
+      type: integer
+      default: '0'
+    name:
+      type: string(255)
+    length:
+      type: string(255)
+    accurate_length:
+      type: integer
+    filesize:
+      type: integer
+    bitrate:
+      type: integer
+    yearpublished:
+      type: integer
+    tracknumber:
+      type: integer
+    label:
+      type: string(255)
+    mtime:
+      type: integer
+    atime:
+      type: integer
+    filename:
+      type: text
+  indexes:
+    artist_index:
+      fields: [artist_id]
+    album_index:
+      fields: [album_id]
+    genres_index:
+      fields: [genre_id]
+    unique_id_index:
+      fields: [unique_id]
+    last_scan_id:
+      fields: [last_scan_id]
+    songname_index:
+      fields: [name]
+    songmtime_index:
+      fields: [mtime]
+    songyearpublished_index:
+      fields: [yearpublished]
+    songlength_index:
+      fields: [length]
+options:
+  collate: utf8_unicode_ci
+  charset: utf8

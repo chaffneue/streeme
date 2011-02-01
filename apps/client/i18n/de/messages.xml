@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
+<xliff version="1.0">
+  <file source-language="EN" target-language="de" datatype="plaintext" original="messages" date="2011-02-07T00:10:14Z" product-name="messages">
+    <header/>
+    <body>
+      <trans-unit id="1">
+       <source>You don't have the required permission to access this page.</source>
+	<target>Sie haben nicht die notwendigen Rechte um auf diese Seite zugreifen zu können.</target>
+      </trans-unit>
+      <trans-unit id="2">
+        <source>Streeme: Please sign in</source>
+        <target>Streeme: Bitte anmeldenq</target>
+        
+      </trans-unit>
+      <trans-unit id="3">
+        <source>Please sign in to continue</source>
+	<target>Bitte melden Sie an um weiter zu machen</target>
+      </trans-unit>
+      <trans-unit id="4">
+        <source>Please Sign In</source>
+	<target>Bitte melden Sie sich an</target>
+      </trans-unit>
+      <trans-unit id="5">
+        <source>Username</source>
+	<target>Benutzername</target>
+      </trans-unit>
+      <trans-unit id="6">
+        <source>Password</source>
+	<target>Passwort</target>
+      </trans-unit>
+      <trans-unit id="7">
+        <source>Remember me</source>
+	<target>Anmeldung dauerhaft merken</target>
+      </trans-unit>
+      <trans-unit id="8">
+        <source>Sign in</source>
+        <target>Anmelden</target>
+      </trans-unit>
+      <trans-unit id="9">
+        <source>First</source>
+        <target>Erste</target>
+      </trans-unit>
+      <trans-unit id="10">
+        <source>Last</source>
+        <target>Letzte</target>
+      </trans-unit>
+      <trans-unit id="11">
+        <source>Next</source>
+        <target>Nächste</target>
+      </trans-unit>
+      <trans-unit id="12">
+        <source>Previous</source>
+        <target>Vorhergehende</target>
+      </trans-unit>
+      <trans-unit id="13">
+        <source>No data available in table</source>
+        <target>In der Tabelle sind keine Daten vorhanden</target>
+      </trans-unit>
+      <trans-unit id="14">
+        <source>Showing _START_ to _END_ of _TOTAL_ entries</source>
+        <target>Zeige _START_ bis _END_ von _TOTAL_ Einträgen</target>
+      </trans-unit>
+      <trans-unit id="15">
+        <source>No entries to show</source>
+        <target>Keine Einträge zum anzeigen</target>
+      </trans-unit>
+      <trans-unit id="16">
+        <source>(filtered from _MAX_ total entries)</source>
+        <target>(gefiltert von insgesamt _MAX_ Einträgen)</target>
+      </trans-unit>
+      <trans-unit id="17">
+        <source>Show _MENU_ songs</source>
+        <target>Zeige _MENU_ Songs</target>
+      </trans-unit>
+      <trans-unit id="18">
+        <source>Loading...</source>
+        <target>Lade...</target>
+      </trans-unit>
+      <trans-unit id="19">
+        <source>Search:</source>
+        <target>Suche:</target>
+      </trans-unit>
+      <trans-unit id="20">
+        <source>No songs to display</source>
+        <target>Keine Lieder anzeigbar</target>
+      </trans-unit>
+      <trans-unit id="21">
+        <source>Album Art Image for: </source>
+        <target>Album Cover für:: </target>
+        
+      </trans-unit>
+      <trans-unit id="22">
+        <source>Are you sure you want to quit the Streeme mobile application?</source>
+        <target>Sind Sie sicher, dass Sie die Streeme mobile Seite schließen wollen?</target>
+        
+      </trans-unit>
+      <trans-unit id="23">
+        <source>Click to add to current playlist</source>
+        <target>Klicken Sie um die aktuelle Playlist hinzuzufügen</target>
+        
+      </trans-unit>
+      <trans-unit id="24">
+        <source>Click to remove this song from the playlist</source>
+        <target>Klicken Sie um dieses Lied von der Playlist zu entfernen</target>
+        
+      </trans-unit>
+      <trans-unit id="25">
+        <source>Item(s) added to playlist</source>
+        <target>Stück(e) zur Playlist hinzugefügt</target>
+        
+      </trans-unit>
+      <trans-unit id="26">
+        <source>Error! Did you select a playlist first?</source>
+        <target>Fehler! Haben Sie zuerst eine Playlist ausgewählt?</target>
+        
+      </trans-unit>
+      <trans-unit id="27">
+        <source>Item deleted from the active playlist</source>
+        <target>Stück von der aktuelle Playlist gelöscht</target>
+        
+      </trans-unit>
+      <trans-unit id="28">
+        <source>Error! Streeme reported an error. Song not deleted.</source>
+        <target>Fehler! Streeme meldete einen Fehler. Lied nicht gelöscht.</target>
+        
+      </trans-unit>
+      <trans-unit id="29">
+        <source>Please specify a name for the new playlist</source>
+        <target>Bitte geben Sie einen Namen für die neue Playlist an</target>
+        
+      </trans-unit>
+      <trans-unit id="30">
+        <source>Added New Playlist</source>
+        <target>Neue Playlist hinzugefügt</target>
+        
+      </trans-unit>
+      <trans-unit id="31">
+        <source>Error! Playlist not created.</source>
+	<target>Fehler! Playlist nicht erstellt.</target>
+        
+      </trans-unit>
+      <trans-unit id="32">
+        <source>Playlist Deleted</source>
+        <target>Playlist gelöscht</target>
+        
+      </trans-unit>
+      <trans-unit id="33">
+        <source>Error! Streeme reported an error. Playlist not deleted.</source>
+        <target>Fehler! Streeme hat einen Fehler gemeldet. Playlist wurde nicht gelöscht.</target>
+        
+      </trans-unit>
+      <trans-unit id="34">
+        <source>Please enter the keywords to search</source>
+        <target>Bitte geben Sie zum suchen ein Stichwort ein.</target>
+        
+      </trans-unit>
+      <trans-unit id="35">
+        <source>Are you sure you want to delete this item?</source>
+        <target>Sind Sie sicher, das Sie dieses Stück löschen möchten?</target>
+        
+      </trans-unit>
+      <trans-unit id="36">
+        <source>Play this track</source>
+        <target>Dieses Stück spielen</target>
+        
+      </trans-unit>
+      <trans-unit id="37">
+        <source>All Artists</source>
+        <target>Alle Künstler</target>
+        
+      </trans-unit>
+      <trans-unit id="38">
+        <source>All Albums</source>
+        <target>Alle Alben</target>
+        
+      </trans-unit>
+      <trans-unit id="39">
+        <source>Album</source>
+        <target>Album</target>
+        
+      </trans-unit>
+      <trans-unit id="40">
+        <source>Alben</source>
+        <target>Alben</target>
+        
+      </trans-unit>
+      <trans-unit id="41">
+        <source>Artist</source>
+        <target>Künstler</target>
+        
+      </trans-unit>
+      <trans-unit id="42">
+        <source>Artists</source>
+        <target>Künstler</target>
+        
+      </trans-unit>
+      <trans-unit id="43">
+        <source>Genre</source>
+        <target>Genre</target>
+        
+      </trans-unit>
+      <trans-unit id="44">
+        <source>Genres</source>
+        <target>Genres</target>
+        
+      </trans-unit>
+      <trans-unit id="45">
+        <source>Song</source>
+        <target>Stück</target>
+        
+      </trans-unit>
+      <trans-unit id="46">
+        <source>Songs</source>
+        <target>Stücke</target>
+        
+      </trans-unit>
+      <trans-unit id="47">
+        <source>Playlist</source>
+        <target>Playlist</target>
+        
+      </trans-unit>
+      <trans-unit id="48">
+        <source>Playlists</source>
+        <target>Playlists</target>
+        
+      </trans-unit>
+      <trans-unit id="49">
+        <source>Settings</source>
+        <target>Einstellungen</target>
+        
+      </trans-unit>
+      <trans-unit id="50">
+        <source>Home</source>
+        <target>Hauptseite</target>
+        
+      </trans-unit>
+      <trans-unit id="51">
+        <source>Menü</source>
+        <target>Menü</target>
+        
+      </trans-unit>
+      <trans-unit id="52">
+        <source>Streeme - Portable Music</source>
+        <target>Streeme - Portable Music</target>
+        
+      </trans-unit>
+      <trans-unit id="53">
+        <source>Streeme Player for Mobile Webkit Enabled Phones and devices</source>
+        <target>Streeme Player für "Mobile Webkit" fähige Telefone und Geräte</target>
+        
+      </trans-unit>
+      <trans-unit id="54">
+        <source>Back to Player Selection</source>
+        <target>Zurück zur Player-Auswahlseite</target>
+        
+      </trans-unit>
+      <trans-unit id="55">
+        <source>Playing</source>
+        <target>Spiele</target>
+        
+      </trans-unit>
+      <trans-unit id="56">
+        <source>Newest Songs</source>
+        <target>Neueste Lied</target>
+        
+      </trans-unit>
+      <trans-unit id="57">
+        <source>Shuffle All Songs</source>
+        <target>Mische alle Lieder</target>
+        
+      </trans-unit>
+      <trans-unit id="58">
+        <source>Streeme Settings</source>
+        <target>Streeme Einstellungen</target>
+        
+      </trans-unit>
+      <trans-unit id="59">
+        <source>Target bitrate:</source>
+        <target>Zu verwendente Bitrate:</target>
+        
+      </trans-unit>
+      <trans-unit id="60">
+        <source>Play original</source>
+        <target>Original abspielen</target>
+        
+      </trans-unit>
+      <trans-unit id="61">
+        <source>Auto</source>
+        <target>Automatisch</target>
+        
+      </trans-unit>
+      <trans-unit id="62">
+        <source>384kbps</source>
+        <target>384kbps</target>
+        
+      </trans-unit>
+      <trans-unit id="63">
+        <source>320kbp</source>
+        <target>320kbp</target>
+        
+      </trans-unit>
+      <trans-unit id="64">
+        <source>256kbps</source>
+        <target>256kbps</target>
+        
+      </trans-unit>
+      <trans-unit id="65">
+        <source>192kbps</source>
+        <target>192kbps</target>
+        
+      </trans-unit>
+      <trans-unit id="66">
+        <source>128kbps</source>
+        <target>128kbps</target>
+        
+      </trans-unit>
+      <trans-unit id="67">
+        <source>96kbps</source>
+        <target>96kbps</target>
+        
+      </trans-unit>
+      <trans-unit id="68">
+        <source>48kbps</source>
+        <target>48kbps</target>
+        
+      </trans-unit>
+      <trans-unit id="69">
+        <source>32kbps</source>
+        <target>32kbps</target>
+        
+      </trans-unit>
+      <trans-unit id="70">
+        <source>Target format:</source>
+        <target>Zielformat:</target>
+        
+      </trans-unit>
+      <trans-unit id="71">
+        <source>None</source>
+        <target>Keine</target>
+        
+      </trans-unit>
+      <trans-unit id="72">
+        <source>MP3</source>
+        <target>MP3</target>
+        
+      </trans-unit>
+      <trans-unit id="73">
+        <source>OGG</source>
+        <target>OGG</target>
+        
+      </trans-unit>
+      <trans-unit id="74">
+        <source>Player</source>
+        <target>Player</target>
+        
+      </trans-unit>
+      <trans-unit id="75">
+        <source>No Song Selected</source>
+        <target>Kein Lied ausgewählt</target>
+        
+      </trans-unit>
+      <trans-unit id="76">
+        <source>Previous Track</source>
+        <target>Vorhergehendes Stück</target>
+        
+      </trans-unit>
+      <trans-unit id="77">
+        <source>Next Track</source>
+        <target>Nächstes Stück</target>
+        
+      </trans-unit>
+      <trans-unit id="78">
+        <source>Track</source>
+        <target>Stück</target>
+        
+      </trans-unit>
+      <trans-unit id="79">
+        <source>Modified</source>
+        <target>Geändert</target>
+        
+      </trans-unit>
+      <trans-unit id="80">
+        <source>Year</source>
+        <target>Jahr</target>
+        
+      </trans-unit>
+      <trans-unit id="81">
+        <source>Length</source>
+        <target>Dauer</target>
+        
+      </trans-unit>
+      <trans-unit id="82">
+        <source>TK#</source>
+        <target>TK#</target>
+        
+      </trans-unit>
+      <trans-unit id="83">
+        <source>Extension</source>
+        <target>Erweiterung</target>
+        
+      </trans-unit>
+      <trans-unit id="84">
+        <source>Streeme: Welcome - Control Panel</source>
+        <target>Streeme: Willkommen - Systemsteuerung</target>
+        
+      </trans-unit>
+      <trans-unit id="85">
+        <source>Continue to a player or change global application settings</source>
+        <target>Weiter zu einem Player oder die globalen Eintstellungen ändern</target>
+        
+      </trans-unit>
+      <trans-unit id="86">
+        <source>Welcome to Streeme</source>
+        <target>Willkommen zu Streeme</target>
+        
+      </trans-unit>
+      <trans-unit id="87">
+        <source>Desktop Player</source>
+        <target>Desktop Player</target>
+        
+      </trans-unit>
+      <trans-unit id="88">
+        <source>Mobile Player</source>
+        <target>Mobile Player</target>
+        
+      </trans-unit>
+      <trans-unit id="89">
+        <source>Global Settings</source>
+        <target>Globale Einstellungen</target>
+        
+      </trans-unit>
+      <trans-unit id="90">
+        <source>Sign Off</source>
+        <target>Abmelden</target>
+        
+      </trans-unit>
+      <trans-unit id="91">
+        <source>Remember my player choice</source>
+        <target>Meine Player Wahl merken</target>
+        
+      </trans-unit>
+      <trans-unit id="92">
+        <source>Desktop</source>
+        <target>Desktop</target>
+        
+      </trans-unit>
+      <trans-unit id="93">
+        <source>Mobile</source>
+        <target>Mobile</target>
+        
+      </trans-unit>
+      <trans-unit id="94">
+        <source>Play this playlist</source>
+        <target>Spiele diese Playlist</target>
+        
+      </trans-unit>
+      <trans-unit id="95">
+        <source>Unload this playlist</source>
+        <target>Diese Playlist entladen</target>
+        
+      </trans-unit>
+      <trans-unit id="96">
+        <source>Delete this playlist</source>
+        <target>Diese Playlist löschen</target>
+        
+      </trans-unit>
+      <trans-unit id="97">
+        <source>Are you sure you want to quit the Streeme desktop application?</source>
+        <target>Sind Sie sicher, dass Sie die Streeme Desktop Seite schließen möchten?</target>
+        
+      </trans-unit>
+      <trans-unit id="98">
+        <source>Browse Artists</source>
+        <target>Künstler durchsuchen</target>
+        
+      </trans-unit>
+      <trans-unit id="99">
+        <source>Browse Albums</source>
+        <target>Alben durchsuchen</target>
+        
+      </trans-unit>
+      <trans-unit id="100">
+        <source>Streeme Player for the Desktop</source>
+        <target>Streeme Player für den  Desktop</target>
+        
+      </trans-unit>
+      <trans-unit id="101">
+        <source>Added item to playlist</source>
+        <target>Füge Stück zur Playlist hinzu</target>
+        
+      </trans-unit>
+      <trans-unit id="102">
+        <source>View playlists</source>
+        <target>Playlists anzeigen</target>
+        
+      </trans-unit>
+      <trans-unit id="103">
+        <source>Change settings</source>
+        <target>Einstellungen ändern</target>
+        
+      </trans-unit>
+      <trans-unit id="104">
+        <source>Double click any song to play</source>
+        <target>Doppel Klicken Sie auf ein Lied um es abzuspielen</target>
+        
+      </trans-unit>
+      <trans-unit id="105">
+        <source>Random Play On/Off</source>
+        <target>Zufallswiedergabe An/Aus</target>
+        
+      </trans-unit>
+      <trans-unit id="106">
+        <source>Add New Playlist&amp;hellip;</source>
+        <target>Füge neue Playlist hinzu&amp;hellip;</target>
+        
+      </trans-unit>
+      <trans-unit id="107">
+        <source>Magnify album art</source>
+        <target>Album Cover vergrößern</target>
+        
+      </trans-unit>
+      <trans-unit id="108">
+	<source>Cancel the Search</source>
+        <target>Suche abbrechen</target>
+        
+      </trans-unit>
+      <trans-unit id="109">
+        <source>Browse Genres</source>
+        <target>Genres durchsuchen</target>
+        
+      </trans-unit>
+      <trans-unit id="110">
+        <source>-- Choose a Genre --</source>
+        <target>--  Genre auswählen --</target>
+        
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

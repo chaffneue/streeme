@@ -1,0 +1,59 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/04-Settings
+
+prod:
+  .settings:
+    no_script_name:         true
+    logging_enabled:        false
+
+dev:
+  .settings:
+    error_reporting:        <?php echo (E_ALL | E_STRICT)."\n" ?>
+    web_debug:              true
+    cache:                  false
+    no_script_name:         false
+    etag:                   false
+
+test:
+  .settings:
+    error_reporting:        <?php echo ((E_ALL | E_STRICT) ^ E_NOTICE)."\n" ?>
+    cache:                  false
+    web_debug:              false
+    no_script_name:         false
+    etag:                   false
+    logging_enabled:        true
+
+all:
+  .settings:
+    # Form security secret (CSRF protection)
+    csrf_secret:            f64f02fb3ee4b576226fec46fcc071ed9cc3f74b
+
+    # Output escaping settings
+    escaping_strategy:      true
+    escaping_method:        ESC_SPECIALCHARS
+
+    # Enable the database manager
+    use_database:           true
+    
+    # Add Internationalization Layer
+    i18n: true
+    charset: utf-8
+    default_culture: en
+    translations_available: [ en,tr,it,es,de ]
+    translation_labels:
+      en: English
+      tr: Türkçe
+      it: Italiano
+      es: Español
+      de: Deutsch
+
+    # Extra Helpers
+    standard_helpers: [ Partial, Cache, I18N ]
+    
+    # Auth modules
+    enabled_modules: [ default, sfGuardAuth ]
+    login_module:           sfGuardAuth
+    login_action:           signin
+    
+    secure_module:          sfGuardAuth
+    secure_action:          secure

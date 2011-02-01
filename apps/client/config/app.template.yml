@@ -1,0 +1,61 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/11-App
+
+all: 
+  # the location of your itunes XML file
+  # eg. Win: C:\Users\username\Music\iTunes\Itunes.xml
+  #     Mac: /Users/username/Music/iTunes/iTunes Music Library.xml
+  itunes_xml_location: "/home/notroot/music/iTunes Music Library.xml"
+  
+  # Watched folders for loading media from the filesystem - no trailing slash
+  # eg. Win: C:\Users\username\Music
+  #     Mac: /Users/username/Music
+  #    *nix: /home/user/music
+  wf: 
+    watched_folders: 
+      - "/home/notroot/music"
+  
+  # If your music is predominantly stored on NAS drives on Windows, please remap the locations 
+  # from the itunes style full paths to the windows style sharing paths using forward slashes
+  # only required for itunes scanning
+  # eg.  'file://localhost/Z:' : '//mediabox/music'
+  # you may experience some pretty heavy lag over SAMBA, but it'll work fine
+  mdl:
+    mapped_drive_locations:
+    
+  # Allowed filetypes - this will be dependent on your browser's codecs
+  # eg. - mp3
+  aft:
+    allowed_file_types:
+      - mp3
+      
+  # Results Per Page 
+  # When in doubt, show this many results per page
+  results_per_page: 60
+  
+  #allow ffmpeg transcoding capabilities
+  allow_ffmpeg_transcoding: false
+  
+  #Full Location of ffmpeg executable
+  ffmpeg_executable: ""
+    
+  #The Port for the media stream - must not be the same as the program port
+  music_proxy_port: 8096
+  
+  #add support for audio tags that do not send cookies ( Palm Pre Support )
+  send_cookies_with_request: false
+  
+  #set the default cookie lifetime for auth
+  sf_guard_plugin:
+     remember_key_expiration_age: 25920000   # 300 days in seconds
+
+  #set up your media scan plan - you can customize how your library is scanned
+  #remove the pound (#) sign to enable scan if you'd like to change the order
+  #just move the items up or down in the list
+  msp:
+    media_scan_plan:
+      #- 'scan-media --type=itunes'
+      - 'scan-media --type=filesystem'
+      #- 'scan-art --source=amazon'
+      - 'scan-art --source=meta'
+      - 'scan-art --source=folders'

@@ -1,0 +1,46 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/10-Routing
+
+services:
+  url: /service/:action
+  param: { module: service, action: :action }
+
+player_desktop_default:
+  url: /player/desktop
+  param: { module: player_desktop, action: index }
+
+player_desktop:
+  url: /player/desktop/:action
+  param: { module: player_desktop, action: :action }
+
+player_settings_default:
+  url: /player/settings
+  param: { module: player_mobile, action: index }  
+
+player_settings:
+  url: /player/settings/:action
+  param: { module: player_mobile, action: :action }
+
+player_mobile_default:
+  url: /player/mobile
+  param: { module: player_mobile, action: index }  
+
+player_mobile:
+  url: /player/mobile/:action
+  param: { module: player_mobile, action: :action }
+
+player_default:
+  url: /player
+  param: { module: player, action: index }
+
+player:
+  url: /player/:action
+  param: { module: player, action: :action }
+  
+homepage:
+  url: /
+  param: { module: player, action: index }
+
+javascript_base:
+  url: /
+  param: { module: player, action: index }

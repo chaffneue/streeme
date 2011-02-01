@@ -1,0 +1,108 @@
+html, table, tr, td, div, ul, ol, li, h1, h2, h3, p, a, dd, dt{
+	font-family: "Helvetica", sans-serif, "Arial";
+}
+html, body{ height: 100%; width: 100%; }
+body{
+	margin: 0;
+	padding: 0;
+	font-family: "Helvetica", sans-serif, "Arial";
+	font-size: 12px;
+	color: #484848;
+	background-color: #EEE;
+}
+.clearfix:after, ui-helper-clearfix:after{
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+.clearfix, .ui-helper-clearfix{
+	display: inline-block;
+}
+html[xmlns] .clearfix, html[xmlns] .ui-helper-clearfix{
+	display: block;
+}
+* html .clearfix, * html .ui-helper-clearfix {
+	height: 1%;
+}
+form{
+	display: inline;
+}
+.title{
+	width: 397px;
+	margin: 52px auto 0 auto;
+	padding: 0 0 0 10px;
+	font-weight: bold;
+}
+.buttoncontainer{
+	position: relative;
+	background: url( ../../images/player/player-button-bg.gif ) no-repeat #EEE;
+	width: 397px;
+	height: 93px;
+	margin: 13px auto 0 auto;
+	padding: 10px 0 0 13px;
+}
+.buttoncontainer .text{
+	position: absolute;
+	top: 32px; 
+	right: 40px;
+	font-weight: bold;
+}
+ul.buttons{
+	position: relative;
+	margin: 0;
+	padding:0;
+	list-style: none;
+}
+ul.buttons li{
+	float: left;
+}
+ul.buttons li a.button{
+	display: block;
+	width: 62px;
+	height: 61px;
+	text-indent: -9999px;
+	overflow:hidden;
+	background-image: url( ../../images/player/player-button-sprite.jpg );
+	cursor: pointer;
+}
+.desktop:hover{
+	background-position:  0 62px;
+}
+.mobile{
+	background-position: -62px 0; 
+}
+.mobile:hover{
+	background-position: -62px 62px; 
+}
+.settings{
+	background-position: -124px 0; 
+}
+.settings:hover{
+	background-position: -124px 62px; 
+}
+#settings{
+	display:none;
+}
+.logout{
+	background-position: -185px 0; 
+}
+.logout:hover{
+	background-position: -185px 62px; 
+}
+.remember{
+	width: 397px;
+	margin: 3px auto 0 auto;
+	padding: 0 0 0 10px;
+	font-weight: bold;
+}
+input[type=checkbox]{
+	vertical-align: -2px;
+}
+.buttonradius{
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+}

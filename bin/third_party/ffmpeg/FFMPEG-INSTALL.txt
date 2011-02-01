@@ -1,0 +1,6 @@
+In order to use a number of Streeme's functions, you may choose to install FFMPEG binaries to this folder. 
+You can set options about the FFMPEG path in the application configuration file. 
+
+I have not included it with the Streeme project due to uncertainty about codec legality. It is NOT required for basic functionality
+
+You install FFMPEG and codecs and libraries at your own peril.

@@ -1,0 +1,256 @@
+Genre:
+  Genre_0:
+    name: Blues
+  Genre_1:
+    name: 'Classic Rock'
+  Genre_2:
+    name: Country
+  Genre_3:
+    name: Dance
+  Genre_4:
+    name: Disco
+  Genre_5:
+    name: Funk
+  Genre_6:
+    name: Grunge
+  Genre_7:
+    name: Hip-Hop
+  Genre_8:
+    name: Jazz
+  Genre_9:
+    name: Metal
+  Genre_10:
+    name: 'New Age'
+  Genre_11:
+    name: Oldies
+  Genre_12:
+    name: Other
+  Genre_13:
+    name: Pop
+  Genre_14:
+    name: 'R&B'
+  Genre_15:
+    name: Rap
+  Genre_16:
+    name: Reggae
+  Genre_17:
+    name: Rock
+  Genre_18:
+    name: Techno
+  Genre_19:
+    name: Industrial
+  Genre_20:
+    name: Alternative
+  Genre_21:
+    name: Ska
+  Genre_22:
+    name: 'Death Metal'
+  Genre_23:
+    name: Pranks
+  Genre_24:
+    name: Soundtrack
+  Genre_25:
+    name: Euro-Techno
+  Genre_26:
+    name: Ambient
+  Genre_27:
+    name: Trip-Hop
+  Genre_28:
+    name: Vocal
+  Genre_29:
+    name: Jazz+Funk
+  Genre_30:
+    name: Fusion
+  Genre_31:
+    name: Trance
+  Genre_32:
+    name: Classical
+  Genre_33:
+    name: Instrumental
+  Genre_34:
+    name: Acid
+  Genre_35:
+    name: House
+  Genre_36:
+    name: Game
+  Genre_37:
+    name: 'Sound Clip'
+  Genre_38:
+    name: Gospel
+  Genre_39:
+    name: Noise
+  Genre_40:
+    name: AlternRock
+  Genre_41:
+    name: Bass
+  Genre_42:
+    name: Soul
+  Genre_43:
+    name: Punk
+  Genre_44:
+    name: Space
+  Genre_45:
+    name: Meditative
+  Genre_46:
+    name: 'Instrumental Pop'
+  Genre_47:
+    name: 'Instrumental Rock'
+  Genre_48:
+    name: Ethnic
+  Genre_49:
+    name: Gothic
+  Genre_50:
+    name: Darkwave
+  Genre_51:
+    name: Techno-Industrial
+  Genre_52:
+    name: Electronic
+  Genre_53:
+    name: Pop-Folk
+  Genre_54:
+    name: Eurodance
+  Genre_55:
+    name: Dream
+  Genre_56:
+    name: 'Southern Rock'
+  Genre_57:
+    name: Comedy
+  Genre_58:
+    name: Cult
+  Genre_59:
+    name: Gangsta
+  Genre_60:
+    name: 'Top 40'
+  Genre_61:
+    name: 'Christian Rap'
+  Genre_62:
+    name: Pop/Funk
+  Genre_63:
+    name: Jungle
+  Genre_64:
+    name: 'Native American'
+  Genre_65:
+    name: Cabaret
+  Genre_66:
+    name: 'New Wave'
+  Genre_67:
+    name: Psychadelic
+  Genre_68:
+    name: Rave
+  Genre_69:
+    name: Showtunes
+  Genre_70:
+    name: Trailer
+  Genre_71:
+    name: Lo-Fi
+  Genre_72:
+    name: Tribal
+  Genre_73:
+    name: 'Acid Punk'
+  Genre_74:
+    name: 'Acid Jazz'
+  Genre_75:
+    name: Polka
+  Genre_76:
+    name: Retro
+  Genre_77:
+    name: Musical
+  Genre_78:
+    name: 'Rock & Roll'
+  Genre_79:
+    name: 'Hard Rock'
+  Genre_80:
+    name: Folk
+  Genre_81:
+    name: Folk-Rock
+  Genre_82:
+    name: 'National Folk'
+  Genre_83:
+    name: Swing
+  Genre_84:
+    name: 'Fast Fusion'
+  Genre_85:
+    name: Bebob
+  Genre_86:
+    name: Latin
+  Genre_87:
+    name: Revival
+  Genre_88:
+    name: Celtic
+  Genre_89:
+    name: Bluegrass
+  Genre_90:
+    name: Avantgarde
+  Genre_91:
+    name: 'Gothic Rock'
+  Genre_92:
+    name: 'Progressive Rock'
+  Genre_93:
+    name: 'Psychedelic Rock'
+  Genre_94:
+    name: 'Symphonic Rock'
+  Genre_95:
+    name: 'Slow Rock'
+  Genre_96:
+    name: 'Big Band'
+  Genre_97:
+    name: Chorus
+  Genre_98:
+    name: 'Easy Listening'
+  Genre_99:
+    name: Acoustic
+  Genre_100:
+    name: Humour
+  Genre_101:
+    name: Speech
+  Genre_102:
+    name: Chanson
+  Genre_103:
+    name: Opera
+  Genre_104:
+    name: 'Chamber Music'
+  Genre_105:
+    name: Sonata
+  Genre_106:
+    name: Symphony
+  Genre_107:
+    name: 'Booty Bass'
+  Genre_108:
+    name: Primus
+  Genre_109:
+    name: 'Porn Groove'
+  Genre_110:
+    name: Satire
+  Genre_111:
+    name: 'Slow Jam'
+  Genre_112:
+    name: Club
+  Genre_113:
+    name: Tango
+  Genre_114:
+    name: Samba
+  Genre_115:
+    name: Folklore
+  Genre_116:
+    name: Ballad
+  Genre_117:
+    name: 'Power Ballad'
+  Genre_118:
+    name: 'Rhythmic Soul'
+  Genre_119:
+    name: Freestyle
+  Genre_120:
+    name: Duet
+  Genre_121:
+    name: 'Punk Rock'
+  Genre_122:
+    name: 'Drum Solo'
+  Genre_123:
+    name: 'A capella'
+  Genre_124:
+    name: Euro-House
+  Genre_125:
+    name: 'Dance Hall'
+Playlist:
+  Playlist_0:
+    name: 'Default Playlist'

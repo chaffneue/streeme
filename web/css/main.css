@@ -1,0 +1,333 @@
+div.mainbg{
+	position: absolute;
+	background: url(../images/main-screen-wallpaper.png) no-repeat top left #000;
+	height: 420px;
+	width: 320px;
+	background-position: 0 0;
+}
+div.container{
+	position: relative;
+	background: url(../images/main-screen-glosscover.png) no-repeat top left;
+}
+.mainsearchspace{
+	position: absolute;
+	top: 0; 
+	left: 0;
+}
+.mainsearchicon{
+	position: absolute; 
+	background: url(../images/search-icon-main.png) no-repeat top left transparent;
+	height: 29px;
+	width: 20px;
+	top:20px;
+	left:12px;
+	z-index: 12;
+}
+.mainsearchform{
+	position: absolute;
+	top: 20px;
+	left: 35px;
+}
+.mainsearchfield{
+	padding: 5px;
+	width: 254px;
+}
+.mainsearchsubmit{
+	display: none;
+}
+
+
+.artistsbutton{
+	display: block;
+	position: absolute;
+	opacity: 0.56;
+	background: url(../images/menu-highlights.png) no-repeat top center;
+	height: 45px;
+	width: 320px;
+	top: 69px;
+	background-color: #000000;
+}
+.artistsbuttonhover{
+	display: block;
+	position: absolute;
+	opacity: 0.56;
+	background: url(../images/menu-highlights.png) no-repeat top center;
+	height: 45px;
+	width: 320px;
+	top: 69px;
+	background-color: #1d7de9;
+}
+
+div.artistslabel{
+	position: absolute;
+	opacity: 1.0;
+	font-weight: bold;
+	font-size: 120%;
+	overflow: hidden;
+	white-space: nowrap;
+	color: white;
+	text-decoration: none;
+	text-shadow: #000000 0 1px 0;
+	top: 79px;
+	left: 15px;
+}
+div.artistsarrow{
+	position: absolute;
+	background: url(../images/next-arrow.png) no-repeat top center;
+	opacity: 1.0;
+	font-size: 120%;
+	width: 9px;
+	height: 13px;
+	color: white;
+	top: 84px;
+	right: 15px;
+}
+
+
+.albumsbutton{
+	-webkit-transition-property: background-color;
+	-webkit-transition-duration: 5s;
+	display: block;
+	position: absolute;
+	opacity: 0.56;
+	background: url(../images/menu-highlights.png) no-repeat top center;
+	height: 45px;
+	width: 320px;
+	top: 119px;
+	background-color: #000000;
+}
+.albumsbuttonhover{
+	-webkit-transition-property: background-color;
+	-webkit-transition-duration: 0.1s;
+	display: block;
+	position: absolute;
+	opacity: 0.56;
+	background: url(../images/menu-highlights.png) no-repeat top center;
+	height: 45px;
+	width: 320px;
+	top: 119px;
+	background-color: #1d7de9;
+}
+div.albumslabel{
+	position: absolute;
+	opacity: 1.0;
+	font-weight: bold;
+	font-size: 120%;
+	overflow: hidden;
+	white-space: nowrap;
+	color: white;
+	text-decoration: none;
+	text-shadow: #000000 0 1px 0;
+	top: 129px;
+	left: 15px;
+}
+div.albumsarrow{
+	position: absolute;
+	background: url(../images/next-arrow.png) no-repeat top center;
+	opacity: 1.0;
+	font-size: 120%;
+	width: 9px;
+	height: 13px;
+	color: white;
+	top: 134px;
+	right: 15px;
+}
+
+.songsbutton{
+	-webkit-transition-property: background-color;
+	-webkit-transition-duration: 5s;
+	display: block;
+	position: absolute;
+	opacity: 0.56;
+	background: url(../images/menu-highlights.png) no-repeat top center;
+	height: 45px;
+	width: 320px;
+	top: 169px;
+	background-color: #000000;
+}
+.songsbuttonhover{
+	-webkit-transition-property: background-color;
+	-webkit-transition-duration: 0.1s;
+	display: block;
+	position: absolute;
+	opacity: 0.56;
+	background: url(../images/menu-highlights.png) no-repeat top center;
+	height: 45px;
+	width: 320px;
+	top: 169px;
+	background-color: #1d7de9;
+}
+div.songslabel{
+	position: absolute;
+	opacity: 1.0;
+	font-weight: bold;
+	font-size: 120%;
+	overflow: hidden;
+	white-space: nowrap;
+	color: white;
+	text-decoration: none;
+	text-shadow: #000000 0 1px 0;
+	top: 179px;
+	left: 15px;
+}
+div.songsarrow{
+	position: absolute;
+	background: url(../images/next-arrow.png) no-repeat top center;
+	opacity: 1.0;
+	font-size: 120%;
+	width: 9px;
+	height: 13px;
+	color: white;
+	top: 184px;
+	right: 15px;
+}
+
+.playlistsbutton{
+	-webkit-transition-property: background-color;
+	-webkit-transition-duration: 5s;
+	display: block;
+	position: absolute;
+	opacity: 0.56;
+	background: url(../images/menu-highlights.png) no-repeat top center;
+	height: 45px;
+	width: 320px;
+	top: 219px;
+	background-color: #000000;
+}
+.playlistsbuttonhover{
+	-webkit-transition-property: background-color;
+	-webkit-transition-duration: 0.1s;
+	display: block;
+	position: absolute;
+	opacity: 0.56;
+	background: url(../images/menu-highlights.png) no-repeat top center;
+	height: 45px;
+	width: 320px;
+	top: 219px;
+	background-color: #1d7de9;
+}
+div.playlistslabel{
+	position: absolute;
+	opacity: 1.0;
+	font-weight: bold;
+	font-size: 120%;
+	overflow: hidden;
+	white-space: nowrap;
+	color: white;
+	text-decoration: none;
+	text-shadow: #000000 0 1px 0;
+	top: 229px;
+	left: 15px;
+}
+div.playlistsarrow{
+	position: absolute;
+	background: url(../images/next-arrow.png) no-repeat top center;
+	opacity: 1.0;
+	font-size: 120%;
+	width: 9px;
+	height: 13px;
+	color: white;
+	top: 234px;
+	right: 15px;
+}
+
+.shufflebutton{
+	-webkit-transition-property: background-color;
+	-webkit-transition-duration: 5s;
+	display: block;
+	position: absolute;
+	opacity: 0.56;
+	background: url(../images/menu-highlights.png) no-repeat top center;
+	height: 45px;
+	width: 320px;
+	top: 269px;
+	background-color: #000000;
+}
+.shufflebuttonhover{
+	-webkit-transition-property: background-color;
+	-webkit-transition-duration: 0.1s;
+	display: block;
+	position: absolute;
+	opacity: 0.56;
+	background: url(../images/menu-highlights.png) no-repeat top center;
+	height: 45px;
+	width: 320px;
+	top: 269px;
+	background-color: #1d7de9;
+}
+div.shufflelabel{
+	position: absolute;
+	opacity: 1.0;
+	font-weight: bold;
+	font-size: 120%;
+	overflow: hidden;
+	white-space: nowrap;
+	color: white;
+	text-decoration: none;
+	text-shadow: #000000 0 1px 0;
+	top: 279px;
+	left: 15px;
+}
+div.shufflearrow{
+	display: none;
+	position: absolute;
+	background: url(../images/next-arrow.png) no-repeat top center;
+	opacity: 1.0;
+	font-size: 120%;
+	width: 9px;
+	height: 13px;
+	color: white;
+	top: 284px;
+	right: 15px;
+}
+
+.newfilebutton{
+	-webkit-transition-property: background-color;
+	-webkit-transition-duration: 5s;
+	display: block;
+	position: absolute;
+	opacity: 0.56;
+	background: url(../images/menu-highlights.png) no-repeat top center;
+	height: 45px;
+	width: 320px;
+	top: 319px;
+	background-color: #000000;
+}
+.newfilebuttonhover{
+	-webkit-transition-property: background-color;
+	-webkit-transition-duration: 0.1s;
+	display: block;
+	position: absolute;
+	opacity: 0.56;
+	background: url(../images/menu-highlights.png) no-repeat top center;
+	height: 45px;
+	width: 320px;
+	top: 319px;
+	background-color: #1d7de9;
+}
+div.newfilelabel{
+	position: absolute;
+	opacity: 1.0;
+	font-weight: bold;
+	font-size: 120%;
+	overflow: hidden;
+	white-space: nowrap;
+	color: white;
+	text-decoration: none;
+	text-shadow: #000000 0 1px 0;
+	top: 329px;
+	left: 15px;
+}
+div.newfilearrow{
+	display: block;
+	position: absolute;
+	background: url(../images/next-arrow.png) no-repeat top center;
+	opacity: 1.0;
+	font-size: 120%;
+	width: 9px;
+	height: 13px;
+	color: white;
+	top: 335px;
+	right: 15px;
+}
+
