@@ -43,7 +43,7 @@ class i18nAutodetectFilter extends sfFilter
       }
       
       //has the user overridden the language manually?
-      if( $request->getParameter('sf_culture') && in_array( $request->getParameter('sf_culture'),  sfConfig::get('sf_translations_available', array() ) ) )
+      if( $request->getParameter('sf_culture') && StreemeUtil::in_array_ci( $request->getParameter('sf_culture'),  sfConfig::get('sf_translations_available', array() ) ) )
       {
         //set the language for this request, so you don't have to refresh
         $culture = $request->getParameter('sf_culture');

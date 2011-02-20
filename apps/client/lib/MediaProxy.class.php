@@ -51,7 +51,7 @@ class MediaProxy
     if( !$result ) return false;
     
     //read configuration file /apps/client/config/app.yml
-    $this->ffmpeg_executable     = sfConfig::get( 'app_ffmpeg_executable' );
+    $this->ffmpeg_executable     = sprintf( '"%s"', sfConfig::get( 'app_ffmpeg_executable' ) );
     $this->allow_transcoding     = sfConfig::get( 'app_allow_ffmpeg_transcoding' );
     
     //get the filename and test if it exists
@@ -128,7 +128,7 @@ class MediaProxy
     if( $this->allow_transcoding )
     {
       $this->log( sprintf( 'Setting target format to: %s', $format ) );
-      $this->target_format         = ( $format && in_array( $format, $this->target_formats ) ) ? $format : false;
+      $this->target_format         = ( $format && StreemeUtil::in_array_ci( $format, $this->target_formats ) ) ? $format : false;
       $this->user_requested_format = ( $this->target_format )  ? true : false;
       $this->target_extension      = '.' . $this->target_format;
       $this->target_type           = $this->types[ $this->target_format ];

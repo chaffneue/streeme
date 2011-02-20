@@ -3,7 +3,7 @@ include( dirname(__FILE__) . '/../bootstrap/unit.php' );
 include( dirname(__FILE__) . '/../../apps/client/lib/StreemeUtil.class.php' );
 
 // Initialize the test object
-$t = new lime_test( 13, new lime_output_color() );
+$t = new lime_test( 14, new lime_output_color() );
 
 
 
@@ -39,3 +39,6 @@ $t->is( StreemeUtil::xmlize_uf8_string( ' 小低胡' . chr(0) ), '小低胡', 'p
 $t->is( StreemeUtil::xmlize_uf8_string( 'äöüæøy' ), 'äöüæøy', 'passes printable UTF-8 tremas' );
 $t->is( StreemeUtil::xmlize_uf8_string( 'm̥mn̥nɲ̊ɲŋ̊ŋðóíáþ' ), 'm̥mn̥nɲ̊ɲŋ̊ŋðóíáþ', 'passes printable UTF-8 icelandic chars' );
 $t->is( StreemeUtil::xmlize_uf8_string( 'YÿþAÿþ#ÿþÿþ' ), '', 'removes id3 signalling leak' );
+
+$t->comment( '->replace_url_nonfs_chars()' );
+$t->is( StreemeUtil::replace_url_nonfs_chars( '%E2%80%93' . '%E2%80%A6' . '%E2%80%BA' ), '%96' . '%85' . '%9B' , 'change mb_strings to single byte latin' );

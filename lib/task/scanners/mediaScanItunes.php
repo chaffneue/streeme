@@ -8,19 +8,16 @@
  * @author     Richard Hoar
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */ 
-require_once( dirname(__FILE__) . '/../../vendor/CFPropertyList-1.1.1/CFPropertyList.php' );
-   
 $itunes_music_library   = sfConfig::get( 'app_itunes_xml_location' );
 $mapped_drive_locations = sfConfig::get( 'app_mdl_mapped_drive_locations' );
 $allowed_filetypes      = sfConfig::get( 'app_aft_allowed_file_types' );
-$media_scanner         = new MediaScan();
-$plist_parser          = new CFPropertyList( $itunes_music_library );
-$plist                 = $plist_parser->toArray();
+$media_scanner          = new MediaScan();
+$itunes_parser          = new StreemeItunesTrackParser( $itunes_music_library );
 
-foreach( $plist[ 'Tracks' ] as $key => $value )
+while( $value = $itunes_parser->getTrack() )
 {
   //if it's not a valid filetype, ignore 
-  if ( !in_array( substr( $value[ 'Location' ], -3 ), $allowed_filetypes ) ) continue;
+  if ( !StreemeUtil::in_array_ci( substr( $value[ 'Location' ], -3 ), $allowed_filetypes ) ) continue;
 
   //update files on windows shares
   if ( is_array( $mapped_drive_locations ) && count( $mapped_drive_locations ) > 0 )
@@ -31,7 +28,7 @@ foreach( $plist[ 'Tracks' ] as $key => $value )
     }
   }
   //if this file's scanned already and nothing about the file has been modified, ignore
-  if ( $media_scanner->is_scanned( StreemeUtil::itunes_format_encode( StreemeUtil::itunes_format_decode( $value[ 'Location' ] ) ), $value[ 'Date Modified' ] ) ) continue;
+  if ( $media_scanner->is_scanned( $value[ 'Location' ], strtotime( $value[ 'Date Modified' ] ) ) ) continue;
 
   //smooth times from itunes format to minutes:seconds
   $minutes = floor( $value[ 'Total Time' ] / 1000 / 60 );
@@ -51,14 +48,18 @@ foreach( $plist[ 'Tracks' ] as $key => $value )
   $song_array[ 'yearpublished' ]    = @$value[ 'Year' ];
   $song_array[ 'tracknumber']       = @$value[ 'Track Number' ];  
   $song_array[ 'label' ]            = @null; //not available from itunes xml
-  $song_array[ 'mtime' ]            = @$value[ 'Date Modified' ];
-  $song_array[ 'atime' ]            = @$value[ 'Date Added' ];
-  $song_array[ 'filename' ]         = StreemeUtil::itunes_format_encode( StreemeUtil::itunes_format_decode( $value[ 'Location' ] ) ); //normalize formatting  
+  $song_array[ 'mtime' ]            = @strtotime( $value[ 'Date Modified' ] );
+  $song_array[ 'atime' ]            = @strtotime( $value[ 'Date Added' ] );
+  $song_array[ 'filename' ]         = @$value[ 'Location' ];
 
-  if( is_readable( urldecode( $song_array[ 'filename' ] ) ) )
+  if( is_readable( StreemeUtil::itunes_format_decode( $song_array[ 'filename' ] ) ) )
   { 
      //it checks out, add the song
      $media_scanner->add_song( $song_array );
+  }
+  else
+  {
+    echo sprintf( 'File %s is unreadable',  $song_array[ 'filename' ] ) . "\r\n";
   }
 }
 

@@ -42,10 +42,6 @@ if ( sfContext::hasInstance()
   $q = Doctrine::getTable( 'sfGuardRememberKey' )->createQuery( 'r' )
     ->innerJoin( 'r.sfGuardUser u' )
     ->where( 'r.remember_key = ?', $cookie );
-  if( sfConfig::get( 'app_send_cookies_with_request' ) )
-  {
-    $q->andWhere( 'r.ip_address = ?', $_SERVER['REMOTE_ADDR'] );
-  }
   if ($q->count())
   {
     $authenticated = true;

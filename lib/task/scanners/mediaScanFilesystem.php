@@ -63,7 +63,7 @@ function scan_directory( $path, $allowed_filetypes, $media_scanner, $id3_scanner
 		$file_stat = stat( $full_file_path );
 
     //is it a usable file? 
-		if ( $file_stat['size'] === 0 || !in_array( substr( $filename, -3 ), $allowed_filetypes ) )	continue;
+		if ( $file_stat['size'] === 0 || !StreemeUtil::in_array_ci( substr( $filename, -3 ), $allowed_filetypes ) )	continue;
 			
     //encode as a iTunes URL
 		$streeme_path_name = StreemeUtil::itunes_format_encode( $full_file_path );
@@ -88,7 +88,7 @@ function scan_directory( $path, $allowed_filetypes, $media_scanner, $id3_scanner
     
     $tags = @$value[ 'tags' ];
     
-    //track number is a nuisance 
+    //track number is a nuisance - regress to find the tags
     if( isset( $tags[ 'id3v1' ][ 'track' ][0] ) && is_int( $tags[ 'id3v1' ][ 'track' ][0] ) )
     {
       //could be an int
@@ -113,9 +113,9 @@ function scan_directory( $path, $allowed_filetypes, $media_scanner, $id3_scanner
     }
     
     $song_array = array();
-    @$song_array[ 'artist_name' ]      = ( $tags['ape'][ 'artist' ][0] ) ? $tags['ape'][ 'artist' ][0] : ( ( $tags['id3v2'][ 'artist' ][0] ) ? $tags['id3v2'][ 'artist' ][0] : ( ( $tags['id3v1'][ 'artist' ][0] ) ? $tags['id3v1'][ 'artist' ][0] : null ) );
-    @$song_array[ 'album_name' ]       = ( $tags['ape'][ 'album' ][0] )  ? $tags['ape'][ 'album' ][0]  : ( ( $tags['id3v2'][ 'album' ][0] )  ? $tags['id3v2'][ 'album' ][0]  : ( ( $tags['id3v1'][ 'album' ][0] )  ? $tags['id3v1'][ 'album' ][0]  : null ) );
-    @$song_array[ 'song_name' ]        = ( $tags['ape'][ 'title' ][0] )  ? $tags['ape'][ 'title' ][0]  : ( ( $tags['id3v2'][ 'title' ][0] )  ? $tags['id3v2'][ 'title' ][0]  : ( ( $tags['id3v1'][ 'title' ][0] )  ? $tags['id3v1'][ 'title' ][0]  : $pinfo['filename'] ) );
+    @$song_array[ 'artist_name' ]      = StreemeUtil::xmlize_uf8_string( ( $tags['ape'][ 'artist' ][0] ) ? $tags['ape'][ 'artist' ][0] : ( ( $tags['id3v2'][ 'artist' ][0] ) ? $tags['id3v2'][ 'artist' ][0] : ( ( $tags['id3v1'][ 'artist' ][0] ) ? $tags['id3v1'][ 'artist' ][0] : null ) ) );
+    @$song_array[ 'album_name' ]       = StreemeUtil::xmlize_uf8_string( ( $tags['ape'][ 'album' ][0] )  ? $tags['ape'][ 'album' ][0]  : ( ( $tags['id3v2'][ 'album' ][0] )  ? $tags['id3v2'][ 'album' ][0]  : ( ( $tags['id3v1'][ 'album' ][0] )  ? $tags['id3v1'][ 'album' ][0]  : null ) ) );
+    @$song_array[ 'song_name' ]        = StreemeUtil::xmlize_uf8_string( ( $tags['ape'][ 'title' ][0] )  ? $tags['ape'][ 'title' ][0]  : ( ( $tags['id3v2'][ 'title' ][0] )  ? $tags['id3v2'][ 'title' ][0]  : ( ( $tags['id3v1'][ 'title' ][0] )  ? $tags['id3v1'][ 'title' ][0]  : $pinfo['filename'] ) ) );
     @$song_array[ 'song_length' ]      = $value[ 'playtime_string' ] ;
     @$song_array[ 'accurate_length' ]  = ( floor( ( (float) $value[ 'playtime_seconds' ] ) * 1000 ) );
     @$song_array[ 'genre_name' ]       = ( $tags['ape'][ 'genre' ][0] )  ? $tags['ape'][ 'genre' ][0]  : ( ( $tags['id3v2'][ 'genre' ] ) ? $tags['id3v2'][ 'genre' ][0] :  ( ( $tags['id3v1'][ 'genre' ][0] )  ? $tags['id3v1'][ 'genre' ][0]  : null ) );
@@ -123,7 +123,7 @@ function scan_directory( $path, $allowed_filetypes, $media_scanner, $id3_scanner
     @$song_array[ 'bitrate' ]          = ( floor ( ( (int) $value[ 'audio' ][ 'bitrate' ] ) / 1000 ) );
     @$song_array[ 'yearpublished' ]             = ( $tags['ape'][ 'year' ][0] )   ? $tags['ape'][ 'year' ][0]   : ( ($tags['id3v2'][ 'year' ][0] ) ? $tags['id3v2'][ 'year' ][0] : ( ( $tags['id3v1'][ 'year' ][0] )  ? $tags['id3v1'][ 'year' ][0]  : null ) );
     @$song_array[ 'tracknumber']      = $tracknumber; 
-    @$song_array[ 'label' ]            = ( $tags['ape'][ 'label' ][0] )  ? $tags['ape'][ 'label' ][0]  : ( ( $tags['id3v2'][ 'label' ][0] ) ? $tags['id3v2'][ 'label' ][0] : null ) ; //not available in V1
+    @$song_array[ 'label' ]            = StreemeUtil::xmlize_uf8_string( ( $tags['ape'][ 'label' ][0] )  ? $tags['ape'][ 'label' ][0]  : ( ( $tags['id3v2'][ 'label' ][0] ) ? $tags['id3v2'][ 'label' ][0] : null ) ); //not available in V1
     @$song_array[ 'mtime' ]            = $file_stat[ 'mtime' ];
     @$song_array[ 'atime' ]            = $file_stat[ 'atime' ];
     @$song_array[ 'filename' ]         = $streeme_path_name; 

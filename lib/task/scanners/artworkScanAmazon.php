@@ -38,9 +38,18 @@ foreach( $artwork_list as $key => $value )
               'SearchIndex' => 'Music',
               'ResponseGroup' => 'Medium'
            );
-
-  $result = $associate_services->item_search( $value['album_name'], $opts );
-
+           
+  //Sometimes Amazon returns malformed xml, so we need to catch exceptions. We'll try again on a later scan.
+  try
+  {
+    $result = $associate_services->item_search( $value['album_name'], $opts );
+  }
+  catch( Exception $e )
+  {
+    echo sprintf( 'Error: Amazon returned invalid response for %s by: %s', $value['album_name'], $value[ 'artist_name'] ) . "\r\n";
+    continue;
+  }
+  
   //error codes - just show the error and skip
   if ( isset( $result->body->Error->Code ) || !empty( $result->body->Error->Code ) )
   {

@@ -3,7 +3,7 @@
 
 all: 
   # the location of your itunes XML file
-  # eg. Win: C:\Users\username\Music\iTunes\Itunes.xml
+  # eg. Win: C:\Users\username\Music\iTunes\iTunes Music Library.xml
   #     Mac: /Users/username/Music/iTunes/iTunes Music Library.xml
   itunes_xml_location: "/home/notroot/music/iTunes Music Library.xml"
   

@@ -328,7 +328,7 @@ video{
 	cursor: pointer;
   width: 100%;
 }
-video.chrome
+video.chrome, audio.chrome
 {
   top: 14px;
   left: 14px;

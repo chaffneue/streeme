@@ -17,7 +17,7 @@
   <div id="albumart"></div>
   <div id="songtitle"><?php echo __('No Song Selected') ?></div>
   <div class="videocontainer buttonradius">
-      <audio preload="none" controls="" id="musicplayer"></audio>
+      <?php include_partial( 'load_html5_player' ) ?>
   </div>
   <div class="previoussongdisabled textindent" id="previous" title="<?php echo __('Previous Track')?>"></div>
   <div class="nextsongdisabled textindent" id="next" title="<?php echo __('Next Track')?>"></div>

@@ -3,10 +3,11 @@
 # Loading an appropriate HTML5 player will change as the standard gets better, add cases here
 #
 
-//Progressive/Predictive buffering in Chrome is far better with a video tag
+//Chrome 10 has serious vido playback bugs, go back to the audio tag for now 
+//chromium bug report: http://code.google.com/p/chromium/issues/detail?id=73458 
 if( strpos( $_SERVER[ 'HTTP_USER_AGENT' ], 'Chrome' ))
 {
-  echo '<video preload="none" controls="" id="musicplayer" class="chrome"></video>' . "\r\n";
+  echo '<audio preload="none" controls="" id="musicplayer" class="chrome"></audio>' . "\r\n";
 }
 
 //Safari codec set on windows isn't as good in the audio tag
