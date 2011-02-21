@@ -130,7 +130,7 @@ class listSongsAction extends sfAction
              if( $key == 'filename' )
              {
                //we actually only want the file extension for jPlayer
-               $value = ( $value ) ? @$jplayer_types[ substr( $value, -4 ) ] : '';
+               $value = ( $value ) ? @$jplayer_types[ strtolower( substr( $value, -4 ) ) ] : '';
              }
              $string .= ( ( $value ) ?  $addtoplaylistbutton . $playsongbutton . $value : '0' ) . '%*=*=*%';
           }
