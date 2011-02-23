@@ -100,7 +100,7 @@ class SongTable extends Doctrine_Table
   
   /**
    * Try to mark a song as scanned by filename and mtime
-   * 
+   *
    * @param filename str: the itunes style filename of the file
    * @param mtime    int: the timestamp we're looking for
    * @param last_scan_id int: scan id value to update
@@ -113,7 +113,7 @@ class SongTable extends Doctrine_Table
     $query .= 'SET ';
     $query .= ' last_scan_id = :last_scan_id ';
     $query .= 'WHERE ';
-    $query .= ' mtime = :mtime ';   
+    $query .= ' mtime = :mtime ';
     $query .= ' AND filename = :filename ';
     
     $parameters = array();
@@ -341,7 +341,7 @@ class SongTable extends Doctrine_Table
                         1 => ' song.name ' . $order_by,
                         2 => ' album.name ' . $order_by . ', song.tracknumber ASC ',
                         3 => ' artist.name ' . $order_by . ', album.name DESC, song.tracknumber ASC ',
-                        4 => ' song.mtime ' . $order_by .  ', album.name DESC, song.tracknumber ASC ',
+                        4 => ' album_mtime ' . $order_by .  ', album.id, song.tracknumber ASC ',
                         5 => ' song.yearpublished ' . $order_by . ', album.name DESC, song.tracknumber ASC ',
                         6 => ' song.length ' . $order_by,
                         7 => ' song.tracknumber ' . $order_by,
@@ -352,7 +352,7 @@ class SongTable extends Doctrine_Table
     $parameters = array();
     
     $query  = 'SELECT ';
-    $query .= ' song.unique_id, song.name, album.name as album_name, artist.name as artist_name, song.mtime as date_modified, song.yearpublished, song.length, song.tracknumber, song.filename ';
+    $query .= ' song.unique_id, song.name, album.name as album_name, artist.name as artist_name, song.mtime as date_modified, song.yearpublished, song.length, song.tracknumber, song.filename, ROUND( song.mtime / 20000 ) as album_mtime ';
     $query .= 'FROM ';
     if( !is_null( $settings['playlist_id'] ) )
     {
@@ -418,7 +418,7 @@ class SongTable extends Doctrine_Table
       $query .= ' AND ( song.name LIKE :search OR album.name LIKE :search OR artist.name LIKE :search ) ';
       $parameters[ 'search' ] = '%' . join('%', explode(' ', $settings[ 'search' ] ) ) . '%';
     }
-    
+
     //get a count of rows returned by this query before applying pagination
     $dbh = Doctrine_Manager::getInstance()->getCurrentConnection()->getDbh();
     $stmt = $dbh->prepare( $query );
@@ -433,7 +433,7 @@ class SongTable extends Doctrine_Table
         $result_count = $row_count;
       }
       else
-      { 
+      {
         //sqlite compatibility: rowCount will only return 0 or 1
         while( $row = $stmt->fetch() ) $result_count++;
       }
@@ -450,7 +450,6 @@ class SongTable extends Doctrine_Table
     $query .= (int) $settings[ 'limit' ];
     $query .= ' OFFSET ';
     $query .= (int) $settings[ 'offset' ];
-    
     $dbh = Doctrine_Manager::getInstance()->getCurrentConnection()->getDbh();
     $stmt = $dbh->prepare( $query );
     $success = $stmt->execute( $parameters );

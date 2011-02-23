@@ -44,7 +44,6 @@ class listSongsAction extends sfAction
                    'sortcolumn'       => $this->iSortCol_0,
                    'sortdirection'    => $this->sSortDir_0
              );
-    
     $result_count = $result_list = null;
     $result = Doctrine_Core::getTable('Song')->getList( $args, $result_count, $result_list );
 
@@ -61,7 +60,7 @@ class listSongsAction extends sfAction
     exit;
   }
   
-  /** 
+  /**
    * JSON Conversion with a touch of post processing for presentation
    * @param song_array     array: the data set to encode
    * @param found_rows     int: total number of found rows
@@ -132,6 +131,10 @@ class listSongsAction extends sfAction
                //we actually only want the file extension for jPlayer
                $value = ( $value ) ? @$jplayer_types[ strtolower( substr( $value, -4 ) ) ] : '';
              }
+             if( $key == 'album_mtime' )
+             {
+              continue;
+             }
              $string .= ( ( $value ) ?  $addtoplaylistbutton . $playsongbutton . $value : '0' ) . '%*=*=*%';
           }
           $convert = explode( '%*=*=*%', rtrim( $string, '%*=*=*%' ) );
@@ -141,12 +144,22 @@ class listSongsAction extends sfAction
     }
     else
     {
-       $flattened = null;
+       $flattened = array();
     }
+    
     $aadata[ 'sEcho' ] = (int) $this->sEcho;
     $aadata[ 'iTotalRecords' ] = (int) Doctrine_Core::getTable('Song')->getTotalSongCount();
     $aadata[ 'iTotalDisplayRecords' ] = (int) $found_rows;
-    $aadata[ 'aaData' ] = ( $flattened ) ? $flattened : $empty_resultset;
+    
+    //Sort Tracks in new entries
+    if( count( $flattened ) > 0 )
+    {
+      $aadata[ 'aaData' ] = $flattened;
+    }
+    else
+    {
+      $aadata[ 'aaData' ] = $empty_resultset;
+    }
     
     return json_encode( $aadata );
   }
