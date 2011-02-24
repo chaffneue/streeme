@@ -64,6 +64,11 @@ streeme = {
 	* If not false, Streme will modify the target file format of Media to the set format
 	*/
 	format : false,
+	
+	/**
+	 * Default volume 
+	 */
+	volume : 1,
 
 	/**
 	* The latest song requested by the user
@@ -232,6 +237,10 @@ streeme = {
 				$( '#formatselector' ).val( $.cookie( 'modify_format' ) );
 			}
 			streeme.format = $.cookie( 'modify_format' );
+		}
+		if( $.cookie('modify_volume') )
+		{
+			streeme.volume = $.cookie('modify_volume');
 		}
 		
 		/**************************************************		
@@ -437,7 +446,8 @@ streeme = {
                             swfPath: "/js/jQuery.jPlayer.2.0.0",
                             solution: "flash, html",
                             supplied: "mp3",
-                            volume: 1,
+                            volume: streeme.volume,
+                            volumechange: streeme.updateVolume,
                           });				
 						break;
 						
@@ -457,10 +467,11 @@ streeme = {
                             swfPath: "/js/jQuery.jPlayer.2.0.0",
                             solution: "html",
                             supplied: "oga",
-                            volume: 1,
+                            volume: streeme.volume,
+                            volumechange: streeme.updateVolume,
                           });				
 						break;
-				}		
+				}
 			}
 			
 			//otherwise use the browser's html player 
@@ -1062,6 +1073,17 @@ streeme = {
 		}
 		//firefox/chrome logging only 
 		//console.log( streeme.format );
+	},
+	
+	/**
+	 * Update music volume on change
+	 * @param event - jPlayer event
+	 */
+	updateVolume : function(event)
+	{
+		streeme.volume = event.jPlayer.status.volume;
+		$.cookie('modify_volume', streeme.volume, { expires: 3000 } );
+		//console.log( streeme.volume );
 	},
 
 	/**
