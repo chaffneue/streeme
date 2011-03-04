@@ -119,18 +119,6 @@ class StreemeUtil
   }
   
   /**
-   * check if an item is in an array in a case insensitive manner -works on 
-   * single dimension arrays only for making configs user case insensitive
-   * @param needle   mixed: needle to find
-   * @param haystack mixed: haystack to search
-   * @return         bool: if in array, return true.
-   */
-  public function in_array_ci($needle, $haystack)
-  {
-    return in_array(strtolower($needle), array_map('strtolower', $haystack));
-  }
-  
-  /**
    * Remove null terminations and whitespace from a string (UTF8 friendly)
    * 
    * @param text     str: the dirty string

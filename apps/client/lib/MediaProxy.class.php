@@ -128,7 +128,7 @@ class MediaProxy
     if( $this->allow_transcoding )
     {
       $this->log( sprintf( 'Setting target format to: %s', $format ) );
-      $this->target_format         = ( $format && StreemeUtil::in_array_ci( $format, $this->target_formats ) ) ? $format : false;
+      $this->target_format         = ( $format && in_array( strtolower( $format ), $this->target_formats ) ) ? strtolower( $format ) : false;
       $this->user_requested_format = ( $this->target_format )  ? true : false;
       $this->target_extension      = '.' . $this->target_format;
       $this->target_type           = $this->types[ $this->target_format ];
@@ -164,7 +164,7 @@ class MediaProxy
     //determine right send method
     if(
         ( $this->user_requested_bitrate || $this->user_requested_format )
-        && ( ( $this->target_bitrate <= $this->source_bitrate ) || ( $this->source_extension == $this->target_extension ) )
+        && ( ( $this->target_bitrate <= $this->source_bitrate ) || ( strtolower( $this->source_extension ) == $this->target_extension ) )
         && !$this->is_icy_response
       )
     {
@@ -196,7 +196,7 @@ class MediaProxy
   {
     header("HTTP/1.1 200 OK");
     header("Content-Type: " . ( ( $this->user_requested_format ) ? $this->target_type : $this->source_type ) );
-    header("Content-Disposition: inline; filename=" . iconv( 'UTF-8', 'ASCII//TRANSLIT', $this->source_filename . $this->target_extension ) );
+    header("Content-Disposition: inline; filename=" . $this->source_filename . $this->target_extension );
     header("Content-Encoding: none");
     $this->ffmpeg_passthru();
   }

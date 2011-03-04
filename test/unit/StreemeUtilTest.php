@@ -16,23 +16,6 @@ $t->is( StreemeUtil::itunes_format_decode( 'file://localhost/home/foo/bar%20man'
 $t->comment( '->slugify()' );
 $t->is( StreemeUtil::slugify('stuff & thing fox\'s Name'), 'stuff-thing-fox-s-name', 'Processed sting pattern into valid url' );
 
-$t->comment( '->in_array_ci()' );
-$needle = 'ABC';
-$haystack = array( 'abc', 'def' );
-$t->is( StreemeUtil::in_array_ci( $needle, $haystack ), true, 'upper needle lower haystack' );
-$needle = 'AbC';
-$haystack = array( 'ABC', 'def' );
-$t->is( StreemeUtil::in_array_ci( $needle, $haystack ), true, 'mixed case needle upper haystack' );
-$needle = 'abc';
-$haystack = array( 'ABC', 'def' );
-$t->is( StreemeUtil::in_array_ci( $needle, $haystack ), true, 'lower case needle upper haystack' );
-$needle = 'abc';
-$haystack = array( 'AbC', 'def' );
-$t->is( StreemeUtil::in_array_ci( $needle, $haystack ), true, 'lower case needle mixed haystack' );
-$needle = 'xyz';
-$haystack = array( 'AbC', 'def' );
-$t->is( StreemeUtil::in_array_ci( $needle, $haystack ), false, 'out of range needle' );
-
 $t->comment( '->xmlize_uf8_string()');
 $t->is( StreemeUtil::xmlize_uf8_string( join( range( chr(0),chr(127) ) ) ), join( range( chr(1),chr(127) ) ), 'passes printable US-ascii chars' );
 $t->is( StreemeUtil::xmlize_uf8_string( ' 小低胡' . chr(0) ), '小低胡', 'passes printable UTF-8 chars' );

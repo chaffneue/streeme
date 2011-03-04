@@ -10,14 +10,14 @@
  */ 
 $itunes_music_library   = sfConfig::get( 'app_itunes_xml_location' );
 $mapped_drive_locations = sfConfig::get( 'app_mdl_mapped_drive_locations' );
-$allowed_filetypes      = sfConfig::get( 'app_aft_allowed_file_types' );
+$allowed_filetypes      = array_map( 'strtolower', sfConfig::get( 'app_aft_allowed_file_types' ) );
 $media_scanner          = new MediaScan();
 $itunes_parser          = new StreemeItunesTrackParser( $itunes_music_library );
 
 while( $value = $itunes_parser->getTrack() )
 {
   //if it's not a valid filetype, ignore 
-  if ( !StreemeUtil::in_array_ci( substr( $value[ 'Location' ], -3 ), $allowed_filetypes ) ) continue;
+  if ( !in_array( strtolower( substr( $value[ 'Location' ], -3 ) ), $allowed_filetypes ) ) continue;
 
   //update files on windows shares
   if ( is_array( $mapped_drive_locations ) && count( $mapped_drive_locations ) > 0 )

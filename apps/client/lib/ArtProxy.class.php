@@ -38,7 +38,7 @@ class ArtProxy
   {
     $sizes = array( 'small', 'medium', 'large' );
     
-    if ( is_null( $this->size ) || !StreemeUtil::in_array_ci( $this->size, $sizes ) )
+    if ( is_null( $this->size ) || !in_array( $this->size, $sizes ) )
     {
       $this->size = 'medium';
     }

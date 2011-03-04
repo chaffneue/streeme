@@ -14,7 +14,7 @@ require_once( dirname(__FILE__) . '/../../vendor/getid3-1.7.9/getid3/getid3.php'
    
 $watched_folers         = sfConfig::get( 'app_wf_watched_folders' );
 $mapped_drive_locations = sfConfig::get( 'app_mdl_mapped_drive_locations' );
-$allowed_filetypes      = sfConfig::get( 'app_aft_allowed_file_types' );
+$allowed_filetypes      = array_map( 'strtolower', sfConfig::get( 'app_aft_allowed_file_types' ) );
 $media_scanner          = new MediaScan();
 $id3_scanner            = new getID3();
 
@@ -63,7 +63,7 @@ function scan_directory( $path, $allowed_filetypes, $media_scanner, $id3_scanner
 		$file_stat = stat( $full_file_path );
 
     //is it a usable file? 
-		if ( $file_stat['size'] === 0 || !StreemeUtil::in_array_ci( substr( $filename, -3 ), $allowed_filetypes ) )	continue;
+		if ( $file_stat['size'] === 0 || !in_array( strtolower( substr( $filename, -3 ) ), $allowed_filetypes ) )	continue;
 			
     //encode as a iTunes URL
 		$streeme_path_name = StreemeUtil::itunes_format_encode( $full_file_path );

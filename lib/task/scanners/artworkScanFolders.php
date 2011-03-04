@@ -69,7 +69,7 @@ foreach( $artwork_list as $key => $value )
 		}
 				
 		//is it a valid filetype? add to the shortlist of images
-		if( StreemeUtil::in_array_ci( substr( $filename, -4 ), $filetypes ) )
+		if( in_array( strtolower( substr( $filename, -4 ) ), $filetypes ) )
 		{
 		  $file_info = stat( $full_file_path );
 		  $shortlist[] = array( $file_info[ 'size' ], $filename, $full_file_path ); 
