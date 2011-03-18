@@ -2,7 +2,7 @@
 include( dirname(__FILE__) . '/../bootstrap/doctrine.php' );
 
 // Initialize the test object
-$t = new lime_test( 24, new lime_output_color() );
+$t = new lime_test( 25, new lime_output_color() );
 
 $song_table = Doctrine_Core::getTable('Song');
 
@@ -156,6 +156,8 @@ $t->is( $result_count, 3, 'Narrowed list by genre id' );
 $result_count = $result_list = null;
 $result = $song_table->getList( array( 'playlist_id' => '1' ), $result_count, $result_list );
 $t->is( $result_count, 0, 'Narrowed list by playlist id' );
+$result = $song_table->getList( array( 'search' => 'shuffle:1' ), $result_count, $result_list );
+$t->is( $result_count, 3, 'Shuffled Songs Successfully' );
 
 $t->comment( '->finalizeScan' );
 $t->is( $song_table->finalizeScan( 1 ), 2, 'finalized scan successfully' );

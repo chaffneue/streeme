@@ -38,6 +38,7 @@ class MediaProxy
   protected $target_bitrate = false;
   protected $target_format = false;
   protected $is_icy_response = false;
+  protected $start_time = 0;
     
   /**
    * Constructor - Hydrates class variables based on a song_id
@@ -155,6 +156,17 @@ class MediaProxy
       $this->log( sprintf( 'Tried to change icy response state to: %s, but transcoding is not allowed.',  ( $is_icy_response ) ? 'on' : 'off' ) );
     }
   }
+  
+  /**
+   * Set the start time for this song. This will begin the song from anywhere you specify
+   * it requires ffmpeg transcoding to work.
+   * @param milliseconds int: time in seconds to start
+   */
+  public function setStartTime( $seconds )
+  {
+    $this->start_time = $seconds;
+  }
+  
   /**
    * play - this method will play the selection using class variables made in the constructor
    * this is the main public method for the class
@@ -163,21 +175,27 @@ class MediaProxy
   {
     //determine right send method
     if(
-        ( $this->user_requested_bitrate || $this->user_requested_format )
-        && ( ( $this->target_bitrate <= $this->source_bitrate ) || ( strtolower( $this->source_extension ) == $this->target_extension ) )
-        && !$this->is_icy_response
+        (
+          ( $this->user_requested_bitrate || $this->user_requested_format )
+          && ( ( $this->target_bitrate <= $this->source_bitrate ) || ( strtolower( $this->source_extension ) == $this->target_extension ) )
+          && !$this->is_icy_response
+        )
+        || ( $this->start_time > 0 && !$this->is_icy_response )
       )
     {
-      $this->log( sprintf('Attempting to play filename: %s in format: %s with bitrate: %s', $this->filename, $this->target_format, $this->target_bitrate ));
+      $this->log( sprintf('Attempting to play filename: %s in format: %s with bitrate: %s at time: %ds', $this->filename, $this->target_format, $this->target_bitrate, $this->start_time ));
       $this->stream_modify();
     }
     else if(
-        ( $this->user_requested_bitrate || $this->user_requested_format )
-        && $this->is_icy_response
-        && $this->target_format == 'mp3'
-      )
+             (
+               ( $this->user_requested_bitrate || $this->user_requested_format )
+               && $this->is_icy_response
+               && $this->target_format == 'mp3'
+             )
+             || ( $this->start_time > 0 )
+           )
     {
-      $this->log( sprintf('Attempting to play filename: %s in format: %s with bitrate: %s using icy headers', $this->filename, $this->target_format, $this->target_bitrate ));
+      $this->log( sprintf('Attempting to play filename: %s in format: %s with bitrate: %s at time: %ds using icy headers', $this->filename, $this->target_format, $this->target_bitrate, $this->start_time ));
       $this->stream_icy();
     }
     else
@@ -269,14 +287,16 @@ class MediaProxy
     switch ( $this->argformat )
     {
       case 'mp3':
-        $args .= sprintf( '-ab %dk ', intval( $this->argbitrate ) ); //bitrate
+        $args .= sprintf( '-ab %dk ', (int) $this->argbitrate ); //bitrate
         $args .= sprintf( '-acodec %s ', 'libmp3lame' ); //codec
         $args .= sprintf( '-f %s ', 'mp3' ); //container
+        if( $this->start_time > 0 ) $args .= sprintf( '-ss %d', (int) $this->start_time ); //set the start time
         break;
       case 'ogg':
-        $args .= sprintf( '-aq %d ', floor( intval( $this->argbitrate ) / 2 ) ); //vbr quality
+        $args .= sprintf( '-aq %d ', floor( ( (int) $this->argbitrate ) / 2 ) ); //vbr quality
         $args .= sprintf( '-acodec %s ', 'vorbis' );
         $args .= sprintf( '-f %s ', 'ogg' );
+        if( $this->start_time > 0 ) $args .= sprintf( '-ss %d', (int) $this->start_time ); //set the start time
         break;
     }
     
@@ -318,10 +338,17 @@ class MediaProxy
   private function output_mp3()
   {
     $this->log( sprintf( 'Transcoding MP3 using ffmpeg command: %s %s', $this->ffmpeg_executable, $this->ffmpeg_args ) );
-    $new_filesize = (( $this->source_duration / 1000 ) //time in seconds
-                  * ( $this->target_bitrate * 1000 ) //bitrate
-                  / 8 ) // convert to bytes
-                  - 1024; //trim 1024 bytes for headers
+    if ( $this->start_time === 0)
+    {
+      $new_filesize = (( $this->source_duration / 1000 ) //time in seconds
+                    * ( $this->target_bitrate * 1000 ) //bitrate
+                    / 8 ) // convert to bytes
+                    - 1024; //trim 1024 bytes for headers
+    }
+    else
+    {
+      $new_filesize = 999999999;
+    }
   	header( 'Content-Length:' . $new_filesize );
   	$this->log(sprintf( 'Content Length modified to %s bytes', $new_filesize ) );
   	passthru( $this->ffmpeg_executable . ' ' . $this->ffmpeg_args );

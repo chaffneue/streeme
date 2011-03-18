@@ -87,7 +87,7 @@ div.horizontalrule
  	position: absolute;
  	display: none;
 	top: -5px;
-	right: 140px;
+	right: 171px;
 	height: 20px;
 	min-width: 300px;
 	color: #222;
@@ -100,7 +100,7 @@ div.horizontalrule
 .playlists{
 	position: absolute;
 	top: -5px;
-	right: 93px;
+	right: 124px;
 	width: 43px;
 	height: 29px;
 	text-align: center;
@@ -120,7 +120,7 @@ div.horizontalrule
 	background-color: #F0F0F0;
 	border: 1px solid #BBB;
 	top: 30px;
-	right: 93px;
+	right: 124px;
 	z-index: 10;
 }
 .playlistsmodalwindow .browse{
@@ -247,7 +247,7 @@ div.horizontalrule
 .settings{
 	position: absolute;
 	top: -5px;
-	right: 46px;
+	right: 77px;
 	width: 43px;
 	height: 29px;
 	text-align: center;
@@ -267,7 +267,7 @@ div.horizontalrule
 	background-color: #F0F0F0;
 	border: 1px solid #BBB;
 	top: 30px;
-	right: 46px;
+	right: 77px;
 	z-index: 10;
 }
 .logout{
@@ -284,6 +284,21 @@ div.horizontalrule
 }
 .logout:hover{
 	background-color: #9d380c;
+}
+.resume{
+  top: -5px;
+  right: 46px;
+  width: 27px;
+  height: 29px;
+  position: absolute;
+  text-align: center;
+  background: url('../../../images/player/desktop/h5-icon-resume.png') no-repeat #444;
+  background-position: 4px 7px; 
+  background-color: #444;
+  cursor: pointer;
+}
+.resume:hover{
+  background-color: #406fe6;
 }
 #albumart{
 	position: absolute;

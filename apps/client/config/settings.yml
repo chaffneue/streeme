@@ -39,7 +39,7 @@ all:
     i18n: true
     charset: utf-8
     default_culture: en
-    translations_available: [ en,tr,it,es,de,fr ]
+    translations_available: [ en,tr,it,es,de,fr,da,km ]
     translation_labels:
       en: English
       tr: Türkçe
@@ -47,6 +47,8 @@ all:
       es: Español
       de: Deutsch
       fr: Français
+      da: Dansk
+      km: ភាសាខ្មែរ
 
     # Extra Helpers
     standard_helpers: [ Partial, Cache, I18N ]

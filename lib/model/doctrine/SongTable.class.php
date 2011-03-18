@@ -334,8 +334,9 @@ class SongTable extends Doctrine_Table
     //search should now be valid keywords, join them with spaces
     $settings[ 'search' ] = join( ' ', $components );
   
-      //this array contains the decoded sort information
-    $order_by = ( $settings['sortdirection'] == 'asc') ? ' ASC ' : ' DESC ';
+    //this array contains the decoded sort information
+    $expression = new Doctrine_Expression( 'random()' );
+    $order_by = ( $settings[ 'sortdirection' ] == 'asc' ) ? ' ASC ' : ' DESC ';
     $column_sql = array(
                         0 => ' song.id ' . $order_by,
                         1 => ' song.name ' . $order_by,
@@ -345,8 +346,9 @@ class SongTable extends Doctrine_Table
                         5 => ' song.yearpublished ' . $order_by . ', album.name DESC, song.tracknumber ASC ',
                         6 => ' song.length ' . $order_by,
                         7 => ' song.tracknumber ' . $order_by,
-                        8 => ' RAND() '
+                        8 => ' ' . $expression . ' '
                      );
+    unset( $expression );                 
     $order_by_string = $column_sql[ (int) $settings[ 'sortcolumn' ] ];
     
     $parameters = array();

@@ -104,6 +104,15 @@ streeme = {
 	send_cookie_name : null,
 	
 	/**
+	 * Variables for the resume functionality
+	 */
+	timer : 0,
+	rSongId : 0, 
+	rSongName : null,
+	rAlbumName : null,
+	rArtistName : null,
+	
+	/**
 	* initialize the application - project constructor
 	* sets up the datatable object for songs and other general setup
 	*/
@@ -169,7 +178,7 @@ streeme = {
 						function()
 						{						  
 						  //play the song
-						  streeme.playSong( aData[0], aData[1], aData[2], aData[3] );
+						  streeme.playSong( aData[0], aData[1], aData[2], aData[3], 0 );
 						  
 						  //update the class pointers
 						  streeme.songPointer = aData[0];
@@ -185,6 +194,20 @@ streeme = {
 				{
 					//highlight the currently playing song 
 					streeme.retarget();
+				},
+				
+				"fnCookieCallback": function( sName, oData, sExpires, sPath)
+				{
+					//extend the state save cookies to 300 days
+					var newdate = new Date();
+					newdate.setTime(newdate.getTime()+(300*24*60*60*1000));
+					var expires = newdate.toGMTString();
+					
+					// Choose what to save in cookie and what not to
+					if (sName != 'sFilter')
+				  	{
+					  	return sName + "=" + JSON.stringify(oData) + "; expires=" + expires + "; path=" + sPath;
+				  	}
 				}
 			}
 		);	
@@ -214,7 +237,7 @@ streeme = {
 			}
 			streeme.format = $.cookie( 'modify_format' );
 		}
-	
+		
 		/**************************************************		
 		* Load Lists                                      *
 		**************************************************/
@@ -231,6 +254,14 @@ streeme = {
 		{
 			//the song unloaded normally
 			$( '#musicplayer' ).bind( 'ended', streeme.playNextSong );
+			
+			//check play/paused state
+			$( '#musicplayer' ).bind( 'pause', function(event){ streeme.play=false; } );
+			$( '#musicplayer' ).bind( 'play', function(event){ streeme.play=true } );			
+			
+			//check for seeking
+			$( '#musicplayer' ).bind( 'seeked', function(event){ streeme.timer = Math.floor( this.currentTime ) } );
+			
 			
 			//The file was not the size reported or the codec is missing 
 			$( '#musicplayer' ).bind( 'error', function(){ if( this.error.code == 4 ) streeme.playNextSong(); } );
@@ -298,9 +329,20 @@ streeme = {
 	* @param song_name 		str: name of the song
 	* @param album_name 	str: name of the album to which this song belongs
 	* @param artist_name 	str: name of the artist to which this song belongs
+	* @param time_offset    int: the start time offset in seconds
 	*/
-	playSong : function( song_id, song_name, album_name, artist_name )
+	playSong : function( song_id, song_name, album_name, artist_name, time_offset )
 	{
+		//start the track from a specific offset if given
+		if( time_offset > 0 )
+		{
+			streeme.timer = time_offset;
+		}
+		else
+		{
+			streeme.timer = 0;
+		}
+		
 		//queue up the song for the next play cycle
 		streeme.queuedSongId = song_id;
 		
@@ -322,9 +364,13 @@ streeme = {
 			}
 
 			//add album art to the viewer
-			if( $( '#albumart' ) )
+			if( $( '#albumart' ) && ( artist_name != null || album_name != null ) )
 			{
 				$( '#albumart' ).html( '<div id="pauseoverlay"></div><img src="' + javascript_base + '/art/' + $.md5( artist_name + album_name ) + '/large" alt="' + sAlbumArtImageAlt + ' ' + album_name + '" class="albumimg" border="0"/>' );
+			}
+			else
+			{
+				$( '#albumart' ).html( '<div id="pauseoverlay"></div><img src="' + javascript_base + '/art/placeholder/large" alt="' + sAlbumArtImageAlt + ' ' + album_name + '" class="albumimg" border="0"/>' );				
 			}
 
 			//update next previous buttons
@@ -339,6 +385,14 @@ streeme = {
 				$( '#previous' ).removeClass( 'previoussongdisabled' );
 			}
 		}
+		
+		// set the resume information
+		streeme.rSongId = song_id; 
+		streeme.rSongName = streeme.stripTags( song_name );
+		streeme.rAlbumName = album_name;
+		streeme.rArtistName = artist_name;
+		
+		// set the song pointer for the playback cursor
 		streeme.songPointer = song_id;
 	},
 	
@@ -364,7 +418,10 @@ streeme = {
 			{
 				parameters.push(  streeme.send_cookie_name + '=' + $.cookie( streeme.send_cookie_name ) );
 			}	
-	
+			if( streeme.timer > 0 )
+			{
+				parameters.push( 'start_time=' + streeme.timer )
+			}
 			url = mediaurl + '/play/' + streeme.queuedSongId + '?' + parameters.join('&');
 			
 			//firefox/chrome logging only 
@@ -377,6 +434,29 @@ streeme = {
 			
 			//clear the queue
 			streeme.queuedSongId = false;
+		}
+		
+		//Update the resume cookie if the song is playing
+		if( streeme.play == true )
+		{
+			streeme.timer++;
+			
+			if( streeme.timer % 2 && streeme.songPointer != 0 )
+			{
+				var data = {
+						'si' : streeme.rSongId,
+						'dp' : streeme.displayPointer,
+						't' : streeme.timer,
+						'sn' : streeme.rSongName,
+						'an' : streeme.rAlbumName, 
+						'rn' : streeme.rArtistName
+					};
+		$.cookie(
+					'resume_mobile', 
+					JSON.stringify(data),
+					{ expires : 3000 }
+				);
+			}
 		}
 	},
 	
@@ -416,7 +496,7 @@ streeme = {
 					nextSongData = $( '#songlist' ).dataTable().fnGetData( 0 );
 					if( nextSongData )
 					{
-						streeme.playSong( nextSongData[ 0 ], nextSongData[ 1 ], nextSongData[ 2 ], nextSongData[ 3 ] );
+						streeme.playSong( nextSongData[ 0 ], nextSongData[ 1 ], nextSongData[ 2 ], nextSongData[ 3 ], 0 );
 					}
 					streeme.displayPointer = 0;
 				}
@@ -444,7 +524,7 @@ streeme = {
 		}
 		if( nextSongData )
 		{
-			streeme.playSong( nextSongData[ 0 ], nextSongData[ 1 ], nextSongData[ 2 ], nextSongData[ 3 ] );
+			streeme.playSong( nextSongData[ 0 ], nextSongData[ 1 ], nextSongData[ 2 ], nextSongData[ 3 ], 0 );
 			streeme.displayPointer++;
 		}
 	},
@@ -485,7 +565,7 @@ streeme = {
 					previousSongData = $( '#songlist' ).dataTable().fnGetData( streeme.iDisplayLength - 1	);
 					if( previousSongData )
 					{
-						streeme.playSong( previousSongData[ 0 ], previousSongData[ 1 ], previousSongData[ 2 ], previousSongData[ 3 ] );
+						streeme.playSong( previousSongData[ 0 ], previousSongData[ 1 ], previousSongData[ 2 ], previousSongData[ 3 ], 0 );
 					}
 					streeme.displayPointer = streeme.iDisplayLength - 1;
 				}
@@ -513,7 +593,7 @@ streeme = {
 		}
 		if( previousSongData )
 		{
-			streeme.playSong( previousSongData[ 0 ], previousSongData[ 1 ], previousSongData[ 2 ], previousSongData[ 3 ] );
+			streeme.playSong( previousSongData[ 0 ], previousSongData[ 1 ], previousSongData[ 2 ], previousSongData[ 3 ], 0 );
 			streeme.displayPointer--;
 		}
 	},
@@ -862,6 +942,14 @@ streeme = {
 				streeme.hideSongAlpha = true;
 				streeme.getList( 'song' );	
 				break;
+			case 'resume':
+				streeme.chooseState( 'card_welcome', 'card_songs' );
+				var resume_rawdata = $.cookie('resume_mobile');
+				var resume_info = JSON.parse(resume_rawdata);
+				//console.log( resume_info );
+				streeme.displayPointer = resume_info.dp;
+				streeme.playSong( resume_info.si, resume_info.sn, resume_info.rn, resume_info.an, resume_info.t );
+				break;		
 		}
 	},
 	
@@ -1027,8 +1115,9 @@ streeme = {
 	* @param string to modify
 	* @return string cleaned of HTML tags
 	*/
-	stripTags : function( string )
+	stripTags : function( sString )
 	{
-	  return string.replace(/<\/?[^>]+>/gi, '');
+		if( sString == null ) return null;
+		return sString.replace(/<\/?[^>]+>/gi, '');
 	}
 }

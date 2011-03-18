@@ -153,6 +153,10 @@ Song:
       fields: [yearpublished]
     songlength_index:
       fields: [length]
+    tracknumber_index:
+      fields: [tracknumber]
+    sort_index: 
+      fields: [artist_id, album_id, tracknumber, mtime] 
 options:
   collate: utf8_unicode_ci
   charset: utf8
