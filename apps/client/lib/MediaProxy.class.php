@@ -278,7 +278,12 @@ class MediaProxy
    */
   private function get_ffmpeg_args()
   {
-    $args  = '-y '; //play without prompts / overwrite
+    $args = '';
+    if( $this->start_time > 0 )
+    {
+      $args .= sprintf( '-ss %d ', (int) $this->start_time ); //set the start time
+    }
+    $args .= '-y '; //play without prompts / overwrite
     $args .= sprintf( '-i "%s" ', $this->filename ); //source filename
     
     $this->argformat = ( $this->user_requested_format ) ? $this->target_format : $this->source_format;
@@ -290,13 +295,11 @@ class MediaProxy
         $args .= sprintf( '-ab %dk ', (int) $this->argbitrate ); //bitrate
         $args .= sprintf( '-acodec %s ', 'libmp3lame' ); //codec
         $args .= sprintf( '-f %s ', 'mp3' ); //container
-        if( $this->start_time > 0 ) $args .= sprintf( '-ss %d', (int) $this->start_time ); //set the start time
         break;
       case 'ogg':
         $args .= sprintf( '-aq %d ', floor( ( (int) $this->argbitrate ) / 2 ) ); //vbr quality
         $args .= sprintf( '-acodec %s ', 'vorbis' );
         $args .= sprintf( '-f %s ', 'ogg' );
-        if( $this->start_time > 0 ) $args .= sprintf( '-ss %d', (int) $this->start_time ); //set the start time
         break;
     }
     
