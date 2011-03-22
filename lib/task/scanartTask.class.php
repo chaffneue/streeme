@@ -7,16 +7,17 @@ class scanartTask extends sfBaseTask
     $this->addOptions(array(
       new sfCommandOption( 'application', null, sfCommandOption::PARAMETER_REQUIRED, 'The application name', 'client' ),
       new sfCommandOption( 'env', null, sfCommandOption::PARAMETER_REQUIRED, 'The environment', 'prod' ),
-      new sfCommandOption( 'connection', null, sfCommandOption::PARAMETER_REQUIRED, 'The connection name', 'doctrine' ),  
+      new sfCommandOption( 'connection', null, sfCommandOption::PARAMETER_REQUIRED, 'The connection name', 'doctrine' ),
       new sfCommandOption( 'source', null, sfCommandOption::PARAMETER_REQUIRED, 'The source to scan'),
+      new sfCommandOption( 'resync', null, sfCommandOption::PARAMETER_REQUIRED, 'Resync your art after a database wipe'),
     ));
 
     $this->namespace        = '';
     $this->name             = 'scan-art';
     $this->briefDescription = 'Scan various sources for album art';
     $this->detailedDescription = <<<EOF
-The [scan-art|INFO] will initiate a scan of your albums for art from sources 
-like Amazon PAS, your music files and artwork from the commons. Stores found 
+The [scan-art|INFO] will initiate a scan of your albums for art from sources
+like Amazon PAS, your music files and artwork from the commons. Stores found
 images in sfproject/web/images/album_art
 
 
@@ -25,6 +26,13 @@ Sources:
   --source=meta         - Read artwork embedded in your media
   --source=folders      - Read artwork from the media folders
   --source=service      - Read from future service (unused)
+
+Resync:
+  Use this command to resync your art after a database wipe or any situation
+  where your databas ehas been damaged for some reason, but your artwork
+  cache remains intact.
+  
+  --resync=true         - Use this command to resync the art cache
 
 Call it with:
 
@@ -38,7 +46,7 @@ EOF;
     $databaseManager = new sfDatabaseManager($this->configuration);
     $connection = $databaseManager->getDatabase($options['connection'])->getConnection();
     
-    // load the scanner 
+    // load the scanner
     switch ( $options[ 'source' ] )
     {
       case 'amazon':
@@ -47,17 +55,24 @@ EOF;
         
       case 'meta':
         require_once( dirname( __FILE__ ) . '/scanners/artworkScanMeta.php' );
-        break;        
+        break;
       
       case 'folders':
         require_once( dirname( __FILE__ ) . '/scanners/artworkScanFolders.php' );
-        break;  
+        break;
       
       case 'service':
-        //reserved for future album art services
+        //reserved for future album art services: unused at the moment
         throw new Exception( 'Not Ready: This is a reserved block for future album art sources.' );
-        break; 
+        break;
     }
+    
+    // resync the database's has_art flag with the users art cache
+    if( $options[ 'resync' ] )
+    {
+      require_once( dirname( __FILE__ ) . '/scanners/artworkScanResync.php' );
+    }
+    
     echo "\r\n";
   }
 }

@@ -417,10 +417,11 @@ streeme = {
 				, 50 );
 			}
 
-			//update the songname
+			//update the songname and title
 			if( $( '#songtitle' ) )
 			{
-				$( '#songtitle' ).text( artist_name + ' - ' + streeme.stripTags( song_name ) ); 
+				$( '#songtitle' ).text( artist_name + ' - ' + streeme.stripTags( song_name ) );
+				$( 'title' ).text( artist_name + ' - ' + streeme.stripTags( song_name ) );
 			}
 
 			//add album art to the viewer
