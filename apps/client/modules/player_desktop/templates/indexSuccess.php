@@ -20,10 +20,14 @@
  
       <?php if( sfConfig::get( 'app_allow_ffmpeg_transcoding' )): ?>
         <div class="settings buttonradius" id="settings" title="<?php echo __( 'Change settings' ) ?>"></div>
-      <?php endif; ?>
+      <?php else: ?>
+        <div class="settingsdisabled buttonradius" title="<?php echo __('This feature is only available when FFMPEG transcoding is enabled') ?>"></div>
+      <?php endif ?>
       
       <?php if( sfConfig::get( 'app_allow_ffmpeg_transcoding' ) && $_COOKIE['resume_desktop'] ): ?>
         <div class="resume buttonradius" id="resume" title="<?php echo __('Resume') ?>"></div>
+      <?php else: ?>
+        <div class="resumedisabled buttonradius" title="<?php echo __('This feature is only available when FFMPEG transcoding is enabled') ?>"></div>
       <?php endif ?>
       
       <a href="<?php echo url_for( '@player_default' ) ?>" class="logout buttonradius" id="logout" title="<?php echo __( 'Back to Player Selection' ) ?>"></a>

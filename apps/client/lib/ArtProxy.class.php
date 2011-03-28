@@ -18,11 +18,11 @@ class ArtProxy
     $art_dir;
   
   /**
-  * Constructor
-  * @param hash     str: the identifier for the album art - created by md5( artist_name + album_name )
-  * @param size     str: the size to respond with large (500x500) | medium (200x200) | small (100x100)
-  * @param art_dir  str: the directory where the album art is stored
-  */
+   * Constructor
+   * @param hash     str: the identifier for the album art - created by md5( artist_name + album_name )
+   * @param size     str: the size to respond with large (500x500) | medium (200x200) | small (100x100)
+   * @param art_dir  str: the directory where the album art is stored
+   */
   public function __construct( $hash = null, $size = null, $art_dir = null )
   {
     $this->art_dir = $art_dir;
@@ -31,9 +31,9 @@ class ArtProxy
   }
   
   /**
-  * Get the image
-  * @return        str: hash name / image size (useful for tests)
-  */
+   * Get the image
+   * @return        str: hash name / image size (useful for tests)
+   */
   public function getImage()
   {
     $sizes = array( 'small', 'medium', 'large' );

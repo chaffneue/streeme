@@ -258,6 +258,17 @@ div.horizontalrule
 .settings:hover{
 	background-color: #406fe6;
 }
+.settingsdisabled{
+  position: absolute;
+  top: -5px;
+  right: 77px;
+  width: 43px;
+  height: 29px;
+  text-align: center;
+  background: url('../../../images/player/desktop/h5-icon-settings.png') no-repeat #444;
+  background-position: 12px 7px; 
+	opacity: 0.2
+}
 .settingsmodalwindow{
 	display: none;
 	position: absolute;
@@ -294,11 +305,21 @@ div.horizontalrule
   text-align: center;
   background: url('../../../images/player/desktop/h5-icon-resume.png') no-repeat #444;
   background-position: 4px 7px; 
-  background-color: #444;
   cursor: pointer;
 }
 .resume:hover{
   background-color: #406fe6;
+}
+.resumedisabled{
+  top: -5px;
+  right: 46px;
+  width: 27px;
+  height: 29px;
+  position: absolute;
+  text-align: center;
+  background: url('../../../images/player/desktop/h5-icon-resume.png') no-repeat #444;
+	opacity: 0.2;
+  background-position: 4px 7px; 
 }
 #albumart{
 	position: absolute;

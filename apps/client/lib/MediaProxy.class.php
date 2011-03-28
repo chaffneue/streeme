@@ -264,7 +264,7 @@ class MediaProxy
       $params = array(
         'File'                => $this->filename,
         'ContentType'         => $this->source_type,
-        'BufferSize'	        => 32000,
+        'BufferSize'          => 32000,
         'ContentDisposition'  => array( HTTP_DOWNLOAD_INLINE, $this->source_basename ),
       );
       
@@ -325,7 +325,7 @@ class MediaProxy
           break;
           
         case 'ogg':
-         	$this->output_ogg();
+          $this->output_ogg();
           break;
       }
       exit;
@@ -335,21 +335,29 @@ class MediaProxy
   }
     
   /**
-   * Send an MP3 file
+   * Send an MP3 to the output buffer with an inaccurate content-length guess
+   * calculate the new filesize ( this algortihm is a huge hack )
    */
   private function output_mp3()
   {
     $this->log( sprintf( 'Transcoding MP3 using ffmpeg command: %s %s', $this->ffmpeg_executable, $this->ffmpeg_args ) );
-  	passthru( $this->ffmpeg_executable . ' ' . $this->ffmpeg_args );
-	}
+    $new_filesize = ( ( ( $this->source_duration / 1000 ) - (int) $this->start_time ) //time in seconds
+                    * ( $this->target_bitrate * 1000 ) //bitrate
+                    / 8 ) // convert to bytes
+                    - 1024; //trim 1024 bytes for headers
+    header( 'Content-Length:' . $new_filesize );
+    $this->log(sprintf( 'Content Length modified to %s bytes', $new_filesize ) );
+    passthru( $this->ffmpeg_executable . ' ' . $this->ffmpeg_args );
+  }
   
   /**
-   * Send an OGG/Vorbis audio file
+   * Send an OGG/Vorbis audio file to the output buffer with a very large filesize
    */
   private function output_ogg()
   {
     $this->log( sprintf( 'Transcoding OGG using ffmpeg command: %s %s', $this->ffmpeg_executable, $this->ffmpeg_args ) );
-  	passthru( $this->ffmpeg_executable . ' ' . $this->ffmpeg_args );
+    header( 'Content-Length: 999999999' );
+    passthru( $this->ffmpeg_executable . ' ' . $this->ffmpeg_args );
   }
   
   /**

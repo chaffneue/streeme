@@ -101,6 +101,7 @@ streeme = {
 	rArtistName : null,
 	rFileType : null,
 	rJplayer : false,
+	stopJplayerTimer: true,
 	
 	/**
 	* initialize the application - project constructor
@@ -172,7 +173,7 @@ streeme = {
 							streeme.clearSelection();
 							 
 							//play the song
-							streeme.playSong( aData[0], aData[1], aData[2], aData[3], aData[8] );
+							streeme.playSong( aData[0], aData[1], aData[2], aData[3], aData[8], 0 );
 							 
 							//update the class pointers
 							streeme.songPointer = aData[0];
@@ -189,7 +190,7 @@ streeme = {
 							streeme.clearSelection();
 						  
 							//play the song
-							streeme.playSong( aData[0], aData[1], aData[2], aData[3], aData[8] );
+							streeme.playSong( aData[0], aData[1], aData[2], aData[3], aData[8], 0 );
 						  
 							//update the class pointers
 							streeme.songPointer = aData[0];
@@ -383,6 +384,9 @@ streeme = {
 	*/
 	playSong : function( song_id, song_name, album_name, artist_name, file_type, time_offset )
 	{
+		//stop the jquery player timer
+		streeme.stopJplayerTimer = true;
+		
 		//start the track from a specific offset if given
 		if( time_offset > 0 )
 		{
@@ -392,7 +396,7 @@ streeme = {
 		{
 			streeme.timer = 0;
 		}
-		
+		//console.log('time:' + streeme.timer);
 		//queue up the song for the next play cycle
 		streeme.sourceFormat = file_type; 
 		streeme.queuedSongId = song_id;
@@ -484,9 +488,9 @@ streeme = {
 			{
 				parameters.push(  streeme.send_cookie_name + '=' + $.cookie( streeme.send_cookie_name ) );
 			}
-			if( streeme.timer > 0 )
+			if( streeme.timer > 1 )
 			{
-				parameters.push( 'start_time=' + streeme.timer )
+				parameters.push( 'start_time=' + streeme.timer );
 			}	
 			url = mediaurl + '/play/' + streeme.queuedSongId + ( ( parameters.length > 0 ) ? '?' : '' )  + parameters.join('&');
 					
@@ -500,6 +504,8 @@ streeme = {
 				switch( setMedia_format )
 				{
 					case 'mp3':
+						$("#jquery_jplayer_1").jPlayer( "stop" );
+						$("#jquery_jplayer_1").jPlayer( "clearMedia" );
 						$("#jquery_jplayer_1").jPlayer( "destroy" );
 						$("#jquery_jplayer_1").jPlayer({
 						    ready: function() {
@@ -517,7 +523,10 @@ streeme = {
                             	streeme.play = false;
                             },
                             timeupdate : function(event){
-                            	streeme.timer = Math.floor( event.jPlayer.status.currentTime );
+                            	if( streeme.stopJplayerTimer == false )
+                            	{
+                            		streeme.timer = Math.floor( event.jPlayer.status.currentTime );
+                            	}
                             },
                             swfPath: "/js/jQuery.jPlayer.2.0.0",
                             solution: "flash, html",
@@ -547,7 +556,10 @@ streeme = {
                             	streeme.play = false;
                             },
                             timeupdate : function(event){
-                            	streeme.timer = Math.floor( event.jPlayer.status.currentTime );
+                            	if( streeme.stopJplayerTimer == false )
+                            	{
+                            		streeme.timer = Math.floor( event.jPlayer.status.currentTime );
+                            	}
                             },
                             swfPath: "/js/jQuery.jPlayer.2.0.0",
                             solution: "html",
@@ -557,6 +569,9 @@ streeme = {
                           });				
 						break;
 				}
+				
+				//start the jquery player timer
+				streeme.stopJplayerTimer = false;
 			}
 			
 			//otherwise use the browser's html player 
@@ -639,7 +654,7 @@ streeme = {
 					nextSongData = $( '#songlist' ).dataTable().fnGetData( 0 );
 					if( nextSongData )
 					{
-						streeme.playSong( nextSongData[ 0 ], nextSongData[ 1 ], nextSongData[ 2 ], nextSongData[ 3 ], nextSongData[ 8 ] );
+						streeme.playSong( nextSongData[ 0 ], nextSongData[ 1 ], nextSongData[ 2 ], nextSongData[ 3 ], nextSongData[ 8 ], 0 );
 					}
 					streeme.displayPointer = 0;
 				}
@@ -667,7 +682,7 @@ streeme = {
 		}
 		if( nextSongData )
 		{
-			streeme.playSong( nextSongData[ 0 ], nextSongData[ 1 ], nextSongData[ 2 ], nextSongData[ 3 ], nextSongData[ 8 ] );
+			streeme.playSong( nextSongData[ 0 ], nextSongData[ 1 ], nextSongData[ 2 ], nextSongData[ 3 ], nextSongData[ 8 ], 0 );
 			streeme.displayPointer++;
 		}
 	},
@@ -708,7 +723,7 @@ streeme = {
 					previousSongData = $( '#songlist' ).dataTable().fnGetData( streeme.iDisplayLength - 1	);
 					if( previousSongData )
 					{
-						streeme.playSong( previousSongData[ 0 ], previousSongData[ 1 ], previousSongData[ 2 ], previousSongData[ 3 ], previousSongData[ 8 ]);
+						streeme.playSong( previousSongData[ 0 ], previousSongData[ 1 ], previousSongData[ 2 ], previousSongData[ 3 ], previousSongData[ 8 ], 0 );
 					}
 					streeme.displayPointer = streeme.iDisplayLength - 1;
 				}
@@ -736,7 +751,7 @@ streeme = {
 		}
 		if( previousSongData )
 		{
-			streeme.playSong( previousSongData[ 0 ], previousSongData[ 1 ], previousSongData[ 2 ], previousSongData[ 3 ], previousSongData[ 8 ] );
+			streeme.playSong( previousSongData[ 0 ], previousSongData[ 1 ], previousSongData[ 2 ], previousSongData[ 3 ], previousSongData[ 8 ], 0 );
 			streeme.displayPointer--;
 		}
 	},
@@ -1236,7 +1251,7 @@ streeme = {
 		var resume_info = JSON.parse(resume_rawdata);
 		//console.log( resume_info );
 		streeme.displayPointer = resume_info.dp;
-		streeme.playSong( resume_info.si, resume_info.sn, resume_info.rn, resume_info.an, resume_info.ft, resume_info.t );
+		streeme.playSong( resume_info.si, resume_info.sn, resume_info.an, resume_info.rn, resume_info.ft, resume_info.t );
     },
 	
 	/**

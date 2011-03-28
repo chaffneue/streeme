@@ -10,12 +10,6 @@ if( strpos( $_SERVER[ 'HTTP_USER_AGENT' ], 'Chrome' ))
   echo '<audio preload="none" controls="" id="musicplayer" class="chrome"></audio>' . "\r\n";
 }
 
-//Safari codec set on windows isn't as good in the audio tag
-else if( strpos( $_SERVER[ 'HTTP_USER_AGENT' ], 'Safari' ) && strpos( $_SERVER[ 'HTTP_USER_AGENT' ], 'Windows' ))
-{
-  echo '<video preload="none" controls="" id="musicplayer" class="safari-win"></video>' . "\r\n";
-}
-
 //Safari can use audio just fine on the mac..the player looks quite different
 else if( strpos( $_SERVER[ 'HTTP_USER_AGENT' ], 'Safari' ) && strpos( $_SERVER[ 'HTTP_USER_AGENT' ], 'Macintosh' ))
 {
@@ -84,10 +78,12 @@ EOL;
 slot( 'javascript_player_loader', $jplayer_player_loader );
 }
 
-//internet explorer has it's own interesting quirks with ogg support
+//internet explorer has it's own interesting quirks with ogg support - same goes for Safari Windows
 else if(
          strpos( $_SERVER[ 'HTTP_USER_AGENT' ], 'Trident' )
-        )
+         ||
+         strpos( $_SERVER[ 'HTTP_USER_AGENT' ], 'Safari' ) && strpos( $_SERVER[ 'HTTP_USER_AGENT' ], 'Windows' )
+       )
 {
   use_stylesheet( '/css/jPlayer.Skin/jplayer.blue.monday.css');
   use_javascript( '/js/jQuery.jPlayer.2.0.0/jquery.jplayer.min.js' );
