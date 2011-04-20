@@ -109,7 +109,7 @@ div.horizontalrule{
 	position: relative;
 	border-bottom: 1pt solid #888;
 	background-color: #888;
-	background: url( ../../../images/player/mobile/mb-headerbgrptx.png ) repeat-x center center #888;
+	background: url("/images/player/mobile/mb-headerbgrptx.png") repeat-x center center #888;
 	z-index:3;
 }
 	.header .title{
@@ -158,7 +158,7 @@ div.horizontalrule{
 	border-right: 1pt solid #496076;
 	border-bottom: 1pt solid #71889e;
 	border-left: 1pt solid #496076;
-	background: url( ../../../images/player/mobile/mb-header-button-bgrptx.png ) repeat-x center center #8fa4b8;
+	background: url("/images/player/mobile/mb-header-button-bgrptx.png") repeat-x center center #8fa4b8;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	letter-spacing: -0.06em;
@@ -227,7 +227,7 @@ table.letterbar{
 	position: relative;
 	width: 220px;
 	height: 220px;
-	background: url("../../../images/player/mobile/mb-artbg.png") no-repeat top left;
+	background: url("/images/player/mobile/mb-artbg.png") no-repeat top left;
 	margin: 10px auto 0 auto;
 }
 .albumimg{
@@ -311,7 +311,7 @@ audio{
   left: 10px;
   width: 30px;
   height: 30px;
-  background: url("../../../images/player/mobile/mb-nextprevsprite.png") no-repeat;
+  background: url("/images/player/mobile/mb-nextprevsprite.png") no-repeat;
   background-position: 0 0; 
 }
 .previoussongdisabled{
@@ -320,7 +320,7 @@ audio{
   left: 10px;
   width: 30px;
   height: 30px;
-  background: url("../../../images/player/mobile/mb-nextprevsprite.png") no-repeat;
+  background: url("/images/player/mobile/mb-nextprevsprite.png") no-repeat;
   background-position: 0 -30px; 
 }
 .nextsong{
@@ -329,7 +329,7 @@ audio{
   right: 10px;
   width: 30px;
   height: 30px;
-  background: url("../../../images/player/mobile/mb-nextprevsprite.png") no-repeat;
+  background: url("/images/player/mobile/mb-nextprevsprite.png") no-repeat;
   background-position: -30px 0; 
 }
 .nextsongdisabled{
@@ -338,7 +338,7 @@ audio{
   right: 10px;
   width: 30px;
   height: 30px;
-  background: url("../../../images/player/mobile/mb-nextprevsprite.png") no-repeat;
+  background: url("/images/player/mobile/mb-nextprevsprite.png") no-repeat;
   background-position: -30px -30px; 
 }
 #pauseoverlay{
@@ -347,7 +347,7 @@ audio{
   position: absolute;
   top: 2px;
   left: 4px;
-	background: url("../../../images/player/mobile/mb-pauseoverlay.png") no-repeat;
+	background: url("/images/player/mobile/mb-pauseoverlay.png") no-repeat;
 	z-index: -1;
 }
 #settingscontainer{
@@ -361,7 +361,7 @@ audio{
   height: 29px;
   position: absolute;
   text-align: center;
-  background: url('../../../images/player/desktop/h5-icon-logout.png') no-repeat #7E3515;
+  background: url("/images/player/desktop/h5-icon-logout.png") no-repeat #7E3515;
   background-position: 4px 7px; 
   background-color: #7E3515;
   cursor: pointer;

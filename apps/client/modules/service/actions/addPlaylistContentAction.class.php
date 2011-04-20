@@ -11,6 +11,6 @@ class addPlaylistContentAction extends sfAction
 
     //add playlist content
     Doctrine_Core::getTable('PlaylistFiles')->addPlaylistFiles( $request->getParameter( 'playlist_id' ), $request->getParameter( 'id' ), $request->getParameter( 'type' ) );
-		exit;
+		return sfView::NONE;
   }
 }

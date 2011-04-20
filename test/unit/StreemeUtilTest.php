@@ -3,7 +3,7 @@ include( dirname(__FILE__) . '/../bootstrap/unit.php' );
 include( dirname(__FILE__) . '/../../apps/client/lib/StreemeUtil.class.php' );
 
 // Initialize the test object
-$t = new lime_test( 14, new lime_output_color() );
+$t = new lime_test( 9, new lime_output_color() );
 
 
 

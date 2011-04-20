@@ -464,8 +464,8 @@ streeme = {
 			el = document.getElementById( 'musicplayer' );
 			el.src = ( url );
 			el.preload = 'none';
+			el.addEventListener ('canplay', function() { this.play(); });
 			el.load();
-			el.play(); 
 			
 			//clear the queue
 			streeme.queuedSongId = false;

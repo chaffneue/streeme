@@ -1,0 +1,36 @@
+# Data needed to make a full test suite for functional tests
+Artist:
+  Artist_0:
+    name: Sigur Ros
+  Artist_1: 
+    name: Gorillaz
+Song:
+  Song_0:
+    unique_id: 9qw9dwj9wqdjw9qjqw9jd
+    album_id: 1
+    artist_id: 1
+    genre_id: 2
+    last_scan_id: 1
+    name: Submarine
+    mtime: 22303290923
+    filename: file://localhost/file.1
+  Song_1:
+    unique_id: dj9jd9wejd0ejf90ewjf
+    album_id: 2
+    artist_id: 2
+    genre_id: 145
+    last_scan_id: 1
+    name: Felix
+    mtime: 194909095
+    filename: file://localhost/file.2
+Album:
+  Album_0:
+    scan_id: 1
+    name: með suð í eyrum við spilum endalaust
+  Album_1:
+    scan_id: 1
+    name: The Fall
+Genre:
+  Genre_144:
+    id: 144
+    name: PostPunkCyberMetal

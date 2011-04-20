@@ -187,6 +187,21 @@ abstract class BaseSong extends sfDoctrineRecord
               0 => 'length',
              ),
              ));
+        $this->index('tracknumber_index', array(
+             'fields' => 
+             array(
+              0 => 'tracknumber',
+             ),
+             ));
+        $this->index('sort_index', array(
+             'fields' => 
+             array(
+              0 => 'artist_id',
+              1 => 'album_id',
+              2 => 'tracknumber',
+              3 => 'mtime',
+             ),
+             ));
         $this->option('collate', 'utf8_unicode_ci');
         $this->option('charset', 'utf8');
     }

@@ -13,14 +13,10 @@ class listSongsAction extends sfAction
     $bEscapeRegex,	 // bool Global search is regex or not
     $bSortable,      // Indicator for if a column is flagged as sortable or not on the client-side
     $iSortingCols,   // Number of columns to sort on
-    $sEcho,          // Information for DataTables to use for rendering
-    $output_format;  // output format json|xml|php array
+    $sEcho;          // Information for DataTables to use for rendering
 
   public function execute($request)
   {
-    //default output format is JSON
-    $this->output_format = 'json';
-    
     //hydrate class variables
     foreach( $request->getParameterHolder()->getAll() as $k => $v )
 		{
@@ -32,7 +28,7 @@ class listSongsAction extends sfAction
   }
   
   /**
-   * Create the data set and stream it to the user in the requested format
+   * Create the data set and stream it to the user
    */
   private function create_response()
   {
@@ -51,13 +47,11 @@ class listSongsAction extends sfAction
     $found_rows    = $result_count;
     $total_library = Doctrine_Core::getTable('Song')->getTotalSongCount();
     
-    switch( $this->output_format )
-    {
-      case 'json':
-        echo $this->to_json_dataTable( $song_array, $found_rows, $total_library );
-        break;
-    }
-    exit;
+
+    $this->content = $this->to_json_dataTable( $song_array, $found_rows, $total_library );
+    sfConfig::set('sf_web_debug', false);
+    $this->setTemplate('output');
+    $this->setLayout(false);
   }
   
   /**

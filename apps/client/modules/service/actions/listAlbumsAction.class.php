@@ -5,7 +5,10 @@ class listAlbumsAction extends sfAction
   {
     $alpha = $request->getParameter( 'alpha' );
     $artist_id = $request->getParameter( 'artist_id' );
-    echo json_encode( Doctrine_Core::getTable('Album')->getList( ( $alpha ) ? $alpha : 'all', ( $artist_id ) ? $artist_id : 'all' ) ); 
-    exit; 
+    $this->content = json_encode( Doctrine_Core::getTable('Album')->getList( ( $alpha ) ? $alpha : 'all', ( $artist_id ) ? $artist_id : 'all' ) ); 
+    
+    sfConfig::set('sf_web_debug', false);
+    $this->setTemplate('output');
+    $this->setLayout(false);
   }
 }

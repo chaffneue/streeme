@@ -1,9 +1,23 @@
-<script type="text/javascript">
+<?php
+  if( strtolower( $namespace ) != 'sfguardauthsignin')
+  {
+    $combiner = new combineFiles();
+    echo sprintf( '<script src="%s" type="text/javascript"></script>',
+                  $combiner->combine( 'js', $namespace, sfContext::getInstance()->getResponse()
+                 ) );
+    unset( $combiner );
+  }
+  else
+  {
+    include_javascripts();
+  }
+?>
+<script type="text/javascript" id="loadjavascript">
 <!--
 /* Add Functions that Need to Load after Ready Here */
 $(document).ready(function()
 {
-<?php 
+<?php
 	//the load_html5_player partial may load jplayer javascripts using this slot if required
 	echo get_slot( 'javascript_player_loader' );
 	
@@ -12,7 +26,7 @@ $(document).ready(function()
   if ( !empty( $_SERVER['HTTPS'] ) )
   {
 	  $port = '';
-  }  
+  }
   else
   {
 	  if( substr( $hostname, -1 ) === ':' )
@@ -22,7 +36,7 @@ $(document).ready(function()
 	  else
 	  {
 		  $port = ':' . $music_proxy_port;
-	  }  
+	  }
   }
   //music url
   echo 'mediaurl = "' . $protocol . $hostname . $port . '";' . "\r\n";
@@ -30,9 +44,9 @@ $(document).ready(function()
   //artwork and asset url
   echo 'rooturl = "' . rtrim( url_for( '@javascript_base', true ), '/' ) . '";' . "\r\n";
   
-  //javascript service endpoint 
+  //javascript service endpoint
   echo 'javascript_base = "' . rtrim( url_for( '@javascript_base', true ), '/' ) . '";' . "\r\n";
-?> 
+?>
   results_per_page = "<?php echo sfConfig::get( 'app_results_per_page' ) ?>";
   send_session_cookies = <?php echo ( sfConfig::get( 'app_send_cookies_with_request' ) ) ? 'true' : 'false' ?>;
   send_cookie_name = "<?php echo sfConfig::get('app_sf_guard_plugin_remember_cookie_name', 'sfRemember') ?>";
@@ -58,13 +72,13 @@ $(document).ready(function()
   addItemError = "<?php echo __( 'Error! Did you select a playlist first?' ) ?>";
   deleteItemSuccess = "<?php echo __( 'Item deleted from the active playlist' ) ?>";
   deleteItemError = "<?php echo __( 'Error! Streeme reported an error. Song not deleted.' ) ?>";
-  playlistNameInput = "<?php echo __( 'Please specify a name for the new playlist' ) ?>"; 
-  addPlaylistSuccess = "<?php echo __( 'Added New Playlist' ) ?>"; 
+  playlistNameInput = "<?php echo __( 'Please specify a name for the new playlist' ) ?>";
+  addPlaylistSuccess = "<?php echo __( 'Added New Playlist' ) ?>";
   addPlaylistError = "<?php echo __( 'Error! Playlist not created.' ) ?>";
-  deletePlaylistSuccess = "<?php echo __( 'Playlist Deleted' ) ?>"; 
-  deletePlaylistError = "<?php echo __( 'Error! Streeme reported an error. Playlist not deleted.' ) ?>"; 
-  confirmDelete = "<?php echo __( 'Are you sure you want to delete this item?' ) ?>"; 
-  playsongbutton = "<?php echo __( 'Play this track' ) ?>"; 
+  deletePlaylistSuccess = "<?php echo __( 'Playlist Deleted' ) ?>";
+  deletePlaylistError = "<?php echo __( 'Error! Streeme reported an error. Playlist not deleted.' ) ?>";
+  confirmDelete = "<?php echo __( 'Are you sure you want to delete this item?' ) ?>";
+  playsongbutton = "<?php echo __( 'Play this track' ) ?>";
          
   //Load the Application
   streeme.__initialize( results_per_page );

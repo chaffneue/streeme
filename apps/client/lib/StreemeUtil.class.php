@@ -53,7 +53,7 @@ class StreemeUtil
     //build the iTunes URL prefix and allow for single byte latin chars
     if ( self::is_windows() )
     {
-      $url_prefix = 'file://localhost/'; 
+      $url_prefix = 'file://localhost/';
       $itunes_url = self::replace_url_nonfs_chars( $itunes_url );
       $filename = utf8_decode( str_replace( $url_prefix, '', rawurldecode( $itunes_url ) ) );
     }
@@ -85,12 +85,12 @@ class StreemeUtil
   
   /**
    * Modifies a string to remove al non ASCII characters and spaces.
-   * From Snipplr http://snipplr.com/view.php?codeview&id=22741
+   *
    * @param text string: the string to slugify
    * @return the slugified string
    * @see http://snipplr.com/view.php?codeview&id=22741
    */
-  public function slugify($text)
+  public static function slugify($text)
   {
     // replace non letter or digits by -
     $text = preg_replace('~[^\\pL\d]+~u', '-', $text);
@@ -120,7 +120,7 @@ class StreemeUtil
   
   /**
    * Remove null terminations and whitespace from a string (UTF8 friendly)
-   * 
+   *
    * @param text     str: the dirty string
    * @return         str: non printable sanitized string
    */
@@ -135,10 +135,10 @@ class StreemeUtil
    * Convert itunes mbchars to single byte latin for windows
    * @param text str: the dirty string
    * @return     str: sanitized str
-   */ 
+   */
   public function replace_url_nonfs_chars( $text )
   {
-    $search = array( 
+    $search = array(
                      '%E2%80%93',
                      '%E2%80%A6',
                      '%E2%80%BA'
@@ -146,7 +146,7 @@ class StreemeUtil
     $replace = array(
                       '%96',
                       '%85',
-                      '%9B' 
+                      '%9B'
                     );
     
     return str_replace( $search, $replace, $text );

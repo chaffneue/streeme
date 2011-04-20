@@ -28,13 +28,13 @@ class player_desktopActions extends sfActions
   }
   
   /**
-  * Execute the playlist action - refreshes the playlist partial in the UI
-  *
-  * @param sfRequest $request A request object
-  */
+   * Execute the playlist action - refreshes the playlist partial in the UI
+   *
+   * @param sfRequest $request A request object
+   */
   public function executePlaylist(sfWebRequest $request)
   {
-    $this->setLayout(false); 
+    $this->setLayout(false);
     sfConfig::set('sf_web_debug', false);
     $this->playlist_list = Doctrine_Core::getTable('Playlist')->getList();
   }

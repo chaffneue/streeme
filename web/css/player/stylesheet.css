@@ -38,7 +38,7 @@ form{
 }
 .buttoncontainer{
 	position: relative;
-	background: url( ../../images/player/player-button-bg.gif ) no-repeat #EEE;
+	background: url("/images/player/player-button-bg.gif") no-repeat #EEE;
 	width: 397px;
 	height: 93px;
 	margin: 13px auto 0 auto;
@@ -65,7 +65,7 @@ ul.buttons li a.button{
 	height: 61px;
 	text-indent: -9999px;
 	overflow:hidden;
-	background-image: url( ../../images/player/player-button-sprite.jpg );
+	background-image: url("/images/player/player-button-sprite.jpg");
 	cursor: pointer;
 }
 .desktop:hover{

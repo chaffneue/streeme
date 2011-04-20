@@ -46,6 +46,7 @@ class ArtProxy
     $image_download = new HTTP_Download();
     $image_download->setContentType( 'image/jpeg' );
     $image_download->setBufferSize( 8192 );
+    $image_download->setCacheControl('public', 86040000 );
     $image_download->setContentDisposition( HTTP_DOWNLOAD_INLINE, $this->size . '.jpg' );
     
     //if art exists stream it to the user, otherwise stream the default placeholder graphics

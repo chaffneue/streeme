@@ -5,16 +5,5 @@ default:
   http_metas:
     content-type: text/html
 
-  metas:
-    #title:        Streeme - Portable Music
-    #description:  Stream YOUR music for YOUR servers - take your music back
-    #keywords:     
-    #language:     en
-    #robots:       index, follow
-
-  stylesheets:    []
-
-  javascripts:    []
-
   has_layout:     true
   layout:         layout

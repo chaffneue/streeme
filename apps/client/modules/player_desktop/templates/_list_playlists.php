@@ -2,7 +2,7 @@
 #
 # Gets and displays a list of playlists
 #
-echo '<ol class="' . $element_id . '">';
+echo '<ol class="' . $element_id . '" id="' . $element_id . '">';
 foreach ( $list as $k => $v )
 {
   echo '  <li id="plli' . $v['id'] . '">';

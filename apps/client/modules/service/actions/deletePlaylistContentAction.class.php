@@ -11,6 +11,6 @@ class deletePlaylistContentAction extends sfAction
 
     //delete playlist content
 		Doctrine_Core::getTable('PlaylistFiles')->deletePlaylistFile( $request->getParameter( 'playlist_id' ), $request->getParameter( 'id' ) );
-		exit;
+		return sfView::NONE;
   }
 }

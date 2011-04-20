@@ -104,7 +104,7 @@ div.horizontalrule
 	width: 43px;
 	height: 29px;
 	text-align: center;
-	background: url('../../../images/player/desktop/h5-icon-playlist.png') no-repeat #444;
+	background: url('/images/player/desktop/h5-icon-playlist.png') no-repeat #444;
 	background-position: 12px 7px; 
 	cursor: pointer;
 }
@@ -139,7 +139,7 @@ div.horizontalrule
 	display:table-cell;
 	vertical-align:top;
 	height: 14px;
-	background: url( ../../../images/player/desktop/h5-button-playlistsprite.png ) no-repeat;
+	background: url( /images/player/desktop/h5-button-playlistsprite.png ) no-repeat;
 	cursor: pointer;
 	background-position: 0 -28px;
 	overflow: hidden;
@@ -165,7 +165,7 @@ div.horizontalrule
 	display:table-cell;
 	vertical-align:top;
 	height: 14px;
-	background: url( ../../../images/player/desktop/h5-button-playlistsprite.png ) no-repeat;
+	background: url( /images/player/desktop/h5-button-playlistsprite.png ) no-repeat;
 	cursor: pointer;
 	background-position: 0 -42px;
 	overflow: hidden;
@@ -183,7 +183,7 @@ div.horizontalrule
 	display:table-cell;
 	vertical-align:top;
 	height: 14px;
-	background: url( ../../../images/player/desktop/h5-button-playsprite.png ) no-repeat;
+	background: url( /images/player/desktop/h5-button-playsprite.png ) no-repeat;
 	cursor: pointer;
 	background-position: 0 0;
 	overflow: hidden;
@@ -212,7 +212,7 @@ div.horizontalrule
 	height: 11px;
 	width: 11px;
 	cursor: pointer;
-	background: url("../../../images/player/desktop/h5-button-playlistsprite.png") no-repeat;
+	background: url("/images/player/desktop/h5-button-playlistsprite.png") no-repeat;
 	background-position: -28px -1px;
 }
 .deleteplaylistbutton:hover{
@@ -225,7 +225,7 @@ div.horizontalrule
 	height: 13px;
 	width: 14px;
 	cursor: pointer;
-	background: url('../../../images/player/desktop/h5-button-playlistsprite.png') no-repeat;
+	background: url('/images/player/desktop/h5-button-playlistsprite.png') no-repeat;
 	background-position: -14px 0;
 }
 .ejectplaylistbutton:hover{
@@ -238,7 +238,7 @@ div.horizontalrule
 	height: 13px;
 	width: 14px;
 	cursor: pointer;
-	background: url('../../../images/player/desktop/h5-button-playlistsprite.png') no-repeat;
+	background: url('/images/player/desktop/h5-button-playlistsprite.png') no-repeat;
 	background-position: 0 0;
 }
 .playplaylistbutton:hover{
@@ -251,7 +251,7 @@ div.horizontalrule
 	width: 43px;
 	height: 29px;
 	text-align: center;
-	background: url('../../../images/player/desktop/h5-icon-settings.png') no-repeat #444;
+	background: url('/images/player/desktop/h5-icon-settings.png') no-repeat #444;
 	background-position: 12px 7px; 
 	cursor: pointer;
 }
@@ -265,7 +265,7 @@ div.horizontalrule
   width: 43px;
   height: 29px;
   text-align: center;
-  background: url('../../../images/player/desktop/h5-icon-settings.png') no-repeat #444;
+  background: url('/images/player/desktop/h5-icon-settings.png') no-repeat #444;
   background-position: 12px 7px; 
 	opacity: 0.2
 }
@@ -288,7 +288,7 @@ div.horizontalrule
 	height: 29px;
 	position: absolute;
 	text-align: center;
-	background: url('../../../images/player/desktop/h5-icon-logout.png') no-repeat #7E3515;
+	background: url('/images/player/desktop/h5-icon-logout.png') no-repeat #7E3515;
 	background-position: 4px 7px; 
 	background-color: #7E3515;
 	cursor: pointer;
@@ -303,7 +303,7 @@ div.horizontalrule
   height: 29px;
   position: absolute;
   text-align: center;
-  background: url('../../../images/player/desktop/h5-icon-resume.png') no-repeat #444;
+  background: url('/images/player/desktop/h5-icon-resume.png') no-repeat #444;
   background-position: 4px 7px; 
   cursor: pointer;
 }
@@ -317,7 +317,7 @@ div.horizontalrule
   height: 29px;
   position: absolute;
   text-align: center;
-  background: url('../../../images/player/desktop/h5-icon-resume.png') no-repeat #444;
+  background: url('/images/player/desktop/h5-icon-resume.png') no-repeat #444;
 	opacity: 0.2;
   background-position: 4px 7px; 
 }
@@ -327,7 +327,7 @@ div.horizontalrule
 	left:13px;
 	width: 105px;
 	height: 107px;
-	background: url("../../../images/player/desktop/h5-album-art-100x100-bg.png") no-repeat top left;
+	background: url("/images/player/desktop/h5-album-art-100x100-bg.png") no-repeat top left;
 	-webkit-tap-highlight-color:  rgba(255, 255, 255, 0); 
 }
 a.cboxElement
@@ -371,7 +371,7 @@ video.chrome, audio.chrome
 	height: 32px;
   margin: 0;
   padding: 0;
-  background-image: url("../../../images/player/desktop/h5-playerembed-bg.png");
+  background-image: url("/images/player/desktop/h5-playerembed-bg.png");
 }
 video.safari-win
 {
@@ -380,7 +380,7 @@ video.safari-win
   height: 16px;
   margin: 0;
   padding: 0;
-  background-image: url("../../../images/player/desktop/h5-playerembed-bg.png");
+  background-image: url("/images/player/desktop/h5-playerembed-bg.png");
 }
 audio{
   position: absolute;
@@ -410,12 +410,12 @@ audio.firefox{
 	right: 96px;
 	width: 38px;
 	height: 32px;
-	background: url("../../../images/player/desktop/h5-button-transportsprite.png") no-repeat;
+	background: url("/images/player/desktop/h5-button-transportsprite.png") no-repeat;
 	background-position: 0px -35px;
 	cursor: pointer;
 }
 .previoussong:hover{
-	background: url("../../../images/player/desktop/h5-button-transportsprite.png") no-repeat;
+	background: url("/images/player/desktop/h5-button-transportsprite.png") no-repeat;
 	background-position: 0px 0px;
 }
 .previoussongdisabled
@@ -425,7 +425,7 @@ audio.firefox{
 	right: 96px;
 	width: 38px;
 	height: 32px;
-	background: url("../../../images/player/desktop/h5-button-transportsprite.png") no-repeat;
+	background: url("/images/player/desktop/h5-button-transportsprite.png") no-repeat;
 	background-position: 0px -70px;
 	cursor: default;
 }
@@ -435,12 +435,12 @@ audio.firefox{
 	right: 59px;
 	width: 37px;
 	height: 32px;
-	background: url("../../../images/player/desktop/h5-button-transportsprite.png") no-repeat;
+	background: url("/images/player/desktop/h5-button-transportsprite.png") no-repeat;
 	background-position: -38px -35px;
 	cursor: pointer;
 }
 .nextsong:hover{
-	background: url("../../../images/player/desktop/h5-button-transportsprite.png") no-repeat;
+	background: url("/images/player/desktop/h5-button-transportsprite.png") no-repeat;
 	background-position: -38px 0px;
 }
 .nextsongdisabled{
@@ -449,7 +449,7 @@ audio.firefox{
 	right: 59px;
 	width: 37px;
 	height: 32px;
-	background: url("../../../images/player/desktop/h5-button-transportsprite.png") no-repeat;
+	background: url("/images/player/desktop/h5-button-transportsprite.png") no-repeat;
 	background-position: -38px -70px;
 	cursor: default;
 }
@@ -459,7 +459,7 @@ audio.firefox{
 	right: 15px;
 	width: 37px;
 	height: 32px;
-	background: url("../../../images/player/desktop/h5-button-transportsprite.png") no-repeat;
+	background: url("/images/player/desktop/h5-button-transportsprite.png") no-repeat;
 	background-position: -77px -35px;
 	cursor: pointer;
 }
@@ -469,7 +469,7 @@ audio.firefox{
 	right: 15px;
 	width: 37px;
 	height: 32px;
-	background: url("../../../images/player/desktop/h5-button-transportsprite.png") no-repeat;
+	background: url("/images/player/desktop/h5-button-transportsprite.png") no-repeat;
 	background-position: -77px 0px;
 	cursor: pointer;
 }
@@ -521,7 +521,7 @@ audio.firefox{
 	}
 	.search .usersearch .cancel{
 		position: absolute;
-		background: url("../../../images/player/desktop/h5-icon-search-cancel.png") no-repeat;
+		background: url("/images/player/desktop/h5-icon-search-cancel.png") no-repeat;
 		width: 13px;
 		height: 13px;
 		right: 13px;
@@ -533,7 +533,7 @@ audio.firefox{
 	display: none;
 	top: 6px;
 	right: 10px;
-	background: url("../../../images/player/desktop/h5-icon-search-cancel.png") no-repeat top left;
+	background: url("/images/player/desktop/h5-icon-search-cancel.png") no-repeat top left;
 	height: 13px;
 	width: 13px;
 	cursor: pointer;
@@ -652,7 +652,7 @@ audio.firefox{
 	font-weight: bold;
 	font-size: 11px;
 	padding: 1px  0 0 0;
-	background: url( "../../../images/player/desktop/ajax.gif" ) no-repeat top left;
+	background: url( "/images/player/desktop/ajax.gif" ) no-repeat top left;
 	height: 16px;
 	width: 16px;
 	margin: 2px 0 0 0;

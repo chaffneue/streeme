@@ -3,13 +3,15 @@
   slot( 'description', __( 'Streeme Player for the Desktop' ) );
   use_stylesheet( '/css/colorbox/colorbox.css' );
   use_stylesheet( '/css/player/desktop/stylesheet.css' );
-  use_javascript( '/js/jquery-1.4.2.min.js' );
+  use_stylesheet( '/css/jPlayer.Skin/jplayer.blue.monday.css', 'first' );
+  use_javascript( '/js/jquery-1.4.2.min.js', 'first' );
   use_javascript( '/js/jquery.dataTables.min.js' );
   use_javascript( '/js/jquery.scrollTo.min.js' );
   use_javascript( '/js/jquery.cookie.min.js' );
   use_javascript( '/js/jquery.md5.min.js' );
   use_javascript( '/js/jquery.colorbox.min.js' );
   use_javascript( '/js/player/desktop/streeme.js' );
+  use_javascript( '/js/jQuery.jPlayer.2.0.0/jquery.jplayer.min.js', 'first' );
 ?>
 <div id="container">
   <div class="header" id="header">
@@ -24,7 +26,7 @@
         <div class="settingsdisabled buttonradius" title="<?php echo __('This feature is only available when FFMPEG transcoding is enabled') ?>"></div>
       <?php endif ?>
       
-      <?php if( sfConfig::get( 'app_allow_ffmpeg_transcoding' ) && $_COOKIE['resume_desktop'] ): ?>
+      <?php if( sfConfig::get( 'app_allow_ffmpeg_transcoding' ) && @$_COOKIE['resume_desktop'] ): ?>
         <div class="resume buttonradius" id="resume" title="<?php echo __('Resume') ?>"></div>
       <?php else: ?>
         <div class="resumedisabled buttonradius" title="<?php echo __('This feature is only available when FFMPEG transcoding is enabled') ?>"></div>
@@ -48,7 +50,7 @@
   </div>
   <div class="content clearfix" id="content">
     <div class="columnleft" id="columnleft">
-      <div class="browsecontainer"> 
+      <div class="browsecontainer">
         <?php include_partial( 'genre_browse', array( 'title'=>'Genres', 'element_id' => 'browsegenre', 'list' => $genre_list ) ) ?>
         <?php include_partial( 'library_browse', array( 'title'=>'Artists', 'element_id' => 'browseartist', 'list_template' => 'list_artists', 'list' => $artist_list ) ) ?>
         <?php include_partial( 'library_browse', array( 'title'=>'Albums', 'element_id'=>'browsealbum', 'list_template' => 'list_albums', 'list' => $album_list ) ) ?>
@@ -79,4 +81,4 @@
 
 <div class="magnify_art" id="magnify_art" title="<?php echo __( 'Magnify album art' ) ?>"></div>
 
-<?php include_partial( 'load_javascript', array( 'music_proxy_port' => $music_proxy_port ) ) ?>
+<?php include_partial( 'load_javascript', array( 'music_proxy_port' => $music_proxy_port, 'namespace' => $this->getModuleName() . $this->getActionName() ) ) ?>

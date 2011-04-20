@@ -3,7 +3,7 @@
   slot( 'description', __( 'Streeme Player for Mobile Webkit Enabled Phones and devices' ) );
   slot( 'metaHTML', '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">' );
   use_stylesheet( '/css/player/mobile/stylesheet.css' );
-  use_javascript( '/js/jquery-1.4.2.min.js' );
+  use_javascript( '/js/jquery-1.4.2.min.js', 'first' );
   use_javascript( '/js/jquery.dataTables.min.js' );
   use_javascript( '/js/jquery.cookie.min.js' );
   use_javascript( '/js/jquery.md5.min.js' );
@@ -35,4 +35,4 @@
     <?php include_partial( 'card_settings' )?>
   </div>
 </div>
-<?php include_partial( 'load_javascript', array( 'music_proxy_port' => $music_proxy_port ) ); ?>
+<?php include_partial( 'load_javascript', array( 'music_proxy_port' => $music_proxy_port, 'namespace' => $this->getModuleName() . $this->getActionName() ) ); ?>

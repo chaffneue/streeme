@@ -12,6 +12,6 @@ class addPlaylistAction extends sfAction
 
     //add playlist
     Doctrine_Core::getTable('Playlist')->addPlaylist( $name );
-		exit;
+		return sfView::NONE;
   }
 }

@@ -7,8 +7,21 @@
   <meta name="description" content="<?php echo get_slot( 'description' ); ?>" />
   <link rel="shortcut icon" href="<?php echo public_path( 'favicon.ico', true ); ?>" />
   <link rel="apple-touch-icon" href="<?php echo public_path( 'apple-touch-icon.png', true ); ?>" />
-  <?php include_stylesheets() ?>
-  <?php include_javascripts() ?>
+  <?php
+    $namespace = $this->getModuleName() . $this->getActionName();
+    if( strtolower( $namespace ) != 'sfguardauthsignin')
+    {
+      $combiner = new combineFiles();
+      echo sprintf( '<link rel="stylesheet" type="text/css" href="%s" />',
+                    $combiner->combine( 'css', $namespace, sfContext::getInstance()->getResponse()
+                   ) );
+      unset( $combiner );
+    }
+    else
+    {
+      include_stylesheets();
+    }
+  ?>
 </head>
 <body>
   <?php echo $sf_content ?>

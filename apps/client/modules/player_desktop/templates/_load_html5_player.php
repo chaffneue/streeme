@@ -3,8 +3,8 @@
 # Loading an appropriate HTML5 player will change as the standard gets better, add cases here
 #
 
-//Chrome 10 has serious vido playback bugs, go back to the audio tag for now 
-//chromium bug report: http://code.google.com/p/chromium/issues/detail?id=73458 
+//Chrome 10 has serious vido playback bugs, go back to the audio tag for now
+//chromium bug report: http://code.google.com/p/chromium/issues/detail?id=73458
 if( strpos( $_SERVER[ 'HTTP_USER_AGENT' ], 'Chrome' ))
 {
   echo '<audio preload="none" controls="" id="musicplayer" class="chrome"></audio>' . "\r\n";
@@ -30,9 +30,7 @@ else if(
          strpos( $_SERVER[ 'HTTP_USER_AGENT' ], 'pera/' )
         )
 {
-  use_stylesheet( '/css/jPlayer.Skin/jplayer.blue.monday.css');
-  use_javascript( '/js/jQuery.jPlayer.2.0.0/jquery.jplayer.min.js' );
-  
+    
   //macs have slightly different font variants. add template tag to adjust line height.
   $if_mac = strpos( $_SERVER[ 'HTTP_USER_AGENT' ], 'Mac OS X' ) ? 'style="top:8px"' : '';
   $if_operawindows = ( strpos( $_SERVER[ 'HTTP_USER_AGENT' ], 'pera/' ) && strpos( $_SERVER[ 'HTTP_USER_AGENT' ], 'Windows' )   ) ? 'style="top:5px"' : '';
@@ -85,8 +83,6 @@ else if(
          strpos( $_SERVER[ 'HTTP_USER_AGENT' ], 'Safari' ) && strpos( $_SERVER[ 'HTTP_USER_AGENT' ], 'Windows' )
        )
 {
-  use_stylesheet( '/css/jPlayer.Skin/jplayer.blue.monday.css');
-  use_javascript( '/js/jQuery.jPlayer.2.0.0/jquery.jplayer.min.js' );
   echo <<<EOL
 <div id="jquery_jplayer_1" class="jp-jplayer"></div>
 <div class="jp-audio">

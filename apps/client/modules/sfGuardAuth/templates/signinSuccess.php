@@ -1,4 +1,4 @@
-<?php 
+<?php
   slot( 'title', __( 'Streeme: Please sign in' ) );
   slot( 'description', __( 'Please sign in to continue' ) );
   slot( 'metaHTML', '<meta name="viewport" content="width=device-width, initial-scale=0.6667, maximum-scale=1.0, user-scalable=no">' );
@@ -16,7 +16,7 @@
       <?php echo $form['password'] ?>
       <?php echo $form['_csrf_token'] ?>
       <div><?php echo $form['remember'] ?>&nbsp;<label for="signin_remember"><?php echo __( 'Remember me' ) ?></label></div>
-      <div class="signin"><input type="submit" value="<?php echo __( 'Sign in' ) ?>" /></div>
+      <div class="signin"><input type="submit" id="submitauth" value="<?php echo __( 'Sign in' ) ?>" /></div>
     </div>
   </form>
 </div>

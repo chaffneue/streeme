@@ -1,8 +1,35 @@
 Options +FollowSymLinks +ExecCGI
-  DirectoryIndex index.php 
+DirectoryIndex index.php 
 
-#if deflate exists - use it
-AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript
+<IfModule mod_headers.c>
+  # no need for ETags if we can modify the headers for forever caches
+  FileETag None
+  
+  # cache images and flash bits
+  <FilesMatch "\.(ico|jpg|jpeg|png|gif|css)$">
+    Header unset Last-Modified
+    Header unset Cookie
+    Header set Cache-Control "max-age=86040000, public, must-revalidate"
+  </FilesMatch>
+  
+  # cache css/js but retain cookies
+  <FilesMatch "\.(js|swf)$">
+    Header unset Last-Modified
+    Header set Cache-Control "max-age=72000000, public, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_expires.c>
+  #make favicons cachable
+  AddType image/x-icon .ico
+  ExpiresActive On
+  ExpiresByType image/x-icon A2592000
+</IfModule>
+
+<IfModule mod_deflate.c>
+  #Use Deflate compression if available
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript
+</IfModule>
 
 <IfModule mod_rewrite.c>
   RewriteEngine On

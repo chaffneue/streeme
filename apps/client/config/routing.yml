@@ -1,6 +1,10 @@
 # You can find more information about this file on the symfony website:
 # http://www.symfony-project.org/reference/1_4/en/10-Routing
 
+asset_combiner: 
+  url: /service/combine/:type/:namespace
+  param: { module: service, action: combine }
+  
 services:
   url: /service/:action
   param: { module: service, action: :action }

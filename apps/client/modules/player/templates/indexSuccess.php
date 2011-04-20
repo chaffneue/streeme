@@ -1,4 +1,4 @@
-<?php 
+<?php
   slot( 'title', __( 'Streeme: Welcome - Control Panel' ) );
   slot( 'description', __( 'Continue to a player or change global application settings' ) );
   slot( 'metaHTML', '<meta name="viewport" content="width=device-width, initial-scale=0.80, maximum-scale=1.0, user-scalable=no">' );
@@ -15,12 +15,7 @@
   </ul>
   <div class="text" id="button_text"></div>
 </div>
-<!--
-<div class="remember">
-  <input type="checkbox">
-  <span class="remember_player"><?php echo __( 'Remember my player choice' )?></span>
-</div>
--->
+<?php include_javascripts() ?>
 <script type="text/javascript">
   $( document ).ready
   (
@@ -29,20 +24,20 @@
       $( '#desktop' ).mouseover( function(){ set_text( '<?php echo __( 'Desktop' ) ?>' ) } );
       $( '#mobile' ).mouseover( function(){ set_text( '<?php echo __( 'Mobile' ) ?>' ) } );
       $( '#settings' ).mouseover( function(){ set_text( '<?php echo __( 'Settings' ) ?>' ) } );
-      $( '#logout' ).mouseover( function(){ set_text( '<?php echo __( 'Sign Off' ) ?>' ) } );     
+      $( '#logout' ).mouseover( function(){ set_text( '<?php echo __( 'Sign Off' ) ?>' ) } );
       $( '#desktop' ).mouseout( function(){ unset_text() } );
       $( '#mobile' ).mouseout( function(){ unset_text() } );
       $( '#settings' ).mouseout( function(){ unset_text() } );
-      $( '#logout' ).mouseout( function(){ unset_text() } );      
+      $( '#logout' ).mouseout( function(){ unset_text() } );
     }
   );
   function set_text( text )
-  { 
+  {
     $( '#button_text' ).text( text );
     $( '#button_text' ).stop(true, true).show(120);
   }
   function unset_text( text )
-  { 
+  {
     $( '#button_text' ).stop(true, true).hide(50);
   }
 </script>
