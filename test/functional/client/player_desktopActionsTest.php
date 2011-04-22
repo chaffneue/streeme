@@ -16,10 +16,8 @@ $browser->
 
   with('response')->begin()->
     isStatusCode(401)->
-  end()
-;
-
-$browser->
+  end()->
+  
   info('2. Desktop Player - login and test partials')->
   
   authenticate()->
@@ -42,5 +40,14 @@ $browser->
     checkElement('#browseplaylist')->
     checkElement('#browseartist')->
     checkElement('#browsealbum')->
+  end()->
+  
+  info('3. Desktop Player - testing logout button')->
+  
+  click('#logout')->
+  
+  with('request')->begin()->
+    isParameter('module', 'player')->
+    isParameter('action', 'index')->
   end()
 ;

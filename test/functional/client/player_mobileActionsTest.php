@@ -16,10 +16,8 @@ $browser->
 
   with('response')->begin()->
     isStatusCode(401)->
-  end()
-;
+  end()->
 
-$browser->
   info('2. Mobile Player - login and test partials')->
   
   authenticate()->
@@ -46,5 +44,14 @@ $browser->
     checkElement('#welcomescreen')->
     checkElement('#header')->
     checkElement('#genrelistcontainer')->
+  end()->
+  
+  info('3. Mobile Player - testing logout button')->
+  
+  click('#logout')->
+  
+  with('request')->begin()->
+    isParameter('module', 'player')->
+    isParameter('action', 'index')->
   end()
 ;

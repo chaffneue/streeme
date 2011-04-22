@@ -35,5 +35,31 @@ $browser->
     isStatusCode(200)->
     info('2.2 Validating partials')->
     checkElement('#button_text')->
+  end()->
+
+  info('3. Test the click paths')->
+  click('#desktop')->
+    
+  with('request')->begin()->
+    isParameter('module', 'player_desktop')->
+    isParameter('action', 'index')->
+  end()->
+  
+  back()->
+  
+  click('#mobile')->
+    
+  with('request')->begin()->
+    isParameter('module', 'player_mobile')->
+    isParameter('action', 'index')->
+  end()->
+  
+  back()->
+  
+  click('#logout')->
+    
+  with('request')->begin()->
+    isParameter('module', 'sfGuardAuth')->
+    isParameter('action', 'signout')->
   end()
 ;

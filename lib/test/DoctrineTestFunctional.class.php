@@ -11,7 +11,7 @@ class DoctrineTestFunctional extends sfTestFunctional
   {
     exec( dirname(__FILE__) . '/../../symfony doctrine:build --all --and-load --env=test --no-confirmation');
     exec( dirname(__FILE__) . '/../../symfony guard:create-user apptest abc123 --env=test');
-    Doctrine_Core::loadData(sfConfig::get('sf_test_dir').'/fixtures/50_FunctionalAll/table.yml');
+    Doctrine_Core::loadData(sfConfig::get('sf_test_dir').'/fixtures/50_FunctionalAll/table.yml', true);
     exec( dirname(__FILE__) . '/../../symfony cc --env=test');
     return $this;
   }

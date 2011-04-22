@@ -3,7 +3,7 @@ include( dirname(__FILE__) . '/../bootstrap/unit.php' );
 include( dirname(__FILE__) . '/../../apps/client/lib/StreemeItunesPlaylistParser.class.php' );
 
 // Initialize the test object
-$t = new lime_test( 2, new lime_output_color() );
+$t = new lime_test( 1, new lime_output_color() );
 
 $t->comment( '->construct()' );
 try
