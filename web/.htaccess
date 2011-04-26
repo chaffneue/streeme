@@ -7,7 +7,6 @@ DirectoryIndex index.php
   
   # cache images and flash bits
   <FilesMatch "\.(ico|jpg|jpeg|png|gif|css)$">
-    Header unset Last-Modified
     Header unset Cookie
     Header set Cache-Control "max-age=86040000, public, must-revalidate"
   </FilesMatch>
