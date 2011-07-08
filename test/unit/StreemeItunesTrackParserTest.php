@@ -43,21 +43,21 @@ while( $row = $parser->getTrack() )
   $rows[ $i ] = $row;
   $i++;
 }
-$expected_row_1 =  array (  
+$expected_row_1 =  array (
                         'Track ID' => '3693',
                         'Name' => 'Bloom',
                         'Artist' => 'Radiohead',
                         'Album Artist' => 'Radiohead',
                         'Album' => 'The King Of Limbs',
                         'Genre' => 'Alternative',
-                        'Kind' => 'MPEG audio file', 
+                        'Kind' => 'MPEG audio file',
                         'Size' => '12755634',
                         'Total Time' => '314723',
                         'Disc Number' => '1',
                         'Disc Count' => '1',
                         'Track Number' => '1',
                         'Track Count' => '8',
-                        'Year' => '2011', 
+                        'Year' => '2011',
                         'Date Modified' => '2011-02-17T01:08:14Z',
                         'Date Added' => '2011-02-19T07:47:05Z',
                         'Bit Rate' => '320',

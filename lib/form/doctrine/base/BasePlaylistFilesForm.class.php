@@ -18,12 +18,14 @@ abstract class BasePlaylistFilesForm extends BaseFormDoctrine
       'id'          => new sfWidgetFormInputHidden(),
       'playlist_id' => new sfWidgetFormInputText(),
       'filename'    => new sfWidgetFormInputText(),
+      'orderfield'  => new sfWidgetFormInputText(),
     ));
 
     $this->setValidators(array(
       'id'          => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
       'playlist_id' => new sfValidatorInteger(array('required' => false)),
       'filename'    => new sfValidatorPass(array('required' => false)),
+      'orderfield'  => new sfValidatorInteger(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('playlist_files[%s]');

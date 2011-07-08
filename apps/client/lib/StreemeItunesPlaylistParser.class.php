@@ -44,6 +44,7 @@ class StreemeItunesPlaylistParser
         //we're done mapping songs, but we've gone 1 record too far
         // to solve this, put the first playlist name in the program state
         $this->playlist_name = $row['Name'];
+        $this->itunes_playlist_id = $row['Playlist Persistent ID'];
         break;
       }
       else
@@ -56,38 +57,48 @@ class StreemeItunesPlaylistParser
     
   /**
    * Get the playlist information
-   * @param OUT playlist_name name of the playlist
-   * @param OUT playlist_songs array of the songs in the playlist
-   * @return                   true if results exist / otherwise false
+   * @param OUT playlist_name       name of the playlist
+   * @param OUT itunes_playlist_id  the itunes unique ID
+   * @param OUT playlist_songs      array of the songs in the playlist
+   * @return                        true if results exist / otherwise false
    */
-  public function getPlaylist( &$playlist_name, &$playlist_songs )
+  public function getPlaylist( &$playlist_name, &$itunes_playlist_id, &$playlist_songs )
   {
     $playlist_name = $this->playlist_name;
+    $itunes_playlist_id = $this->itunes_playlist_id;
+    $playlist_songs = array();
     while( $row = $this->getTrack() )
     {
       if( isset( $row['Name'] ) )
       {
-        //we're done mapping songs, but we've gone 1 record too far
-        // to solve this, put the first playlist name in the program state
-        $playlist_name = $row['Name'];
+        $this->playlist_name = $row['Name'];
+        $this->itunes_playlist_id = $row['Playlist Persistent ID'];
         break;
       }
       else
       {
         $record = $this->song_mapping[ $row['Track ID'] ];
-        if( !empty($playlist_songs) )
+        if( !empty($record) )
         {
-          $playlist_songs[] = $record;
+          $playlist_songs[] = array('filename'=>$record);
         }
       }
     }
-    if( count( $playlist_songs ) > 0 )
+    if($this->last_record)
     {
-      return true;
+      $record = $this->song_mapping[ $this->last_record ];
+      if( !empty($record) )
+      {
+          $playlist_songs[] = array('filename'=>$record);
+      }
+    }
+    if(!$this->songs)
+    {
+      return false;
     }
     else
     {
-      return false;
+      return true;
     }
   }
   
@@ -117,13 +128,16 @@ class StreemeItunesPlaylistParser
           xml_error_string(xml_get_error_code($this->xml_parser)),
           xml_get_current_line_number($this->xml_parser)));
       }
-      
       //is the array ready yet?
       if ( $this->pull )
       {
         $this->pull = 0;
         return $this->songs;
       }
+    }
+    if($this->songs['Track ID'] && $this->pull==0)
+    {
+      $this->last_record = $this->songs['Track ID'];
     }
   }
   

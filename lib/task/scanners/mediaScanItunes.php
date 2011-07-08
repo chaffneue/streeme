@@ -19,14 +19,8 @@ while( $value = $itunes_parser->getTrack() )
   //if it's not a valid filetype, ignore 
   if ( !in_array( strtolower( substr( $value[ 'Location' ], -3 ) ), $allowed_filetypes ) ) continue;
 
-  //update files on windows shares
-  if ( is_array( $mapped_drive_locations ) && count( $mapped_drive_locations ) > 0 )
-  {
-    foreach ( $mapped_drive_locations as $k => $v ) 
-    {      
-      $value[ 'Location' ] = str_replace( $k, $v, $value[ 'Location' ] );
-    }
-  }
+  $value[ 'Location' ] = StreemeUtil::itunes_format_decode( $value[ 'Location' ], StreemeUtil::is_windows(), $mapped_drive_locations);
+  
   //if this file's scanned already and nothing about the file has been modified, ignore
   if ( $media_scanner->is_scanned( $value[ 'Location' ], strtotime( $value[ 'Date Modified' ] ) ) ) continue;
 
@@ -52,14 +46,14 @@ while( $value = $itunes_parser->getTrack() )
   $song_array[ 'atime' ]            = @strtotime( $value[ 'Date Added' ] );
   $song_array[ 'filename' ]         = @$value[ 'Location' ];
 
-  if( is_readable( StreemeUtil::itunes_format_decode( $song_array[ 'filename' ] ) ) )
+  if( is_readable( $value[ 'Location' ] ) )
   { 
      //it checks out, add the song
      $media_scanner->add_song( $song_array );
   }
   else
   {
-    echo sprintf( 'File %s is unreadable',  $song_array[ 'filename' ] ) . "\r\n";
+    echo sprintf( 'File %s is unreadable',  $value[ 'Location' ] ) . "\r\n";
   }
 }
 

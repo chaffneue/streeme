@@ -59,3 +59,4 @@ all:
       #- 'scan-art --source=amazon'
       - 'scan-art --source=meta'
       - 'scan-art --source=folders'
+      #- 'scan-playlists --type=itunes'

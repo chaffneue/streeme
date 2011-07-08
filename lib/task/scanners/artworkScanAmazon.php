@@ -3,14 +3,23 @@
  * artworkScanAmazon
  *
  * Read album art from Amazon PAS service
- * Bes sure to review and complete the cloudfusion configuration in config/
+ * Be sure to review and complete the cloudfusion configuration in config/
  *
  * @package    streeme
  * @author     Richard Hoar
  */
-error_reporting( 0 );
-require_once( dirname( __FILE__ ) . '/../../../config/cloudfusion.php' );
-require_once( dirname( __FILE__ ) . '/../../vendor/cloudfusion/cloudfusion.class.php' );
+
+if(sfConfig::get('sf_environment')==='test')
+{
+  //load a mock for testing - simulates the expected response from amazon for integration tests
+  require_once( dirname( __FILE__ ) . '/../../../test/files/cloudfusion.php' );
+  require_once( dirname( __FILE__ ) . '/../../../test/files/cloudfusion.class.php' );
+}
+else
+{
+  require_once( dirname( __FILE__ ) . '/../../../config/cloudfusion.php' );
+  require_once( dirname( __FILE__ ) . '/../../vendor/cloudfusion/cloudfusion.class.php' );
+}
 
 $artwork_scanner        = new ArtworkScan( 'amazon' );
 $associate_services     = new AmazonPAS();

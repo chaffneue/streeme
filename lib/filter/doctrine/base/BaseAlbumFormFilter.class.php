@@ -15,20 +15,20 @@ abstract class BaseAlbumFormFilter extends BaseFormFilterDoctrine
     $this->setWidgets(array(
       'scan_id'         => new sfWidgetFormFilterInput(),
       'name'            => new sfWidgetFormFilterInput(),
+      'mtime'           => new sfWidgetFormFilterInput(),
       'amazon_flagged'  => new sfWidgetFormFilterInput(),
       'meta_flagged'    => new sfWidgetFormFilterInput(),
       'folders_flagged' => new sfWidgetFormFilterInput(),
-      'service_flagged' => new sfWidgetFormFilterInput(),
       'has_art'         => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
       'scan_id'         => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'name'            => new sfValidatorPass(array('required' => false)),
+      'mtime'           => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'amazon_flagged'  => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'meta_flagged'    => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'folders_flagged' => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
-      'service_flagged' => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'has_art'         => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
     ));
 
@@ -52,10 +52,10 @@ abstract class BaseAlbumFormFilter extends BaseFormFilterDoctrine
       'id'              => 'Number',
       'scan_id'         => 'Number',
       'name'            => 'Text',
+      'mtime'           => 'Number',
       'amazon_flagged'  => 'Number',
       'meta_flagged'    => 'Number',
       'folders_flagged' => 'Number',
-      'service_flagged' => 'Number',
       'has_art'         => 'Number',
     );
   }

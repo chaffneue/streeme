@@ -1,16 +1,16 @@
 Song:
   Song_0:
-    last_scan_id: 1
+    scan_id: 1
     genre_id: 52
     mtime: 020200200
     filename: file://localhost/file.1
   Song_1:
-    last_scan_id: 1
+    scan_id: 1
     genre_id: 127
     mtime: 002002002
     filename: file://localhost/file.2
   Song_2:
-    last_scan_id: 1
+    scan_id: 1
     genre_id: 128
     mtime: 020202220
     filename: file://localhost/file.3

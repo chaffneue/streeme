@@ -3,7 +3,7 @@ Song:
     unique_id: 9qw9dwj9wqdjw9qjqw9jd
     album_id: 1
     artist_id: 1
-    last_scan_id: 1
+    scan_id: 1
     name: Submarine
     mtime: 22303290923
     filename: file://localhost/file.1
@@ -11,7 +11,7 @@ Song:
     unique_id: dj9jd9wejd0ejf90ewjf
     album_id: 2
     artist_id: 2
-    last_scan_id: 1
+    scan_id: 1
     name: Felix
     mtime: 194909095
     filename: file://localhost/file.2

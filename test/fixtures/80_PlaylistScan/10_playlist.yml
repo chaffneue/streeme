@@ -1,0 +1,21 @@
+Playlist:
+  Playlist_0:
+    id: 1
+    name: 90's Rock
+    service_unique_id: B16E9C5DFFC4695D
+    service_name: itunes
+    mtime: 2022020102 
+    scan_id: 4
+    
+  Playlist_1:
+    id: 2
+    name: Streeme Playlist
+    mtime: 302020002020
+ 
+  Playlist_2:
+    id: 3
+    name: Retro Classics
+    service_unique_id: C92A1451DFADE99
+    service_name: itunes
+    mtime: 3040003003002 
+    scan_id: 2

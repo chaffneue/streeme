@@ -2,7 +2,7 @@
 include( dirname(__FILE__) . '/../bootstrap/doctrine.php' );
 
 // Initialize the test object
-$t = new lime_test( 25, new lime_output_color() );
+$t = new lime_test( 24, new lime_output_color() );
 
 $valid_test_song = array(
                           'artist_name' => 'Gorillaz', //string
@@ -61,12 +61,11 @@ $artist_integrity_test = Doctrine_Core::getTable('Artist')->find(2);
 $album_integrity_test = Doctrine_Core::getTable('Album')->find(2);
 $genre_integrity_test = Doctrine_Core::getTable('Genre')->find(127);
 $t->is( $song_integrity_test->id, 2, 'integrity: primary id');
-$t->is( $song_integrity_test->last_scan_id, 2, 'integrity: last_scan_id id');
+$t->is( $song_integrity_test->scan_id, 2, 'integrity: last_scan_id id');
 $t->is( $song_integrity_test->artist_id, 2, 'integrity: artist_id');
 $t->is( $artist_integrity_test->name, 'Sigur Rós', 'integrity: artist_name');
 $t->is( $song_integrity_test->album_id, 2, 'integrity: album_id');
 $t->is( $album_integrity_test->name, 'með suð í eyrum við spilum endalaust', 'integrity: album_name');
-$t->is( $song_integrity_test->genre_id, 127, 'integrity: genre_id');
 $t->is( $genre_integrity_test->name, 'Русский', 'integrity: album_name');
 $t->is( $song_integrity_test->length, '3:05', 'integrity: song length ');
 $t->is( $song_integrity_test->accurate_length, 185000, 'integrity: song length in milliseconds');
@@ -83,4 +82,4 @@ $t->comment( '->finalize_scan()' );
 $t->is( $media_scan->finalize_scan(), 4, 'Removed Song and Associations' );
 
 $t->comment( '->get_summary()' );
-$t->is( is_string( $media_scan->get_summary() ), true, 'returned string' );
+$t->is( is_string( $media_scan->get_summary() ), true, 'returned summary message successfully' );

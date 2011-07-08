@@ -11,7 +11,7 @@ class deletePlaylistAction extends sfAction
     if( !isset( $playlist_id ) || empty( $playlist_id ) ) $this->forward404();
 
     //delete playlist entry and all associated content
-    Doctrine_Core::getTable('Playlist')->deletePlaylist( $request->getParameter( 'playlist_id' ) );
+    Doctrine_Core::getTable('Playlist')->deletePlaylist( playlistFilesTable::getInstance(), $request->getParameter( 'playlist_id' ) );
 		return sfView::NONE;
   }
 }

@@ -15,11 +15,13 @@ abstract class BasePlaylistFilesFormFilter extends BaseFormFilterDoctrine
     $this->setWidgets(array(
       'playlist_id' => new sfWidgetFormFilterInput(),
       'filename'    => new sfWidgetFormFilterInput(),
+      'orderfield'  => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
       'playlist_id' => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'filename'    => new sfValidatorPass(array('required' => false)),
+      'orderfield'  => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
     ));
 
     $this->widgetSchema->setNameFormat('playlist_files_filters[%s]');
@@ -42,6 +44,7 @@ abstract class BasePlaylistFilesFormFilter extends BaseFormFilterDoctrine
       'id'          => 'Number',
       'playlist_id' => 'Number',
       'filename'    => 'Text',
+      'orderfield'  => 'Number',
     );
   }
 }

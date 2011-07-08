@@ -10,27 +10,27 @@ Doctrine_Manager::getInstance()->bindComponent('Album', 'doctrine');
  * @property integer $id
  * @property integer $scan_id
  * @property string $name
+ * @property integer $mtime
  * @property integer $amazon_flagged
  * @property integer $meta_flagged
  * @property integer $folders_flagged
- * @property integer $service_flagged
  * @property integer $has_art
  * 
  * @method integer getId()              Returns the current record's "id" value
  * @method integer getScanId()          Returns the current record's "scan_id" value
  * @method string  getName()            Returns the current record's "name" value
+ * @method integer getMtime()           Returns the current record's "mtime" value
  * @method integer getAmazonFlagged()   Returns the current record's "amazon_flagged" value
  * @method integer getMetaFlagged()     Returns the current record's "meta_flagged" value
  * @method integer getFoldersFlagged()  Returns the current record's "folders_flagged" value
- * @method integer getServiceFlagged()  Returns the current record's "service_flagged" value
  * @method integer getHasArt()          Returns the current record's "has_art" value
  * @method Album   setId()              Sets the current record's "id" value
  * @method Album   setScanId()          Sets the current record's "scan_id" value
  * @method Album   setName()            Sets the current record's "name" value
+ * @method Album   setMtime()           Sets the current record's "mtime" value
  * @method Album   setAmazonFlagged()   Sets the current record's "amazon_flagged" value
  * @method Album   setMetaFlagged()     Sets the current record's "meta_flagged" value
  * @method Album   setFoldersFlagged()  Sets the current record's "folders_flagged" value
- * @method Album   setServiceFlagged()  Sets the current record's "service_flagged" value
  * @method Album   setHasArt()          Sets the current record's "has_art" value
  * 
  * @package    streeme
@@ -56,6 +56,9 @@ abstract class BaseAlbum extends sfDoctrineRecord
              'unique' => true,
              'length' => 255,
              ));
+        $this->hasColumn('mtime', 'integer', null, array(
+             'type' => 'integer',
+             ));
         $this->hasColumn('amazon_flagged', 'integer', 1, array(
              'type' => 'integer',
              'default' => 0,
@@ -67,11 +70,6 @@ abstract class BaseAlbum extends sfDoctrineRecord
              'length' => 1,
              ));
         $this->hasColumn('folders_flagged', 'integer', 1, array(
-             'type' => 'integer',
-             'default' => 0,
-             'length' => 1,
-             ));
-        $this->hasColumn('service_flagged', 'integer', 1, array(
              'type' => 'integer',
              'default' => 0,
              'length' => 1,

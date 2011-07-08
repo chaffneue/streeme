@@ -1,9 +1,9 @@
 <?php
 /**
  * artworkScanFolders
- * 
+ *
  * Read album art from the folders that contain the songs
- * 
+ *
  * @package    streeme
  * @author     Richard Hoar
  */
@@ -23,8 +23,7 @@ if ( !$artwork_list )
 {
   echo( "*** All song folders have been scanned for art ***" );
   $artwork_list = array();
-} 
-
+}
 
 foreach( $artwork_list as $key => $value )
 {
@@ -34,28 +33,19 @@ foreach( $artwork_list as $key => $value )
   //this album has copied art, skip to the next album
   if ( $current_album_id == $value[ 'album_id' ] ) continue;
   
-    echo 'Scanning: ' .  $value[ 'album_name' ] . ' by: ' .  $value[ 'artist_name' ] . "\r\n";
+  echo 'Scanning: ' .  $value[ 'album_name' ] . ' by: ' .  $value[ 'artist_name' ] . "\r\n";
   
-  //setup paths 
+  //setup paths
   $art_dir = dirname( __FILE__ ) . '/../../../data/album_art/' . md5( $value[ 'artist_name' ] . $value[ 'album_name' ] );
-	if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN')
-	{
-	  //Windows
-	  $streeme_path_name = 'file://localhost/';
-	} 
-	else
-	{
-	  //*nix
-	  $streeme_path_name = 'file://localhost';
-	}
-  $song_path_info = pathinfo( str_replace( $streeme_path_name, '', utf8_decode( urldecode( $value['song_filename'] ) ) ) );
+  $song_path_info = pathinfo($value['song_filename']);
   $scan_dir = $song_path_info[ 'dirname' ];
   
-  //skip files in the root path 
-  $depth = explode( '/' , $scan_dir );
+  //skip files in the root path
+  $depth = explode( '/' , str_replace( sfConfig::get('app_wf_watched_folders'), '', $scan_dir ) );
+
   if ( count( $depth ) <= 1 ) continue;
     
-  //scan for allowed files in this song's folder and put the result in an array 
+  //scan for allowed files in this song's folder and put the result in an array
   $dp = opendir( $scan_dir );
 	while( $filename = readdir( $dp ) )
 	{
@@ -72,7 +62,7 @@ foreach( $artwork_list as $key => $value )
 		if( in_array( strtolower( substr( $filename, -4 ) ), $filetypes ) )
 		{
 		  $file_info = stat( $full_file_path );
-		  $shortlist[] = array( $file_info[ 'size' ], $filename, $full_file_path ); 
+		  $shortlist[] = array( $file_info[ 'size' ], $filename, $full_file_path );
 		}
 	}
 	
@@ -86,27 +76,27 @@ foreach( $artwork_list as $key => $value )
 	  {
 	    $file_to_process = $candidates[ 2 ];
 	    break;
-	  }	
-	}	
+	  }
+	}
 	
 	//did we find a match? Let's make the thumbnails
   if ( isset( $file_to_process ) && !empty( $file_to_process ) )
   {
-    $temp_pathinfo = pathinfo( $file_to_process ); 
+    $temp_pathinfo = pathinfo( $file_to_process );
     $temp_filename = 'temp.' . $temp_pathinfo[ 'extension' ];
     copy( $file_to_process, $temp_dir . '/' . $temp_filename );
     if ( is_readable( $temp_dir . '/' . $temp_filename ) )
     {
       $original = generate_thumbnail( $temp_dir, $temp_filename, 'x', 600, $value );
-      $medium = generate_thumbnail( $temp_dir, $temp_filename, 'x', 300, $value ); 
+      $medium = generate_thumbnail( $temp_dir, $temp_filename, 'x', 300, $value );
       $small = generate_thumbnail( $temp_dir, $temp_filename, 'x', 110, $value );
       
       if ( @mkdir( $art_dir, 0777, true ) )
       {
         //copy new art to the album art list
         copy( $temp_dir . '/' . $original, $art_dir . '/' . 'large.jpg' );
-        copy( $temp_dir . '/' . $medium, $art_dir . '/' . 'medium.jpg' );      
-        copy( $temp_dir . '/' . $small, $art_dir . '/' . 'small.jpg' ); 
+        copy( $temp_dir . '/' . $medium, $art_dir . '/' . 'medium.jpg' );
+        copy( $temp_dir . '/' . $small, $art_dir . '/' . 'small.jpg' );
         
         unlink( $temp_dir . '/' . $temp_filename );
         
@@ -121,7 +111,7 @@ foreach( $artwork_list as $key => $value )
         //if the dir's already there, chances are it has art
         $current_album_id = $value[ 'album_id' ];
         $artwork_scanner->flag_as_skipped( $value[ 'album_id' ] );
-      }      
+      }
     }
     else
     {
@@ -136,15 +126,15 @@ foreach( $artwork_list as $key => $value )
     $current_album_id = $value[ 'album_id' ];
     $artwork_scanner->flag_as_skipped( $value[ 'album_id' ] );
   }
-} 
+}
 
 //summarize the results of the scan
 echo "\r\n";
 echo $artwork_scanner->get_summary();
   
 /**
-* generates a constrained image and returns the data stream 
-*	Good for making thumbnails or just constraining all  uploaded images. 
+* generates a constrained image and returns the data stream
+*	Good for making thumbnails or just constraining all  uploaded images.
 *
 * @param path       str: path to temp image (eg. '/home/user/web/temp')
 * @param tmp_file   str: the original filename( eg. foo.jpg )
@@ -158,12 +148,12 @@ function generate_thumbnail( $path, $tmp_file, $constrain, $size, $value )
   $rights = 0755;
   
 	//get the source image size
-	if ( $imagesize = getimagesize( $path . '/' . $tmp_file ) ) 
+	if ( $imagesize = getimagesize( $path . '/' . $tmp_file ) )
 	{
-  	//figure out the scaling ratio 
+  	//figure out the scaling ratio
   	switch( $constrain )
   	{
-  		case 'x': 
+  		case 'x':
     		$ratio = $size/$imagesize[0];
     		break;
   		
@@ -203,14 +193,14 @@ function generate_thumbnail( $path, $tmp_file, $constrain, $size, $value )
     	//we're done with the source, so we'll purge it
     	imagedestroy( $source );
     
-    	//copy the proper JPEG source to the server and chmod it to 644    
+    	//copy the proper JPEG source to the server and chmod it to 644
     	imageJPEG( $tempdest, $path . '/' . $size . '-' . $tmp_file );
     	chmod( $path . '/' . $size . '-' . $tmp_file, $rights );
     
-    	//finally, clean up the rest of image memory 
+    	//finally, clean up the rest of image memory
     	imagedestroy($tempdest);
     	
-    	//return the new filename for moving 
+    	//return the new filename for moving
     	return( $size . '-' . $tmp_file );
     }
     else
@@ -222,7 +212,7 @@ function generate_thumbnail( $path, $tmp_file, $constrain, $size, $value )
   {
     echo 'GD could not get the image dimensions for the media: ' . $value[ 'artist_name' ] . '/' . $value[ 'album_name' ];
   }
-}  
+}
 
 /**
 * Compare file sizes for finding album art

@@ -10,13 +10,16 @@ Doctrine_Manager::getInstance()->bindComponent('PlaylistFiles', 'doctrine');
  * @property integer $id
  * @property integer $playlist_id
  * @property text $filename
+ * @property integer $orderfield
  * 
  * @method integer       getId()          Returns the current record's "id" value
  * @method integer       getPlaylistId()  Returns the current record's "playlist_id" value
  * @method text          getFilename()    Returns the current record's "filename" value
+ * @method integer       getOrderfield()  Returns the current record's "orderfield" value
  * @method PlaylistFiles setId()          Sets the current record's "id" value
  * @method PlaylistFiles setPlaylistId()  Sets the current record's "playlist_id" value
  * @method PlaylistFiles setFilename()    Sets the current record's "filename" value
+ * @method PlaylistFiles setOrderfield()  Sets the current record's "orderfield" value
  * 
  * @package    streeme
  * @subpackage model
@@ -39,6 +42,9 @@ abstract class BasePlaylistFiles extends sfDoctrineRecord
              ));
         $this->hasColumn('filename', 'text', null, array(
              'type' => 'text',
+             ));
+        $this->hasColumn('orderfield', 'integer', null, array(
+             'type' => 'integer',
              ));
 
         $this->option('collate', 'utf8_unicode_ci');

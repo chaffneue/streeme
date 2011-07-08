@@ -18,10 +18,10 @@ abstract class BaseAlbumForm extends BaseFormDoctrine
       'id'              => new sfWidgetFormInputHidden(),
       'scan_id'         => new sfWidgetFormInputText(),
       'name'            => new sfWidgetFormInputText(),
+      'mtime'           => new sfWidgetFormInputText(),
       'amazon_flagged'  => new sfWidgetFormInputText(),
       'meta_flagged'    => new sfWidgetFormInputText(),
       'folders_flagged' => new sfWidgetFormInputText(),
-      'service_flagged' => new sfWidgetFormInputText(),
       'has_art'         => new sfWidgetFormInputText(),
     ));
 
@@ -29,10 +29,10 @@ abstract class BaseAlbumForm extends BaseFormDoctrine
       'id'              => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
       'scan_id'         => new sfValidatorInteger(array('required' => false)),
       'name'            => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'mtime'           => new sfValidatorInteger(array('required' => false)),
       'amazon_flagged'  => new sfValidatorInteger(array('required' => false)),
       'meta_flagged'    => new sfValidatorInteger(array('required' => false)),
       'folders_flagged' => new sfValidatorInteger(array('required' => false)),
-      'service_flagged' => new sfValidatorInteger(array('required' => false)),
       'has_art'         => new sfValidatorInteger(array('required' => false)),
     ));
 

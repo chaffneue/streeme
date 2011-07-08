@@ -1,0 +1,15 @@
+Playlist:
+  Playlist_2:
+    id: 2
+    scan_id: 1
+    service_name: itunes
+    service_unique_id: B16E9C5DFFC4695D
+    name: Itunes 90's Playlist
+    mtime: 2022020102
+ 
+  Playlist_4:
+    id: 4
+    scan_id: 1
+    service_name: wjukebox
+    name: WJukebox Retro Playlist
+    mtime: 3203019039

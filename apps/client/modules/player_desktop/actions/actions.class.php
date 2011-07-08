@@ -18,7 +18,7 @@ class player_desktopActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
     //get the user's media listings
-    $this->genre_list = Doctrine_Core::getTable('Genre')->getList();
+    $this->genre_list = Doctrine_Core::getTable('SongGenres')->getList();
     $this->artist_list = Doctrine_Core::getTable('Artist')->getList();
     $this->album_list = Doctrine_Core::getTable('Album')->getList();
     $this->playlist_list = Doctrine_Core::getTable('Playlist')->getList();

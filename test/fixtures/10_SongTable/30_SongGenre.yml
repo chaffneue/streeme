@@ -1,0 +1,14 @@
+SongGenres:
+  SongGenres_0:
+    song_id: 1
+    genre_id: 1
+  SongGenres_01:
+    song_id: 1
+    genre_id: 18
+  SongGenres_1:
+    song_id: 2
+    genre_id: 1
+  SongGenres_2:
+    song_id: 3
+    genre_id: 1
+  

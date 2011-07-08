@@ -24,6 +24,14 @@ class GenreTable extends Doctrine_Table
    */
   public function addGenre( $name )
   {
+    //trim whitespace
+    $name = trim($name);
+    
+    if( empty( $name ) )
+    {
+      $name = 'Uncategorized';
+    }
+    
     //is this name already in the collection?
     if( is_numeric( $name ) && $name < 127 )
     {
@@ -55,37 +63,15 @@ class GenreTable extends Doctrine_Table
   }
   
   /**
-   * Fetch the genre list - sensitive to user's content
-   * @param alpha str: the alphabetical grouping
-   * @return array of all genre entries
-   */
-  public function getList( $alpha = 'all' )
-  {
-    $q = Doctrine_Query::create()
-      ->select( 'g.id, g.name' )
-      ->from( 'Genre g, Song s' )
-      ->where( 'g.id = s.genre_id' )
-      ->andWhere( 'g.name IS NOT NULL' );
-    if( $alpha !== 'all' )
-    {
-      $q->andWhere( 'upper( g.name ) LIKE ?', strtoupper( substr( $alpha, 0, 1 ) ) . '%' );
-    }
-    $q->distinct()
-      ->orderBy( 'g.name ASC' );
-    return $q->fetchArray();
-  }
-  
-  /**
    * Remove album records with no song relation
    *
-   * @param last_scan_id int: this should be the id of the latest library scan
    * @return             array: number of records removed
    */
   public function finalizeScan()
   {
     $q = Doctrine_Query::create()
       ->delete('Genre g')
-      ->where('g.id NOT IN (SELECT s.genre_id FROM song AS s)')
+      ->where('g.id NOT IN (SELECT sg.genre_id FROM SongGenres AS sg)')
       ->andWhere( 'g.id > 126' )
       ->execute();
     return $q;

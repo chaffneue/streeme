@@ -56,7 +56,7 @@ class MediaProxy
     $this->allow_transcoding     = sfConfig::get( 'app_allow_ffmpeg_transcoding' );
     
     //get the filename and test if it exists
-    $this->filename = StreemeUtil::itunes_format_decode( $result->filename );
+    $this->filename = $result->filename;
  
     if( !isset( $this->filename ) || empty( $this->filename ) )
     {

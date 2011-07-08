@@ -8,13 +8,13 @@ DirectoryIndex index.php
   # cache images and flash bits
   <FilesMatch "\.(ico|jpg|jpeg|png|gif|css)$">
     Header unset Cookie
-    Header set Cache-Control "max-age=86040000, public, must-revalidate"
+    Header set Cache-Control "max-age=86040000, private, must-revalidate"
   </FilesMatch>
   
   # cache css/js but retain cookies
   <FilesMatch "\.(js|swf)$">
     Header unset Last-Modified
-    Header set Cache-Control "max-age=72000000, public, must-revalidate"
+    Header set Cache-Control "max-age=72000000, private, must-revalidate"
   </FilesMatch>
 </IfModule>
 

@@ -84,13 +84,13 @@ $utf8_test_song = array(
 
 //tests
 $t->comment( '->addSong' );
-$first_insert_id = $song_table->addSong( 1, 1, 1, 1, $valid_test_song );
+$first_insert_id = $song_table->addSong( 1, 1, 1, $valid_test_song );
 $t->like( $first_insert_id, '/\d+/', 'Successfully added a song entry.' );
-$second_insert_id = $song_table->addSong( 1, 1, 1, 2, $valid_test_song_updated_tag );
+$second_insert_id = $song_table->addSong( 1, 1, 2, $valid_test_song_updated_tag );
 $t->like( $second_insert_id, '/\d+/', 'Successfully updated a song entry with new scan id.' );
 $third_insert_id = $song_table->addSong( null, null, null, null, $empty_test_song );
 $t->is( $third_insert_id ,null, 'Ignore Entry of an incomplete song record');
-$fourth_insert_id = $song_table->addSong( 2, 2, 1, 1, $utf8_test_song );
+$fourth_insert_id = $song_table->addSong( 2, 2, 1, $utf8_test_song );
 $t->like( $fourth_insert_id, '/\d+/', 'Successfully added a UTF-8 encoded entry' );
 
 $t->comment( '->findByFilenameAndMtime' );

@@ -27,7 +27,7 @@ class SongTable extends Doctrine_Table
    * @return          int: the song insert id
    * @see apps/client/lib/MediaScan.class.php for information about the song_array
    */
-  public function addSong( $artist_id, $album_id, $genre_id, $last_scan_id, $song_array )
+  public function addSong( $artist_id, $album_id, $last_scan_id, $song_array )
   {
     if(
       isset( $song_array['filename'] )
@@ -45,8 +45,7 @@ class SongTable extends Doctrine_Table
       $song->unique_id = sha1( uniqid( '', true ) . mt_rand( 1, 99999999 ) );
       $song->artist_id = (int) $artist_id;
       $song->album_id = (int) $album_id;
-      $song->genre_id = (int) ( ( $genre_id ) ? $genre_id : $song_array[ 'id3_genre_id' ] );
-      $song->last_scan_id = (int) $last_scan_id;
+      $song->scan_id = (int) $last_scan_id;
       $song->name = $song_array[ 'song_name' ];
       $song->length = $song_array[ 'song_length' ];
       $song->accurate_length = (int) $song_array[ 'accurate_length' ];
@@ -111,7 +110,7 @@ class SongTable extends Doctrine_Table
     $query  = 'UPDATE ';
     $query .= ' song ';
     $query .= 'SET ';
-    $query .= ' last_scan_id = :last_scan_id ';
+    $query .= ' scan_id = :last_scan_id ';
     $query .= 'WHERE ';
     $query .= ' mtime = :mtime ';
     $query .= ' AND filename = :filename ';
@@ -367,10 +366,22 @@ class SongTable extends Doctrine_Table
     $query .= 'LEFT JOIN ';
     $query .= ' album ';
     $query .= 'ON song.album_id = album.id ';
-    $query .= 'LEFT JOIN ';
-    $query .= ' genre ';
-    $query .= 'ON song.genre_id = genre.id ';
+
+    if ( !is_null(  $settings[ 'genre_id' ] ) )
+    {
+      $query .= 'INNER JOIN ';
+      $query .= ' song_genres ';
+      $query .= 'ON song_genres.song_id = song.id ';
+    }
+    
     $query .= 'WHERE ( 1 = 1 ) ';
+    
+    if( !is_null( $settings['genre_id'] ) )
+    {
+      $query .= ' AND song_genres.genre_id = :genre_id ';
+      $parameters[ 'genre_id' ] = $settings[ 'genre_id' ];
+    }
+    
     if( !is_null( $settings['playlist_id'] ) )
     {
       $query .= ' AND playlist_files.playlist_id = :playlist_id ';
@@ -392,11 +403,6 @@ class SongTable extends Doctrine_Table
       $query .= ' AND song.artist_id = :artist_id ';
       $parameters[ 'artist_id' ] = $settings[ 'artist_id' ];
     }
-    if ( !is_null(  $settings[ 'genre_id' ] ) )
-    {
-      $query .= ' AND song.genre_id = :genre_id ';
-      $parameters[ 'genre_id' ] = $settings[ 'genre_id' ];
-    }
     if ( !is_null(  $settings[ 'by_alpha' ] ) )
     {
       $query .= ' AND song.name LIKE :by_alpha ';
@@ -417,7 +423,7 @@ class SongTable extends Doctrine_Table
     }
     if ( !is_null(  $settings[ 'search' ] ) && ( !empty( $settings[ 'search' ] ) || $settings[ 'search' ] === '0'  ) )
     {
-      $query .= ' AND ( lower( song.name ) LIKE :search OR lower( album.name ) LIKE :search OR lower( artist.name ) LIKE :search OR lower( genre.name ) LIKE :search ) ';
+      $query .= ' AND ( lower( song.name ) LIKE :search OR lower( album.name ) LIKE :search OR lower( artist.name ) LIKE :search ) ';
       $parameters[ 'search' ] = '%' . join('%', explode(' ', $settings[ 'search' ] ) ) . '%';
     }
 
@@ -454,6 +460,7 @@ class SongTable extends Doctrine_Table
     $query .= (int) $settings[ 'offset' ];
     $dbh = Doctrine_Manager::getInstance()->getCurrentConnection()->getDbh();
     $stmt = $dbh->prepare( $query );
+    //echo "$query\r\n";
     $success = $stmt->execute( $parameters );
     if( $success )
     {
@@ -476,7 +483,7 @@ class SongTable extends Doctrine_Table
   {
     $q = Doctrine_Query::create()
       ->delete('Song s')
-      ->where('s.last_scan_id != ?', $last_scan_id )
+      ->where('s.scan_id != ?', $last_scan_id )
       ->execute();
     return $q;
   }

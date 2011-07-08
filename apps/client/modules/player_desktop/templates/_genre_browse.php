@@ -11,7 +11,7 @@
       <?php
       foreach( $list as $row )
       {
-        echo '<option value="' . $row[ 'id' ] . '">' . __( $row[ 'name' ] ) . '</option>';
+        echo '<option value="' . $row[ 'genre_id' ] . '">' . __( $row[ 'Genre' ][ 'name' ] ) . '</option>';
       }
       ?>
     </select>

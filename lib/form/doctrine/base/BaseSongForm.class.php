@@ -16,11 +16,10 @@ abstract class BaseSongForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'              => new sfWidgetFormInputHidden(),
+      'scan_id'         => new sfWidgetFormInputText(),
       'unique_id'       => new sfWidgetFormInputText(),
       'artist_id'       => new sfWidgetFormInputText(),
       'album_id'        => new sfWidgetFormInputText(),
-      'genre_id'        => new sfWidgetFormInputText(),
-      'last_scan_id'    => new sfWidgetFormInputText(),
       'name'            => new sfWidgetFormInputText(),
       'length'          => new sfWidgetFormInputText(),
       'accurate_length' => new sfWidgetFormInputText(),
@@ -29,18 +28,19 @@ abstract class BaseSongForm extends BaseFormDoctrine
       'yearpublished'   => new sfWidgetFormInputText(),
       'tracknumber'     => new sfWidgetFormInputText(),
       'label'           => new sfWidgetFormInputText(),
+      'isremix'         => new sfWidgetFormInputText(),
       'mtime'           => new sfWidgetFormInputText(),
       'atime'           => new sfWidgetFormInputText(),
       'filename'        => new sfWidgetFormInputText(),
+      'comments'        => new sfWidgetFormInputText(),
     ));
 
     $this->setValidators(array(
       'id'              => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
+      'scan_id'         => new sfValidatorInteger(array('required' => false)),
       'unique_id'       => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'artist_id'       => new sfValidatorInteger(array('required' => false)),
       'album_id'        => new sfValidatorInteger(array('required' => false)),
-      'genre_id'        => new sfValidatorInteger(array('required' => false)),
-      'last_scan_id'    => new sfValidatorInteger(array('required' => false)),
       'name'            => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'length'          => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'accurate_length' => new sfValidatorInteger(array('required' => false)),
@@ -49,9 +49,11 @@ abstract class BaseSongForm extends BaseFormDoctrine
       'yearpublished'   => new sfValidatorInteger(array('required' => false)),
       'tracknumber'     => new sfValidatorInteger(array('required' => false)),
       'label'           => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'isremix'         => new sfValidatorInteger(array('required' => false)),
       'mtime'           => new sfValidatorInteger(array('required' => false)),
       'atime'           => new sfValidatorInteger(array('required' => false)),
       'filename'        => new sfValidatorPass(array('required' => false)),
+      'comments'        => new sfValidatorPass(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('song[%s]');
