@@ -37,11 +37,19 @@ foreach( $artwork_list as $key => $value )
   
   //setup paths
   $art_dir = dirname( __FILE__ ) . '/../../../data/album_art/' . md5( $value[ 'artist_name' ] . $value[ 'album_name' ] );
-  $song_path_info = pathinfo($value['song_filename']);
+  $song_path_info = pathinfo( iconv( 'UTF-8', sprintf('%s//TRANSLIT', sfConfig::get( app_filesystem_encoding, 'ISO-8859-1' )), $value['song_filename'] ) );
   $scan_dir = $song_path_info[ 'dirname' ];
   
   //skip files in the root path
-  $depth = explode( '/' , str_replace( sfConfig::get('app_wf_watched_folders'), '', $scan_dir ) );
+  $watched_folders = sfConfig::get('app_wf_watched_folders');
+  if(is_array($watched_folders) && count($watched_folders) > 0)
+  {
+    foreach($watched_folders as $key => $folder)
+    {
+      $watched_folders[ $key ] =  iconv( 'UTF-8', sprintf('%s//TRANSLIT', sfConfig::get( app_filesystem_encoding, 'ISO-8859-1' )), $folder );
+    }
+  }
+  $depth = explode( '/' , str_replace( $watched_folders, '', $scan_dir ) );
 
   if ( count( $depth ) <= 1 ) continue;
     

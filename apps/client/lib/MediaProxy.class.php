@@ -6,6 +6,8 @@
 * @subpackage play
 * @author     Richard Hoar
 */
+mb_internal_encoding("UTF-8");
+
 error_reporting( 0 ); //HTTP download is extremely noisy
 require_once( 'HTTP/Download.php' );
 require_once( dirname( __FILE__ ) . '/StreemeUtil.class.php' );
@@ -56,7 +58,7 @@ class MediaProxy
     $this->allow_transcoding     = sfConfig::get( 'app_allow_ffmpeg_transcoding' );
     
     //get the filename and test if it exists
-    $this->filename = $result->filename;
+    $this->filename = iconv('UTF-8', sprintf('%s//TRANSLIT', sfConfig::get( app_filesystem_encoding, 'ISO-8859-1' )), $result->filename);
  
     if( !isset( $this->filename ) || empty( $this->filename ) )
     {

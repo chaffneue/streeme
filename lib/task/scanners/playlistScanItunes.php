@@ -17,7 +17,7 @@ $playlist_name = $itunes_playlist_id = null;
 $playlist_songs = array();
 function mapItunes($collection)
 {
-  return array('filename'=>StreemeUtil::itunes_format_decode($collection['filename']));
+  return array('filename'=> iconv( sfConfig::get( app_filesystem_encoding, 'ISO-8859-1' ), 'UTF-8//TRANSLIT', StreemeUtil::itunes_format_decode($collection['filename'], StreemeUtil::is_windows(), sfConfig::get( 'app_mdl_mapped_drive_locations'))));
 }
 while( $itunes_parser->getPlaylist( $playlist_name, $itunes_playlist_id, $playlist_songs ) )
 {

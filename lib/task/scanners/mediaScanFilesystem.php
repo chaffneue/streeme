@@ -8,7 +8,7 @@
  * package    streeme
  * author     Richard Hoar
  */
-mb_internal_encoding( 'UTF-8' );
+mb_internal_encoding("UTF-8");
 
 require_once( dirname(__FILE__) . '/../../vendor/getid3-1.9.0/getid3/getid3.php' );
    
@@ -17,6 +17,7 @@ $mapped_drive_locations = sfConfig::get( 'app_mdl_mapped_drive_locations' );
 $allowed_filetypes      = array_map( 'strtolower', sfConfig::get( 'app_aft_allowed_file_types' ) );
 $media_scanner          = new MediaScan();
 $id3_scanner            = new getID3();
+$id3_scanner->encoding  = 'UTF-8';
 
 foreach ( $watched_folders as $key => $path )
 {
@@ -65,11 +66,10 @@ function scan_directory( $path, $allowed_filetypes, $media_scanner, $id3_scanner
     //is it a usable file?
     if ( $file_stat['size'] === 0 || !in_array( strtolower( substr( $filename, -3 ) ), $allowed_filetypes ) ) continue;
       
-    $streeme_path_name = $full_file_path;
+    $streeme_path_name = iconv( sfConfig::get( app_filesystem_encoding, 'ISO-8859-1' ), 'UTF-8//TRANSLIT', $full_file_path );
     
     //has it been scanned before?
     if ( $media_scanner->is_scanned(  $streeme_path_name, $file_stat[ 'mtime' ] ) ) continue;
-    
 
     echo "Scanning " . $filename . "\n";
 

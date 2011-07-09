@@ -35,6 +35,10 @@ all:
   
   #allow ffmpeg transcoding capabilities
   allow_ffmpeg_transcoding: false
+
+  #have streeme use a different filesystem encoding - use any php iconv compatible value
+  #examples: OSX:UTF-8; Windows:CP-1252; Ubuntu:ISO-8859-1 
+  filesystem_encoding: ISO-8859-1
   
   #Full Location of ffmpeg executable
   ffmpeg_executable: ""

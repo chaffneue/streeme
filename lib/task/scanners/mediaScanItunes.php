@@ -19,7 +19,11 @@ while( $value = $itunes_parser->getTrack() )
   //if it's not a valid filetype, ignore 
   if ( !in_array( strtolower( substr( $value[ 'Location' ], -3 ) ), $allowed_filetypes ) ) continue;
 
-  $value[ 'Location' ] = StreemeUtil::itunes_format_decode( $value[ 'Location' ], StreemeUtil::is_windows(), $mapped_drive_locations);
+  //decode the itunes file scheme for checking is_readable
+  $location = StreemeUtil::itunes_format_decode( $value[ 'Location' ], StreemeUtil::is_windows(), $mapped_drive_locations);
+  
+  //convert it from user's filesystem value to UTF-8 for the database
+  $value[ 'Location' ] = iconv( sfConfig::get( app_filesystem_encoding, 'ISO-8859-1' ), 'UTF-8//TRANSLIT', $location );
   
   //if this file's scanned already and nothing about the file has been modified, ignore
   if ( $media_scanner->is_scanned( $value[ 'Location' ], strtotime( $value[ 'Date Modified' ] ) ) ) continue;
@@ -46,7 +50,7 @@ while( $value = $itunes_parser->getTrack() )
   $song_array[ 'atime' ]            = @strtotime( $value[ 'Date Added' ] );
   $song_array[ 'filename' ]         = @$value[ 'Location' ];
 
-  if( is_readable( $value[ 'Location' ] ) )
+  if( is_readable( $location ) )
   { 
      //it checks out, add the song
      $media_scanner->add_song( $song_array );
