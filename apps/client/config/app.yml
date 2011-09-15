@@ -3,7 +3,7 @@
 
 all: 
   # the location of your itunes XML file
-  # eg. Win: C:\Users\username\Music\iTunes\Itunes.xml
+  # eg. Win: C:\Users\username\Music\iTunes\iTunes Music Library.xml
   #     Mac: /Users/username/Music/iTunes/iTunes Music Library.xml
   itunes_xml_location: "/home/notroot/music/iTunes Music Library.xml"
   
@@ -35,6 +35,10 @@ all:
   
   #allow ffmpeg transcoding capabilities
   allow_ffmpeg_transcoding: true
+  
+  #have streeme use a different terminal encoding - use any php iconv compatible value
+  #examples: OSX:UTF-8; Windows:ISO-8859-1; Ubuntu:ISO-8859-1 
+  filesystem_encoding: ISO-8859-1
   
   #Full Location of ffmpeg executable
   ffmpeg_executable: "ffmpeg"
