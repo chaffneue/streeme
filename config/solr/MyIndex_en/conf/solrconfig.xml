@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+ This is a stripped down config file used for a simple example...  
+ It is *not* a good example to work from. 
+-->
+<config>
+
+  <lib dir="${solr.lib.dir}"/>
+
+  <updateHandler class="solr.DirectUpdateHandler2" />
+
+  
+
+  <requestDispatcher handleSelect="true" >
+    <requestParsers enableRemoteStreaming="false" multipartUploadLimitInKB="2048" />
+  </requestDispatcher>
+
+  
+
+  <requestHandler name="standard" class="solr.StandardRequestHandler" default="true" />
+  <requestHandler name="/update" class="solr.XmlUpdateRequestHandler" />
+  <requestHandler name="/admin/" class="org.apache.solr.handler.admin.AdminHandlers" />
+
+  
+
+  <!-- config for the admin interface --> 
+  <admin>
+    <defaultQuery>solr</defaultQuery>
+    <pingQuery>q=solr&amp;version=2.0&amp;start=0&amp;rows=0</pingQuery>
+  </admin>
+
+  <dataDir>${solr.data.dir}/MyIndex_en</dataDir>
+    
+  <!-- WARNING: this <indexDefaults> section only provides defaults for index writers
+       in general. See also the <mainIndex> section after that when changing parameters
+       for Solr's main Lucene index. -->
+  <indexDefaults>
+   <!-- Values here affect all index writers and act as a default unless overridden. -->
+    <useCompoundFile>false</useCompoundFile>
+
+    <mergeFactor>10</mergeFactor>
+    <!-- If both ramBufferSizeMB and maxBufferedDocs is set, then Lucene will flush
+     based on whichever limit is hit first.  -->
+    <!--<maxBufferedDocs>1000</maxBufferedDocs>-->
+
+    <!-- Sets the amount of RAM that may be used by Lucene indexing
+      for buffering added documents and deletions before they are
+      flushed to the Directory.  -->
+    <ramBufferSizeMB>32</ramBufferSizeMB>
+    <!-- <maxMergeDocs>2147483647</maxMergeDocs> -->
+    <maxFieldLength>10000</maxFieldLength>
+    <writeLockTimeout>1000</writeLockTimeout>
+    <commitLockTimeout>10000</commitLockTimeout>
+
+    <!--
+     Expert: Turn on Lucene's auto commit capability.  This causes intermediate
+     segment flushes to write a new lucene index descriptor, enabling it to be
+     opened by an external IndexReader.  This can greatly slow down indexing
+     speed.  NOTE: Despite the name, this value does not have any relation to
+     Solr's autoCommit functionality
+     -->
+    <!--<luceneAutoCommit>false</luceneAutoCommit>-->
+
+    <!--
+     Expert: The Merge Policy in Lucene controls how merging is handled by
+     Lucene.  The default in 2.3 is the LogByteSizeMergePolicy, previous
+     versions used LogDocMergePolicy.
+
+     LogByteSizeMergePolicy chooses segments to merge based on their size.  The
+     Lucene 2.2 default, LogDocMergePolicy chose when to merge based on number
+     of documents
+
+     Other implementations of MergePolicy must have a no-argument constructor
+     -->
+    <!--<mergePolicy class="org.apache.lucene.index.LogByteSizeMergePolicy"/>-->
+
+    <!--
+     Expert:
+     The Merge Scheduler in Lucene controls how merges are performed.  The
+     ConcurrentMergeScheduler (Lucene 2.3 default) can perform merges in the
+     background using separate threads.  The SerialMergeScheduler (Lucene 2.2
+     default) does not.
+     -->
+    <!--<mergeScheduler class="org.apache.lucene.index.ConcurrentMergeScheduler"/>-->
+
+    <!--
+      This option specifies which Lucene LockFactory implementation to use.
+      
+      single = SingleInstanceLockFactory - suggested for a read-only index
+               or when there is no possibility of another process trying
+               to modify the index.
+      native = NativeFSLockFactory  - uses OS native file locking
+      simple = SimpleFSLockFactory  - uses a plain file for locking
+
+      (For backwards compatibility with Solr 1.2, 'simple' is the default
+       if not specified.)
+    -->
+    <lockType>single</lockType>
+
+    <!--
+     Expert:
+    Controls how often Lucene loads terms into memory -->
+    <!--<termIndexInterval>256</termIndexInterval>-->
+  </indexDefaults>
+</config>
+

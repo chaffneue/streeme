@@ -31,17 +31,22 @@ class ArtistTable extends Doctrine_Table
       ->from( 'Artist a' )
       ->where( 'a.name = ?', $name);
     $result = $q->fetchOne();
-     
     if ( is_object( $result ) && $result->id > 0 )
     {
-      return $result->id;
+      $retId = $result->id;
+      unset($q, $result);
+      return (int) $retId;
     }
     else
     {
-      $item = new Artist;
+      $item = new Artist();
       $item->name = $name;
       $item->save();
-      return $item->getId();
+      $id = $item->getId();
+      $item->free();
+      unset($item, $q, $result);
+      
+      return (int) $id;
     }
   }
     
@@ -61,7 +66,13 @@ class ArtistTable extends Doctrine_Table
       $q->where( 'upper( a.name ) LIKE ?', strtoupper( substr( $alpha, 0, 1 ) ) . '%' );
     }
     $q->orderBy( 'a.name ASC' );
-    return $q->fetchArray();
+    $tmp = $q->fetchArray();
+    foreach($tmp as $key => $value)
+    {
+      $tmp[$key]['id'] = (int) $value['id'];
+    }
+    
+    return $tmp;
   }
   
   /**

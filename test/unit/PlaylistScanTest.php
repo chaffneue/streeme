@@ -5,6 +5,14 @@ include( dirname(__FILE__) . '/../bootstrap/doctrine.php' );
 $t = new lime_test( 26, new lime_output_color() );
 
 Doctrine::loadData(sfConfig::get('sf_test_dir').'/fixtures/80_PlaylistScan');
+if(Doctrine_Manager::getInstance()->getCurrentConnection()->getDriverName() === 'Pgsql')
+{
+    $dbh = Doctrine_Manager::getInstance()->getCurrentConnection()->getDbh();
+    $query = 'SELECT setval(\'playlist_id_seq\', 3)';
+    $dbh->query( $query );
+    $query = 'SELECT setval(\'playlist_files_id_seq\', 3)';
+    $dbh->query( $query );
+}
 $playlist_scan = new PlaylistScan('itunes');
 $playlist = PlaylistTable::getInstance();
 $playlist_files = PlaylistFilesTable::getInstance();

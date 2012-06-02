@@ -44,6 +44,7 @@
         </div>
         <div class="previoussongdisabled textindent" id="previous" title="<?php echo __( 'Previous Track' ) ?>"></div>
         <div class="nextsongdisabled textindent" id="next" title="<?php echo __( 'Next Track' ) ?>"></div>
+        <div class="repeatsong textindent" id="repeat" title="<?php echo __( 'Repeat Songs and Playlists' ) ?>"></div>
         <div class="randomsong textindent" id="random" title="<?php echo __( 'Random Play On/Off' ) ?>"></div>
       </div>
     </div>

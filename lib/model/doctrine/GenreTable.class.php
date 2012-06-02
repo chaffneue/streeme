@@ -51,14 +51,20 @@ class GenreTable extends Doctrine_Table
      
     if ( is_object( $result ) && $result->id > 0 )
     {
-      return $result->id;
+      $retId = $result->id;
+      unset($q, $result);
+      return $retId;
     }
     else
     {
       $item = new Genre;
       $item->name = $name;
       $item->save();
-      return $item->getId();
+      $id = $item->getId();
+      $item->free();
+      unset($item, $q, $result);
+      
+      return $id;
     }
   }
   

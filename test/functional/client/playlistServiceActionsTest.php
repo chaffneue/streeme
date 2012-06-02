@@ -38,7 +38,7 @@ $browser->
   
   with('response')->begin()->
     isStatusCode(200)->
-    matches('/\[\{\"id\"\:\"1\",\"name\"\:\"Default Playlist\"\},\{\"id\"\:\"2\",\"name\"\:\"testplaylist\"\}\]/')->
+    matches('/\[\{\"id\"\:1,\"name\"\:\"Default Playlist\"\},\{\"id\"\:2,\"name\"\:\"testplaylist\"\}\]/')->
   end()->
   
   info('With alpha letter "t"')->
@@ -46,7 +46,7 @@ $browser->
   
   with('response')->begin()->
     isStatusCode(200)->
-    matches('/\[\{\"id\"\:\"2\",\"name\"\:\"testplaylist\"\}\]/')->
+    matches('/\[\{\"id\"\:2,\"name\"\:\"testplaylist\"\}\]/')->
   end()->
   
   info('4. Add content to the playlist')->
@@ -110,5 +110,5 @@ $browser->
   with('response')->begin()->
     isStatusCode(200)->
     matches('/\[\]/')->
-  end()  
+  end()
 ;

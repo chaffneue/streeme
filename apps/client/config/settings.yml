@@ -4,7 +4,7 @@
 prod:
   .settings:
     no_script_name:         true
-    logging_enabled:        false
+    logging_enabled:        true
 
 dev:
   .settings:
@@ -39,7 +39,7 @@ all:
     i18n: true
     charset: utf-8
     default_culture: en
-    translations_available: [ en,tr,it,es,de,fr,da,km ]
+    translations_available: [ en,tr,it,es,de,fr,da,km,lv ]
     translation_labels:
       en: English
       tr: Türkçe
@@ -49,6 +49,7 @@ all:
       fr: Français
       da: Dansk
       km: ភាសាខ្មែរ
+      lv: Latviešu
 
     # Extra Helpers
     standard_helpers: [ Partial, Cache, I18N ]

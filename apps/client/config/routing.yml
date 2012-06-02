@@ -40,6 +40,26 @@ player_default:
 player:
   url: /player/:action
   param: { module: player, action: :action }
+
+setup_home:
+  url: /setup
+  param: { module: setup, action: index }
+
+setup_db:
+  url: /setup/db
+  param: { module: setup, action: setupDb }
+  
+setup_user:
+  url: /setup/user
+  param: { module: setup, action: setupUser }
+  
+setup_application:
+  url: /setup/application
+  param: { module: setup, action: setupApplication }      
+
+setup_scan:
+  url: /setup/scan
+  param: { module: setup, action: setupScanMedia }  
   
 homepage:
   url: /

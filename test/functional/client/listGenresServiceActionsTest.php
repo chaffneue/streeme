@@ -26,8 +26,8 @@ $browser->
   
   with('response')->begin()->
     isStatusCode(200)->
-    matches('/\"id\"\:\"2\"/')->
-    matches('/\"id\"\:\"144\"/')->
+    matches('/\"id\"\:2/')->
+    matches('/\"id\"\:144/')->
   end()->
     
   info('3. Get list by alphabetical character')->
@@ -36,6 +36,6 @@ $browser->
   
   with('response')->begin()->
     isStatusCode(200)->
-    matches('/\"id\"\:\"144\"/')->
+    matches('/\"id\"\:144/')->
   end()
 ;

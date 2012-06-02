@@ -8,10 +8,10 @@ Album:
     name: Meow Remix
     scan_id: 1
     mtime: 2002039920
-    amazon_flagged: false
-    meta_flagged: false
-    folders_flagged: false
-    has_art: false
+    amazon_flagged: 0
+    meta_flagged: 0
+    folders_flagged: 0
+    has_art: 0
     
 Song:
   Song_0:

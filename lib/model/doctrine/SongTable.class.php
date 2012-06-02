@@ -60,6 +60,7 @@ class SongTable extends Doctrine_Table
       $song->save();
       $id = $song->getId();
       $song->free();
+      unset($song, $song_array);
       
       return $id;
     }
@@ -331,8 +332,20 @@ class SongTable extends Doctrine_Table
     }
     
     //search should now be valid keywords, join them with spaces
-    $settings[ 'search' ] = join( ' ', array_map( 'strtolower', $components ) );
-  
+    $driverName = Doctrine_Manager::getInstance()->getCurrentConnection()->getDriverName();
+    if($driverName === 'Mysql' || $driverName === 'Pgsql')
+    {
+      foreach($components as $id => $search_term)
+      {
+        $components[$id] = strtolower(iconv('UTF-8', 'US-ASCII//TRANSLIT//IGNORE', $search_term));
+      }
+      $settings[ 'search' ] = join( ' ', $components);
+    }
+    else
+    {
+      $settings[ 'search' ] = join( ' ', array_map( 'strtolower', $components ) );
+    }
+    
     //this array contains the decoded sort information
     $expression = new Doctrine_Expression( 'random()' );
     $order_by = ( $settings[ 'sortdirection' ] == 'asc' ) ? ' ASC ' : ' DESC ';
@@ -423,13 +436,41 @@ class SongTable extends Doctrine_Table
     }
     if ( !is_null(  $settings[ 'search' ] ) && ( !empty( $settings[ 'search' ] ) || $settings[ 'search' ] === '0'  ) )
     {
-      $query .= ' AND ( lower( song.name ) LIKE :search OR lower( album.name ) LIKE :search OR lower( artist.name ) LIKE :search ) ';
-      $parameters[ 'search' ] = '%' . join('%', explode(' ', $settings[ 'search' ] ) ) . '%';
+      if(sfConfig::get('app_indexer_use_indexer', false))
+      {
+        try
+        {
+          $index_settings = sfConfig::get('app_indexer_settings');
+          $indexer = new $index_settings['class']();
+          $keys = $indexer->getKeys(strtolower($settings[ 'search' ]), 100);
+
+          if(count($keys)>0)
+          {
+            $query .= sprintf(' AND song.unique_id IN (%s) ', join(',', array_map(array($this, 'quoteMap'), $keys)) );
+            $query .= ' AND ( lower( song.name ) LIKE :search OR lower( album.name ) LIKE :search OR lower( artist.name ) LIKE :search ) ';
+            $parameters[ 'search' ] = '%' . join('%', explode(' ', strtolower( $settings[ 'search' ] ) ) ) . '%';
+          }
+          else
+          {
+            $query .= ' AND ( 1 = 0 ) ';
+          }
+        }
+        catch(Exception $e)
+        {
+          return false;
+        }
+      }
+      else
+      {
+        $query .= ' AND ( lower( song.name ) LIKE :search OR lower( album.name ) LIKE :search OR lower( artist.name ) LIKE :search ) ';
+        $parameters[ 'search' ] = '%' . join('%', explode(' ', strtolower($settings[ 'search' ]) ) ) . '%';
+      }
     }
 
     //get a count of rows returned by this query before applying pagination
+    //limit results to 1000 possible rows to speed things up
     $dbh = Doctrine_Manager::getInstance()->getCurrentConnection()->getDbh();
-    $stmt = $dbh->prepare( $query );
+    $stmt = $dbh->prepare( $query . ' LIMIT 1000 ' );
     $success = $stmt->execute( $parameters );
     if( $success )
     {
@@ -473,6 +514,49 @@ class SongTable extends Doctrine_Table
     }
   }
   
+  
+  /**
+   * Get all songs for indexing
+   *
+   * @param result_list   OUT array: the resulting data set
+   * @return              bol: true on success
+   */
+  public function getIndexerList(&$result_list)
+  {
+    $parameters = array();
+    
+    $query  = 'SELECT ';
+    $query .= ' song.unique_id, song.name, album.name as album_name, artist.name as artist_name, genre.name as genre_name ';
+    $query .= 'FROM ';
+    $query .= ' song ';
+    $query .= 'LEFT JOIN ';
+    $query .= ' artist ';
+    $query .= 'ON song.artist_id = artist.id ';
+    $query .= 'LEFT JOIN ';
+    $query .= ' album ';
+    $query .= 'ON song.album_id = album.id ';
+    $query .= 'LEFT JOIN ';
+    $query .= ' song_genres ';
+    $query .= 'ON song_genres.song_id = song.id ';
+    $query .= 'LEFT JOIN ';
+    $query .= ' genre ';
+    $query .= 'ON song_genres.genre_id = genre.id ';
+    
+    $dbh = Doctrine_Manager::getInstance()->getCurrentConnection()->getDbh();
+    $stmt = $dbh->prepare( $query );
+    //echo "$query\r\n";
+    $success = $stmt->execute( $parameters );
+    if( $success )
+    {
+      $result_list = $stmt->fetchAll(Doctrine::FETCH_ASSOC);
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+  
   /**
    * Remove song records not found in the specified scan
    *
@@ -486,5 +570,16 @@ class SongTable extends Doctrine_Table
       ->where('s.scan_id != ?', $last_scan_id )
       ->execute();
     return $q;
+  }
+  
+  /**
+   * Mapper to adds quotes to a key list
+   *
+   * @param text str: input text
+   * @return     str: transformed output text
+   */
+  public function quoteMap($text)
+  {
+    return "\"$text\"";
   }
 }

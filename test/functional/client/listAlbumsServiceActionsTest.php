@@ -26,8 +26,8 @@ $browser->
   
   with('response')->begin()->
     isStatusCode(200)->
-    matches('/\"id\"\:\"1\"/')->
-    matches('/\"id\"\:\"2\"/')->
+    matches('/\"id\"\:1/')->
+    matches('/\"id\"\:2/')->
   end()->
   
   info('3. Get list by artist id')->
@@ -36,7 +36,7 @@ $browser->
   
   with('response')->begin()->
     isStatusCode(200)->
-    matches('/\"id\"\:\"1\"/')->
+    matches('/\"id\"\:1/')->
   end()->
   
   info('4. Get list by alphabetical character')->
@@ -45,7 +45,7 @@ $browser->
   
   with('response')->begin()->
     isStatusCode(200)->
-    matches('/\"id\"\:\"2\"/')->
+    matches('/\"id\"\:2/')->
   end()->
   
   info('5. Get list by alphabetical character and artist id')->
@@ -54,6 +54,6 @@ $browser->
   
   with('response')->begin()->
     isStatusCode(200)->
-    matches('/\"id\"\:\"2\"/')->
+    matches('/\"id\"\:2/')->
   end()
 ;

@@ -21,6 +21,10 @@ class combineAction extends sfAction
     {
       $this->content = file_get_contents( $file );
     }
+    else
+    {
+      $this->content = sprintf('Couldn\'t read file %s', $file);
+    }
     
     sfConfig::set('sf_web_debug', false);
     $this->getResponse()->setHttpHeader('Content-Type', ( $request->getParameter('type') === 'css' ) ? 'text/css' : 'text/javascript' );

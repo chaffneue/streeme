@@ -8,8 +8,6 @@
  * package    streeme
  * author     Richard Hoar
  */
-mb_internal_encoding("UTF-8");
-
 require_once( dirname(__FILE__) . '/../../vendor/getid3-1.9.0/getid3/getid3.php' );
    
 $watched_folers         = sfConfig::get( 'app_wf_watched_folders' );
@@ -66,7 +64,7 @@ function scan_directory( $path, $allowed_filetypes, $media_scanner, $id3_scanner
     //is it a usable file?
     if ( $file_stat['size'] === 0 || !in_array( strtolower( substr( $filename, -3 ) ), $allowed_filetypes ) ) continue;
       
-    $streeme_path_name = iconv( sfConfig::get( app_filesystem_encoding, 'ISO-8859-1' ), 'UTF-8//TRANSLIT', $full_file_path );
+    $streeme_path_name = iconv( sfConfig::get( 'app_filesystem_encoding', 'ISO-8859-1' ), 'UTF-8//TRANSLIT', $full_file_path );
     
     //has it been scanned before?
     if ( $media_scanner->is_scanned(  $streeme_path_name, $file_stat[ 'mtime' ] ) ) continue;
@@ -112,17 +110,17 @@ function scan_directory( $path, $allowed_filetypes, $media_scanner, $id3_scanner
     }
     
     $song_array = array();
-    $song_array[ 'artist_name' ]      = StreemeUtil::xmlize_utf8_string( ( $tags['ape'][ 'artist' ][0] ) ? $tags['ape'][ 'artist' ][0] : ( ( $tags['id3v2'][ 'artist' ][0] ) ? $tags['id3v2'][ 'artist' ][0] : ( ( $tags['id3v1'][ 'artist' ][0] ) ? $tags['id3v1'][ 'artist' ][0] : null ) ) );
-    $song_array[ 'album_name' ]       = StreemeUtil::xmlize_utf8_string( ( $tags['ape'][ 'album' ][0] )  ? $tags['ape'][ 'album' ][0]  : ( ( $tags['id3v2'][ 'album' ][0] )  ? $tags['id3v2'][ 'album' ][0]  : ( ( $tags['id3v1'][ 'album' ][0] )  ? $tags['id3v1'][ 'album' ][0]  : null ) ) );
-    $song_array[ 'song_name' ]        = StreemeUtil::xmlize_utf8_string( ( $tags['ape'][ 'title' ][0] )  ? $tags['ape'][ 'title' ][0]  : ( ( $tags['id3v2'][ 'title' ][0] )  ? $tags['id3v2'][ 'title' ][0]  : ( ( $tags['id3v1'][ 'title' ][0] )  ? $tags['id3v1'][ 'title' ][0]  : $pinfo['filename'] ) ) );
+    $song_array[ 'artist_name' ]      = StreemeUtil::xmlize_utf8_string( ( @$tags['ape'][ 'artist' ][0] ) ? @$tags['ape'][ 'artist' ][0] : ( ( $tags['id3v2'][ 'artist' ][0] ) ? $tags['id3v2'][ 'artist' ][0] : ( ( $tags['id3v1'][ 'artist' ][0] ) ? $tags['id3v1'][ 'artist' ][0] : null ) ) );
+    $song_array[ 'album_name' ]       = StreemeUtil::xmlize_utf8_string( ( @$tags['ape'][ 'album' ][0] )  ? @$tags['ape'][ 'album' ][0]  : ( ( $tags['id3v2'][ 'album' ][0] )  ? $tags['id3v2'][ 'album' ][0]  : ( ( $tags['id3v1'][ 'album' ][0] )  ? $tags['id3v1'][ 'album' ][0]  : null ) ) );
+    $song_array[ 'song_name' ]        = StreemeUtil::xmlize_utf8_string( ( @@$tags['ape'][ 'title' ][0] )  ? @$tags['ape'][ 'title' ][0]  : ( ( $tags['id3v2'][ 'title' ][0] )  ? $tags['id3v2'][ 'title' ][0]  : ( ( $tags['id3v1'][ 'title' ][0] )  ? $tags['id3v1'][ 'title' ][0]  : $pinfo['filename'] ) ) );
     $song_array[ 'song_length' ]      = $value[ 'playtime_string' ] ;
     $song_array[ 'accurate_length' ]  = ( floor( ( (float) $value[ 'playtime_seconds' ] ) * 1000 ) );
-    $song_array[ 'genre_name' ]       = ( $tags['ape'][ 'genre' ][0] )  ? $tags['ape'][ 'genre' ][0]  : ( ( $tags['id3v2'][ 'genre' ] ) ? $tags['id3v2'][ 'genre' ][0] :  ( ( $tags['id3v1'][ 'genre' ][0] )  ? $tags['id3v1'][ 'genre' ][0]  : null ) );
+    $song_array[ 'genre_name' ]       = ( @$tags['ape'][ 'genre' ][0] )  ? @$tags['ape'][ 'genre' ][0]  : ( ( $tags['id3v2'][ 'genre' ] ) ? $tags['id3v2'][ 'genre' ][0] :  ( ( $tags['id3v1'][ 'genre' ][0] )  ? $tags['id3v1'][ 'genre' ][0]  : null ) );
     $song_array[ 'filesize' ]             = $file_stat[ 'size' ];
     $song_array[ 'bitrate' ]          = ( floor ( ( (int) $value[ 'audio' ][ 'bitrate' ] ) / 1000 ) );
-    $song_array[ 'yearpublished' ]             = ( $tags['ape'][ 'year' ][0] )   ? $tags['ape'][ 'year' ][0]   : ( ($tags['id3v2'][ 'year' ][0] ) ? $tags['id3v2'][ 'year' ][0] : ( ( $tags['id3v1'][ 'year' ][0] )  ? $tags['id3v1'][ 'year' ][0]  : null ) );
+    $song_array[ 'yearpublished' ]             = ( @$tags['ape'][ 'year' ][0] )   ? @$tags['ape'][ 'year' ][0]   : ( ($tags['id3v2'][ 'year' ][0] ) ? $tags['id3v2'][ 'year' ][0] : ( ( $tags['id3v1'][ 'year' ][0] )  ? $tags['id3v1'][ 'year' ][0]  : null ) );
     $song_array[ 'tracknumber']      = $tracknumber;
-    $song_array[ 'label' ]            = StreemeUtil::xmlize_utf8_string( ( $tags['ape'][ 'label' ][0] )  ? $tags['ape'][ 'label' ][0]  : ( ( $tags['id3v2'][ 'label' ][0] ) ? $tags['id3v2'][ 'label' ][0] : null ) ); //not available in V1
+    $song_array[ 'label' ]            = StreemeUtil::xmlize_utf8_string( ( @$tags['ape'][ 'label' ][0] )  ? @$tags['ape'][ 'label' ][0]  : ( ( $tags['id3v2'][ 'label' ][0] ) ? $tags['id3v2'][ 'label' ][0] : null ) ); //not available in V1
     $song_array[ 'mtime' ]            = $file_stat[ 'mtime' ];
     $song_array[ 'atime' ]            = $file_stat[ 'atime' ];
     $song_array[ 'filename' ]         = $streeme_path_name;

@@ -63,6 +63,7 @@ class listSongsAction extends sfAction
    */
   private function to_json_dataTable( $song_array = array(), $found_rows, $total_library )
   {
+    $flattened = array();
     $count = 0;
     $empty_resultset[] = array( "", "No Matches Found...", "", "", "", "", "", "", "" );
     if ( is_array( $song_array ) )

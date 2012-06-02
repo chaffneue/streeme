@@ -47,7 +47,7 @@ abstract class BaseSongGenres extends sfDoctrineRecord
              ));
 
 
-        $this->index('song_index', array(
+        $this->index('song_id_index', array(
              'fields' => 
              array(
               0 => 'song_id',

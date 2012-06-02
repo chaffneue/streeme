@@ -6,8 +6,6 @@
 * @subpackage play
 * @author     Richard Hoar
 */
-mb_internal_encoding("UTF-8");
-
 error_reporting( 0 ); //HTTP download is extremely noisy
 require_once( 'HTTP/Download.php' );
 require_once( dirname( __FILE__ ) . '/StreemeUtil.class.php' );

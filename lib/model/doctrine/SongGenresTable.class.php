@@ -16,20 +16,27 @@ class SongGenresTable extends Doctrine_Table
   public function getList( $alpha = 'all' )
   {
     $q = Doctrine_Query::create()
-      ->select( 'sg.genre_id, g.name' )
-      ->from( 'SongGenres sg' )
-      ->leftJoin( 'sg.Genre g' )
-      ->leftJoin( 'sg.Song s')
-      ->where( 'sg.song_id = s.id' )
-      ->andWhere( 'g.name IS NOT NULL' );
+    ->select( 'sg.genre_id, g.name' )
+    ->from( 'SongGenres sg' )
+    ->leftJoin( 'sg.Genre g' )
+    ->leftJoin( 'sg.Song s')
+    ->where( 'sg.song_id = s.id' )
+    ->andWhere( 'g.name IS NOT NULL' );
     if( $alpha !== 'all' )
     {
       $q->andWhere( 'upper( g.name ) LIKE ?', strtoupper( substr( $alpha, 0, 1 ) ) . '%' );
     }
-    $q->groupBy( 'g.name' )
-      ->orderBy( 'g.name ASC' );
-    
-    return $q->fetchArray();
+    $q->orderBy( 'g.name ASC' );
+    $result = $q->fetchArray();
+    $tmp = array();
+    foreach($result as $key=>$value)
+    {
+      $tmp[(int) $value['genre_id']] = $value;
+      $tmp[(int) $value['genre_id']]['Genre']['id'] = (int) $value['Genre']['id'];
+    }
+    $tmp = array_slice($tmp, 0);
+
+    return $tmp;
   }
   
   /**
@@ -48,24 +55,29 @@ class SongGenresTable extends Doctrine_Table
       foreach ( $genre_list as $genre )
       {
         $genre_id = GenreTable::getInstance()->addGenre($genre);
-        $song_genres = new SongGenres;
+        $song_genres = new SongGenres();
         $song_genres->song_id = $song_id;
         $song_genres->genre_id = $genre_id;
         $song_genres->save();
-        $insert_list[] = $genre_id;
+        $insert_list[] = (string) $genre_id;
+        $song_genres->free();
+        unset($song_genres);
       }
     }
     else
     {
       $genre_id = GenreTable::getInstance()->addGenre('Uncategorized');
-      $song_genres = new SongGenres;
+      $song_genres = new SongGenres();
       $song_genres->song_id = $song_id;
       $song_genres->genre_id = $genre_id;
       $song_genres->save();
-      $insert_list[] = $genre_id;
+      $insert_list[] = (string) $genre_id;
+      $song_genres->free();
+      unset($song_genres);
     }
-    unset( $genre_list, $genre_id, $genre, $song_id, $genre_id, $song_genres );
     
+    unset($genre_id);
+        
     return $insert_list;
   }
   

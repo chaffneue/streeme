@@ -47,7 +47,7 @@ $(document).ready(function()
   //javascript service endpoint
   echo 'javascript_base = "' . rtrim( url_for( '@javascript_base', true ), '/' ) . '";' . "\r\n";
 ?>
-  results_per_page = "<?php echo sfConfig::get( 'app_results_per_page' ) ?>";
+  results_per_page = <?php echo (int) sfConfig::get( 'app_results_per_page', 60 ) ?>;
   send_session_cookies = <?php echo ( sfConfig::get( 'app_send_cookies_with_request' ) ) ? 'true' : 'false' ?>;
   send_cookie_name = "<?php echo sfConfig::get('app_sf_guard_plugin_remember_cookie_name', 'sfRemember') ?>";
 

@@ -94,7 +94,7 @@ Class PlaylistScan
        )
     {
       $this->added_playlists++;
-      $playlist_id = PlaylistTable::getInstance()->addPlaylist($playlist_name, $scan_id, $service_name, $service_unique_id);
+      $playlist_id = PlaylistTable::getInstance()->addPlaylist($playlist_name, (int) $scan_id, $service_name, $service_unique_id);
       PlaylistFilesTable::getInstance()->addFiles($playlist_id, $playlist_files);
     }
     else if(

@@ -8,9 +8,16 @@ $playlist_table = Doctrine_Core::getTable('Playlist');
 $playlist_files_table = Doctrine_Core::getTable('PlaylistFiles');
 Doctrine::loadData(sfConfig::get('sf_test_dir').'/fixtures/70_PlaylistTable');
 
+if(Doctrine_Manager::getInstance()->getCurrentConnection()->getDriverName() === 'Pgsql')
+{
+    $dbh = Doctrine_Manager::getInstance()->getCurrentConnection()->getDbh();
+    $query = 'SELECT setval(\'playlist_id_seq\', 4)';
+    $dbh->query( $query );
+}
+
 $t->comment( '->addPlaylist' );
 $t->comment('Adding a streeme Playlist');
-$first_insert_id  = $playlist_table->addPlaylist('A Playlist');
+$first_insert_id = $playlist_table->addPlaylist('A Playlist');
 $t->is( $first_insert_id, 5, 'Successfully added a playlist entry.' );
 $t->comment('Adding a playlist from a service like itunes');
 $result = $playlist_table->find(5);

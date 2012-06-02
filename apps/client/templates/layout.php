@@ -9,7 +9,10 @@
   <link rel="apple-touch-icon" href="<?php echo public_path( 'apple-touch-icon.png', true ); ?>" />
   <?php
     $namespace = $this->getModuleName() . $this->getActionName();
-    if( strtolower( $namespace ) != 'sfguardauthsignin')
+    if( strtolower( $namespace ) != 'sfguardauthsignin'
+        &&
+        substr( $namespace, 0, 5 ) != 'setup'
+    )
     {
       $combiner = new combineFiles();
       echo sprintf( '<link rel="stylesheet" type="text/css" href="%s" />',

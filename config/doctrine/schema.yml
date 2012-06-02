@@ -62,7 +62,7 @@ SongGenres:
     genre_id:
       type: integer
   indexes:
-    song_index:
+    song_id_index:
       fields: [song_id]
   relations:
     Genre:

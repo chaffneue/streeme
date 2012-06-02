@@ -67,7 +67,12 @@ class MediaScan
    * int: count genres removed during the scan
    */
   public $removed_genres= 0;
-      
+
+  /**
+   * obj: table instances
+   */
+  protected $artist_table, $song_table, $album_table, $song_genres_table;
+  
   /**
    * initialize the library scan by setting a new last_scan_id for the session
    */
@@ -76,6 +81,11 @@ class MediaScan
     //Since this class services a batch script, stop Doctrine from leaving objects in memory
     Doctrine_Manager::connection()->setAttribute(Doctrine_Core::ATTR_AUTO_FREE_QUERY_OBJECTS, true );
     $this->scan_id = Doctrine_Core::getTable('Scan')->addScan( 'library' );
+    $this->artist_table = Doctrine_Core::getTable( 'Artist' );
+    $this->song_table = Doctrine_Core::getTable( 'Song' );
+    $this->album_table = Doctrine_Core::getTable( 'Album' );
+    $this->song_genres_table = Doctrine_Core::getTable('SongGenres');
+    $this->genre_table = Doctrine_Core::getTable('Genre');
   }
   
   /**
@@ -100,7 +110,7 @@ class MediaScan
     $this->total_songs++;
     
     //have we seen this song before?
-    $song = Doctrine_Core::getTable( 'Song' )->updateScanId( $filename, $mtime, $this->scan_id );
+    $song = $this->song_table->updateScanId( $filename, (int) $mtime, $this->scan_id );
     if( $song > 0 )
     {
       $this->skipped_songs++;
@@ -136,23 +146,24 @@ class MediaScan
   public function add_song( $song_array )
   {
     $artist_name = ( $song_array['artist_name'] ) ? $song_array['artist_name'] : 'Unknown Artist';
-    $artist_id = Doctrine_Core::getTable('Artist')->addArtist( $artist_name );
+    $artist_id = $this->artist_table->addArtist( $artist_name );
     if( !empty( $artist_id ) )
     {
       $this->added_artists[ $artist_id ] = 1;
     }
     $album_name = ( $song_array['album_name'] ) ? $song_array['album_name'] : 'Unknown Album';
-    $album_id = Doctrine_Core::getTable('Album')->addAlbum( $album_name );
+    $album_id = $this->album_table->addAlbum( $album_name );
     if( !empty( $album_id ) )
     {
       $this->added_albums[ $album_id ] = 1;
     }
-    $song_id = Doctrine_Core::getTable('Song')->addSong( $artist_id, $album_id, $this->scan_id, $song_array );
+    $song_id = $this->song_table->addSong( $artist_id, $album_id, (int) $this->scan_id, $song_array );
     $this->added_songs++;
-    $genre_ids = Doctrine_Core::getTable('SongGenres')->addSongGenres($song_id, $song_array['genre_name']);
-    unset( $artist_name, $artist_id, $album_name, $album_id, $genre_name, $genre_ids, $song_array );
+    $genre_ids = $this->song_genres_table->addSongGenres((int) $song_id, $song_array['genre_name']);
     
-    return $song_id;
+    unset($artist_name, $artist_id, $album_name, $album_id, $song_id, $genre_ids, $song_array );
+    
+    return (int) $song_id;
   }
   
   /**
@@ -162,10 +173,10 @@ class MediaScan
    */
   public function finalize_scan()
   {
-    $this->removed_songs   = Doctrine_Core::getTable('Song')->finalizeScan( $this->scan_id );
-    $this->removed_artists = Doctrine_Core::getTable('Artist')->finalizeScan();
-    $this->removed_albums  = Doctrine_Core::getTable('Album')->finalizeScan();
-    $this->removed_genres  = Doctrine_Core::getTable('SongGenres')->finalizeScan();
+    $this->removed_songs   = $this->song_table->finalizeScan( $this->scan_id );
+    $this->removed_artists = $this->artist_table->finalizeScan();
+    $this->removed_albums  = $this->album_table->finalizeScan();
+    $this->removed_genres  = $this->song_genres_table->finalizeScan();
     
     return $this->removed_songs + $this->removed_artists + $this->removed_albums;
   }

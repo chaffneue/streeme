@@ -6,7 +6,7 @@ class scanmediaTask extends sfBaseTask
     $this->addOptions(array(
       new sfCommandOption( 'application', null, sfCommandOption::PARAMETER_REQUIRED, 'The application name', 'client' ),
       new sfCommandOption( 'env', null, sfCommandOption::PARAMETER_REQUIRED, 'The environment', 'prod' ),
-      new sfCommandOption( 'connection', null, sfCommandOption::PARAMETER_REQUIRED, 'The connection name', 'doctrine' ),        
+      new sfCommandOption( 'connection', null, sfCommandOption::PARAMETER_REQUIRED, 'The connection name', 'doctrine' ),
       new sfCommandOption( 'type', null, sfCommandOption::PARAMETER_REQUIRED, 'The type of scan to run - see opts'),
     ));
 
@@ -15,13 +15,13 @@ class scanmediaTask extends sfBaseTask
     $this->briefDescription = 'Scan and update your media library';
     $this->detailedDescription = <<<EOF
 The [scan-media|INFO] task will scan your watched folders for new media and
-import them into your streeme library. This task should be run 
+import them into your streeme library. This task should be run
 periodically, but note the time a scan normally takes your machine before
-adding it to a cron/scheduled task. 
+adding it to a cron/scheduled task.
 
 
 Types:
-  --type=itunes         - Read an Itunes.xml file for media 
+  --type=itunes         - Read an Itunes.xml file for media
   --type=filesystem     - Scan the filesystem for media
 
 Call it with:
@@ -36,7 +36,7 @@ EOF;
     $databaseManager = new sfDatabaseManager($this->configuration);
     $connection = $databaseManager->getDatabase($options['connection'])->getConnection();
     
-    // load the scanner 
+    // load the scanner
     switch ( $options[ 'type' ] )
     {
       case 'itunes':
@@ -56,7 +56,7 @@ EOF;
         break;
         
       case 'filesystem':
-        //check that there is at least 1 watched folder 
+        //check that there is at least 1 watched folder
         $watched_folders = sfConfig::get( 'app_wf_watched_folders' );
         if ( count( $watched_folders ) < 1 )
         {
@@ -72,5 +72,11 @@ EOF;
         break;
     }
     echo "\r\n";
+
+    if(sfConfig::get('app_indexer_use_indexer'))
+    {
+      $mediaIndexTask = new mediaindexTask($this->dispatcher, $this->formatter);
+      $mediaIndexTask->run(array(), array('application' => $arguments['application'], 'env' => $options['env'], 'connection' => $options['connection']));
+    }
   }
 }

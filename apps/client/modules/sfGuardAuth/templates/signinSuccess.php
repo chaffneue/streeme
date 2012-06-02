@@ -6,7 +6,14 @@
 ?>
 <div class="languagecontainer"><?php include_partial('player/languagechooser'); ?></div>
 <div class="logininstruction"><?php echo __( 'Please Sign In' ) ?></div>
-<div class="loginerror"><?php echo $form['username']->getError()?></div>
+<div class="loginerror">
+<?php
+if($form['username']->hasError())
+{
+  echo __('Invalid username or password.') . ' ';
+}
+?>
+</div>
 <div class="logincontainer">
   <form action="<?php echo url_for('@sf_guard_signin') ?>" method="post">
     <div class="formarea">

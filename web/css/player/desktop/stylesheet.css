@@ -357,7 +357,7 @@ a.cboxElement
 }
 .videocontainer{
 	position:relative;
-	margin-right: 156px;
+	margin-right: 190px;
 }
 video{
 	position: absolute;
@@ -407,7 +407,7 @@ audio.firefox{
 .previoussong{
 	position: absolute; 
 	top: 14px;
-	right: 96px;
+	right: 134px;
 	width: 38px;
 	height: 32px;
 	background: url("/images/player/desktop/h5-button-transportsprite.png") no-repeat;
@@ -422,7 +422,7 @@ audio.firefox{
 {
 	position: absolute; 
 	top: 14px;
-	right: 96px;
+	right: 134px;
 	width: 38px;
 	height: 32px;
 	background: url("/images/player/desktop/h5-button-transportsprite.png") no-repeat;
@@ -432,7 +432,7 @@ audio.firefox{
 .nextsong{
 	position: absolute; 
 	top: 14px;
-	right: 59px;
+	right: 97px;
 	width: 37px;
 	height: 32px;
 	background: url("/images/player/desktop/h5-button-transportsprite.png") no-repeat;
@@ -446,7 +446,7 @@ audio.firefox{
 .nextsongdisabled{
 	position: absolute; 
 	top: 14px;
-	right: 59px;
+	right: 97px;
 	width: 37px;
 	height: 32px;
 	background: url("/images/player/desktop/h5-button-transportsprite.png") no-repeat;
@@ -460,8 +460,12 @@ audio.firefox{
 	width: 37px;
 	height: 32px;
 	background: url("/images/player/desktop/h5-button-transportsprite.png") no-repeat;
-	background-position: -77px -35px;
+	background-position: -77px -70px;
 	cursor: pointer;
+}
+.randomsong:hover{
+  background: url("/images/player/desktop/h5-button-transportsprite.png") no-repeat;
+  background-position: -77px -35px;
 }
 .randomsongactive{
 	position: absolute; 
@@ -472,6 +476,41 @@ audio.firefox{
 	background: url("/images/player/desktop/h5-button-transportsprite.png") no-repeat;
 	background-position: -77px 0px;
 	cursor: pointer;
+}
+.repeatsong{
+  position: absolute; 
+  top: 14px;
+  right: 54px;
+  width: 39px;
+  height: 32px;
+  background: url("/images/player/desktop/h5-button-transportsprite.png") no-repeat;
+  background-position: -77px -104px;
+  cursor: pointer;
+}
+.repeatsong:hover{
+  background: url("/images/player/desktop/h5-button-transportsprite.png") no-repeat;
+  background-position: -1px -138px;
+  cursor: pointer;
+}
+.repeatsongall{
+  position: absolute; 
+  top: 14px;
+  right: 55px;
+  width: 39px;
+  height: 32px;
+  background: url("/images/player/desktop/h5-button-transportsprite.png") no-repeat;
+  background-position: 0px -104px;
+  cursor: pointer;
+}
+.repeatsongsingle{
+  position: absolute; 
+  top: 14px;
+  right: 55px;
+  width: 38px;
+  height: 32px;
+  background: url("/images/player/desktop/h5-button-transportsprite.png") no-repeat;
+  background-position: -39px -104px;
+  cursor: pointer;
 }
 .content{
 	position: relative;
@@ -506,7 +545,7 @@ audio.firefox{
 		position: absolute;
 		font-size: 14px;
 		font-weight: bold;
-		top: 8px;
+		top: 9px;
 		left: 15px;
 		text-shadow: #FFFFFF 0 -1px 0;
 	}
@@ -517,7 +556,7 @@ audio.firefox{
 		display: block;
 		border: 1px solid #BBB;
 		width: 270px;
-		margin: 5px 5px 5px 85px;
+		margin: 6px 5px 6px 85px;
 	}
 	.search .usersearch .cancel{
 		position: absolute;
@@ -525,13 +564,13 @@ audio.firefox{
 		width: 13px;
 		height: 13px;
 		right: 13px;
-		top: 6px;
+		top: 8px;
 		cursor: pointer;
 	}
 .cancelsearch{
 	position: absolute;
 	display: none;
-	top: 6px;
+	top: 7px;
 	right: 10px;
 	background: url("/images/player/desktop/h5-icon-search-cancel.png") no-repeat top left;
 	height: 13px;
@@ -549,7 +588,7 @@ audio.firefox{
 	z-index: 0;
 }
 	.browse .label{
-		padding: 5px 15px;
+		padding: 6px 15px;
 		font-size: 11px;
 		font-weight: bold;
 		background-color: #D0D0D0;
@@ -621,7 +660,7 @@ audio.firefox{
 .fg-toolbar{
 	position: relative;
 	background-color: #D0D0D0;
-	padding: 2px 5px;
+	padding: 3px 5px;
 	height: 20px;
 	border-top: 1px solid #EEE;
 	border-bottom: 1px solid #BBB;
@@ -703,7 +742,6 @@ audio.firefox{
 	color:#555555;
 	font-weight:normal;
 	outline:medium none;
-	padding: 2px 5px;
 	cursor: pointer;
 }
 .ui-state-disabled {
@@ -717,7 +755,6 @@ audio.firefox{
 }
 .songlist thead tr th{
 	border: 1px solid #AAA;
-	padding: 2px 5px;
 	font-weight: bold;
 	color: #444;
 	text-align: left;
@@ -743,15 +780,10 @@ audio.firefox{
 .song_id{
 	display: none;
 }
+.DataTables_sort_wrapper{
+	 padding: 2px 5px;
+}
 .sorting{
-	background-color: #D0D0D0;
-	background-image: -webkit-gradient(
-		linear,
-		left top,
-		left bottom,
-		color-stop(0.26, rgb(206,206,206)),
-		color-stop(0.63, rgb(219,219,219))
-	);
 }
 .major{
 	width: 33%;
@@ -786,4 +818,27 @@ audio.firefox{
 	z-index: 20;
 	white-space: nowrap;
 	overflow: hidden;
+}
+.css_right{
+}
+.ui-icon{
+	padding: 0 8px 0 8px;
+	background: url("/images/player/desktop/sort_both.png") no-repeat; 
+	background-position: 30px 30px;
+}
+.ui-icon-triangle-1-n{
+  background-position: 0 1px;
+	
+}
+.ui-icon-triangle-1-s{
+  background-position: 0 -12px;
+}
+.fg-button{
+	padding: 2px 5px;
+	margin-left: 3px;
+	border-top: 1px solid #FFF;
+	border-left: 1px solid #E2E2E2;
+	border-bottom: 1px solid #BBB;
+	border-right: 1px solid #E2E2E2;
+	outline: 1px solid #AAA;
 }

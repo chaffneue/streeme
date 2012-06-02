@@ -39,6 +39,7 @@ EOF;
         passthru( $root_dir . '/symfony ' . $scan_item );
         echo "\r\n\r\n";
       }
+      echo "Finished!\r\n";
     }
   }
 }

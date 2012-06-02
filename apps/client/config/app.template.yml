@@ -52,6 +52,26 @@ all:
   #set the default cookie lifetime for auth
   sf_guard_plugin:
     remember_key_expiration_age: 25920000   # 300 days in seconds
+    
+    # Uncomment these LDAP settings in case you'd like to use LDAP to authenticate
+    # You will need to add ldap to php using ldap.dll (windows) 
+    # or getting php5-ldap suport for port/apt/rpm (linux/osx)
+    # you'll also have to create a dummy user with the same name in Streeme to 
+    # sync the accounts.
+    #
+    #check_password_callable: [StreemeLdapUser, checkLdapCredentials]
+    #ldap_settings:
+    #  account_suffix: '@example.com',
+    #  base_dn: 'DC=controller1,DC=controller2',
+    #  domain_controllers: ['10.0.0.1','10.0.0.2']
+    #  admin_username: user
+    #  admin_password: $ecret
+    #  real_primarygroup: true
+    #  use_ssl: false
+    #  use_tls: true
+    #  recursive_groups: false
+    #  ad_port: 389
+    #  sso: false
 
   #set up your media scan plan - you can customize how your library is scanned
   #remove the pound (#) sign to enable scan if you'd like to change the order
@@ -64,3 +84,10 @@ all:
       - 'scan-art --source=meta'
       - 'scan-art --source=folders'
       #- 'scan-playlists --type=itunes'
+      
+  #Search Indexing Service - please review the wiki on indexing before enabling
+  indexer:
+    use_indexer: false                     # enable use of an external indexer for more expressive/faster searching
+    settings:
+      class: StreemeIndexerMysql           # Add your own search indexer to the apps/client/lib/indexer dir
+      auto-start: true                     # automatically start the search service

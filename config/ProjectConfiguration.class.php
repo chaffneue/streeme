@@ -10,5 +10,6 @@ class ProjectConfiguration extends sfProjectConfiguration
     $this->enablePlugins('sfDoctrinePlugin');
     $this->enablePlugins('sfWebBrowserPlugin');
     $this->enablePlugins('sfDoctrineGuardPlugin');
+    //$this->enablePlugins('sfSolrPlugin'); #adds solr search indexing integration - @see https://github.com/rande/sfSolrPlugin
   }
 }

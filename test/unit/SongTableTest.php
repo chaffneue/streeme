@@ -140,10 +140,19 @@ $result = $song_table->getList( array( 'offset' => 1 ), $result_count, $result_l
 $array_count = count( $result_list );
 $t->is( $result_count, 3, 'List length is correct for an offset result set' );
 $t->is( $array_count, 2, 'Results list is the correct length for an offset set' );
+$driverName = Doctrine_Manager::getInstance()->getCurrentConnection()->getDriverName();
 $result_count = $result_list = null;
 $result = $song_table->getList( array( 'search' => 'dót' ), $result_count, $result_list );
-$t->is( $result_count, 1, 'List length is correct for a search result set' );
-$t->is( $result_list[0]['name'], 'dót widget', 'Keyword search narrowed results correctly' );
+if($driverName === 'Sqlite')
+{
+  $t->is( $result_count, 1, 'List length is correct for a search result set' );
+  $t->is( $result_list[0]['name'], 'dót widget', 'Keyword search narrowed results correctly' );
+}
+else
+{
+  $t->is( $result_count, 0, 'Non UTF8 List length is correct for a search result set' );
+  $t->is( $result_list[0]['name'], null, 'Non UTF8 Keyword search narrowed results correctly' );
+}
 $result_count = $result_list = null;
 $result = $song_table->getList( array( 'artist_id' => '1' ), $result_count, $result_list );
 $t->is( $result_list[0]['artist_name'], 'Gorillas', 'Narrowed list by artist id' );

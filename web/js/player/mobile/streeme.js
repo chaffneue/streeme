@@ -289,6 +289,9 @@ streeme = {
 			
 			//The file was not the size reported or the codec is missing 
 			$( '#musicplayer' ).bind( 'error', function(){ if( this.error.code == 4 ) streeme.playNextSong(); } );
+			
+			//The file was not the size reported or the codec is missing 
+			$( '#musicplayer' ).bind( 'error', function(){ alert(this.error.code) } );
 		}
 		
 		/* Button listeners */ 
@@ -459,8 +462,6 @@ streeme = {
 			}
 			url = mediaurl + '/play/' + streeme.queuedSongId + '?' + parameters.join('&');
 			
-			//firefox/chrome logging only 
-			//console.log ( url );
 			el = document.getElementById( 'musicplayer' );
 			el.src = ( url );
 			el.preload = 'none';
@@ -500,11 +501,14 @@ streeme = {
 	*/
 	playNextSong : function()
 	{
-		try
+		var nextSongData = $( '#songlist' ).dataTable().fnGetData( streeme.displayPointer + 1 );
+
+		if( nextSongData )
 		{
-			var nextSongData = $( '#songlist' ).dataTable().fnGetData( streeme.displayPointer + 1 )
+			streeme.playSong( nextSongData[ 0 ], nextSongData[ 1 ], nextSongData[ 2 ], nextSongData[ 3 ], 0 );
+			streeme.displayPointer++;
 		}
-		catch( err )
+		else
 		{
 			//attempt to move to the next page
 			try
@@ -553,14 +557,7 @@ streeme = {
 				  $( '#next' ).removeClass( 'nextsong' );
 					$( '#next' ).addClass( 'nextsongdisabled' );
 				}
-				//firefox and chrome only
-				//console.log ( 'no next songs' );
 			} 
-		}
-		if( nextSongData )
-		{
-			streeme.playSong( nextSongData[ 0 ], nextSongData[ 1 ], nextSongData[ 2 ], nextSongData[ 3 ], 0 );
-			streeme.displayPointer++;
 		}
 	},
 
@@ -569,11 +566,14 @@ streeme = {
 	*/
 	playPreviousSong : function()
 	{
-		try
+		var previousSongData = $( '#songlist' ).dataTable().fnGetData( streeme.displayPointer - 1 );
+
+		if( previousSongData )
 		{
-			var previousSongData = $( '#songlist' ).dataTable().fnGetData( streeme.displayPointer - 1 )
+			streeme.playSong( previousSongData[ 0 ], previousSongData[ 1 ], previousSongData[ 2 ], previousSongData[ 3 ], 0 );
+			streeme.displayPointer--;
 		}
-		catch( err )
+		else
 		{
 			//attempt to move to the previous page
 			try
@@ -622,14 +622,7 @@ streeme = {
 					$( '#previous' ).removeClass( 'previoussong' );
 					$( '#previous' ).addClass( 'previoussongdisabled' );
 				}
-				//firefox and chrome only
-				//console.log ( 'no previous songs' );
-			} 
-		}
-		if( previousSongData )
-		{
-			streeme.playSong( previousSongData[ 0 ], previousSongData[ 1 ], previousSongData[ 2 ], previousSongData[ 3 ], 0 );
-			streeme.displayPointer--;
+			}
 		}
 	},
 	
@@ -738,8 +731,6 @@ streeme = {
 				streeme.bitrate = 0;
 				break;
 		}
-		//firefox/chrome logging only 
-		//console.log ( ( streeme.bitrate != 0 ) ? 'music will be downsampled to: ' + streeme.bitrate + 'k' : 'connection supports all audio speeds - playing original' );
 	},
 	
 	/**
@@ -764,8 +755,6 @@ streeme = {
 			$.cookie('modify_bitrate', null );
 			streeme.bitrate = 0;
 		}
-		//firefox/chrome logging only 
-		//console.log( streeme.bitrate );
 	},
 
 	/**
@@ -785,8 +774,6 @@ streeme = {
 			$.cookie('modify_format', null );
 			streeme.format = false;
 		}
-		//firefox/chrome logging only 
-		//console.log( streeme.format );
 	},
 
 	/*
@@ -981,7 +968,6 @@ streeme = {
 				streeme.chooseState( 'card_welcome', 'card_songs' );
 				var resume_rawdata = $.cookie('resume_mobile');
 				var resume_info = JSON.parse(resume_rawdata);
-				//console.log( resume_info );
 				streeme.displayPointer = resume_info.dp;
 				streeme.playSong( resume_info.si, resume_info.sn, resume_info.an, resume_info.rn, resume_info.t );
 				break;		

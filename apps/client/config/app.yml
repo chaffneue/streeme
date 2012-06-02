@@ -1,65 +1,30 @@
-# You can find more information about this file on the symfony website:
-# http://www.symfony-project.org/reference/1_4/en/11-App
-
-all: 
-  # the location of your itunes XML file
-  # eg. Win: C:\Users\username\Music\iTunes\iTunes Music Library.xml
-  #     Mac: /Users/username/Music/iTunes/iTunes Music Library.xml
-  itunes_xml_location: "/home/notroot/music/iTunes Music Library.xml"
-  
-  # Watched folders for loading media from the filesystem - no trailing slash
-  # eg. Win: C:\Users\username\Music
-  #     Mac: /Users/username/Music
-  #    *nix: /home/user/music
-  wf: 
-    watched_folders: 
-      - "/home/notroot/music"
-  
-  # If your music is predominantly stored on NAS drives on Windows, please remap the locations 
-  # from the itunes style full paths to the windows style sharing paths using forward slashes
-  # only required for itunes scanning
-  # eg.  'file://localhost/Z:' : '//mediabox/music'
-  # you may experience some pretty heavy lag over SAMBA, but it'll work fine
-  mdl:
-    mapped_drive_locations:
-    
-  # Allowed filetypes - this will be dependent on your browser's codecs
-  # eg. - mp3
+all:
+  setup_library_type: '2'
+  itunes_xml_location: '/Users/user/Music/iTunes/iTunes Music Library.xml'
+  wf:
+    watched_folders:
+      - /Users/user/Music
+      - /Users/users/Shared_Music
   aft:
     allowed_file_types:
       - mp3
-      
-  # Results Per Page 
-  # When in doubt, show this many results per page
-  results_per_page: 85
-  
-  #allow ffmpeg transcoding capabilities
-  allow_ffmpeg_transcoding: true
-  
-  #have streeme use a different terminal encoding - use any php iconv compatible value
-  #examples: OSX:UTF-8; Windows:ISO-8859-1; Ubuntu:ISO-8859-1 
-  filesystem_encoding: ISO-8859-1
-  
-  #Full Location of ffmpeg executable
-  ffmpeg_executable: "ffmpeg"
-    
-  #The Port for the media stream - must not be the same as the program port
-  music_proxy_port: 8081
-  
-  #add support for audio tags that do not send cookies ( Palm Pre - etc )
-  send_cookies_with_request: false
-  
-  #set the default cookie lifetime for auth
-  sf_guard_plugin:
-    remember_key_expiration_age: 25920000   # 300 days in seconds
-    
-  #set up your media scan plan - you can customize how your library is scanned
-  #remove the pound (#) sign to enable scan if you'd like to change the order
-  #just move the items up or down in the list
   msp:
     media_scan_plan:
-      #- 'scan-media --type=itunes'
       - 'scan-media --type=filesystem'
-      #- 'scan-art --source=amazon'
       - 'scan-art --source=meta'
-      - 'scan-art --source=folders'
+  results_per_page: 20
+  allow_ffmpeg_transcoding: true
+  ffmpeg_executable: /opt/local/var/macports/software/ffmpeg/0.6.1_0/opt/local/bin/ffmpeg
+  music_proxy_port: 8096
+  send_cookies_with_request: true
+  sf_guard_plugin:
+    remember_key_expiration_age: 25920000
+  indexer:
+    use_indexer: false
+    settings:
+      class: StreemeIndexerMysql
+      auto-start: true
+  setup_acl:
+    allowed_ips:
+      - 192.168.43.249
+      - 123.0.0.1

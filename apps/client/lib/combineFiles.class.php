@@ -11,12 +11,12 @@ class combineFiles
   /**
    * Combine multiple text assets into a single file for better http performance this
    * method generates a new cache file with every symfony cc you can override the cache
-   * by adding ?clearassetcache=1 to the page request. 
+   * by adding ?clearassetcache=1 to the page request.
    *
    * @param type      string css or js
    * @param namespace string the combined file namespace (eg. module+action names)
    * @param response  object the sfWebResponse instance
-   * @return          string the url for the combiner service 
+   * @return          string the url for the combiner service
    */
   public function combine( $type, $namespace, sfWebResponse $response )
   {

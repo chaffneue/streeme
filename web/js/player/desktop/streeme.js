@@ -46,6 +46,11 @@ streeme = {
 	random : false,
 
 	/**
+	* Repeat State str: off|all|single;
+	*/
+	repeat : 'off',
+	
+	/**
 	* Record the connection speed in kb/s around when the application loads
 	*/
 	connectionSpeed : 0,
@@ -106,23 +111,21 @@ streeme = {
 	/**
 	* initialize the application - project constructor
 	* sets up the datatable object for songs and other general setup
-	* @param results_per_page    in: number of results per page
+	* @param results_per_page    int: number of results per page
 	*/
 	__initialize : function( results_per_page ) 
 	{
 		/**************************************************		
 		 * Setup the JQuery Datatables UI Component       *
 		 **************************************************/
-		streeme.iDisplayLength = results_per_page;
-
-		$('#songlist').dataTable
+        
+		var oTable = $('#songlist').dataTable
 		( 
 			{
 				/* datatable config */
 				"bProcessing"     : true,
 				"bServerSide"     : true,
 				"sAjaxSource"     : javascript_base + '/service/listSongs',
-				"iDisplayLength"  : streeme.iDisplayLength,
 				"bJQueryUI"       : true,
 				"sPaginationType" : "full_numbers",
 				"bAutoWidth"      : false,
@@ -145,7 +148,8 @@ streeme = {
 					"sProcessing"   : sProcessing,
 					"sSearch"       : sSearch,
 					"sZeroRecords"  : sZeroRecords,
-				},		
+				},
+				
 				/* hide the song id field from the user */
 				"aoColumns" : 
 				[ 
@@ -240,6 +244,11 @@ streeme = {
 				}
 			}
 		);
+        var oSettings = oTable.fnSettings();
+        oSettings._iDisplayLength = parseInt(results_per_page);
+        oTable.fnDraw();
+        streeme.iDisplayLength = results_per_page;
+		
 		
 		/**************************************************		
 		 * Read and setup cookie based ui  settings       *
@@ -268,6 +277,11 @@ streeme = {
 		{
 			streeme.volume = $.cookie('modify_volume');
 		}
+		if( $.cookie( 'repeat') )
+		{
+			streeme.repeat = $.cookie( 'repeat' );
+			streeme.playRepeat();
+		}
 		
 		/**************************************************		
 		 * Register Event listeners for the Streeme class *
@@ -276,7 +290,18 @@ streeme = {
 		if( $( '#musicplayer' ) )
 		{
 			//the song unloaded normally
-			$( '#musicplayer' ).bind( 'ended', streeme.playNextSong );
+			$( '#musicplayer' ).bind( 'ended', function(){
+				if(streeme.repeat === 'single')
+				{
+					var currentSongData = $( '#songlist' ).dataTable().fnGetData( streeme.displayPointer );
+					streeme.playSong( currentSongData[ 0 ], currentSongData[ 1 ], currentSongData[ 2 ], currentSongData[ 3 ], currentSongData[ 8 ], 0 );
+					return true;
+				}
+				else
+				{
+					streeme.playNextSong();
+				}
+			});
 			
 			//check play/paused state
 			$( '#musicplayer' ).bind( 'pause', function(event){ streeme.play=false; } );
@@ -301,6 +326,10 @@ streeme = {
 		if( $( '#random' ) )
 		{
 			$( '#random' ).click( streeme.playRandom );
+		}
+		if( $( '#repeat' ) )
+		{
+			$( '#repeat' ).click( streeme.playRepeat );
 		}
 		if( $( '#settings' ) )
 		{
@@ -396,8 +425,7 @@ streeme = {
 		{
 			streeme.timer = 0;
 		}
-		//console.log('time:' + streeme.timer);
-		//queue up the song for the next play cycle
+
 		streeme.sourceFormat = file_type; 
 		streeme.queuedSongId = song_id;
 	
@@ -413,10 +441,22 @@ streeme = {
 			if( $( '#songlistcontainer' ) && $( '#songlist' ) )
 			{
 				setTimeout(function()
-				{ 	
-					var trHeight = ( streeme.displayPointer * $( '#songlist tbody tr' ).css('height').replace( 'px', '' ) - 205 );
-					if( trHeight < 30 ) trHeight = 0;
-					$('#songlistcontainer').scrollTo( trHeight, 200 );
+				{
+					var trId = '#sltr' + song_id;
+					var trHeight = $(trId).height();
+					var tblIndex = $(trId).parent().children().index($(trId));
+					for( var i=0; i<=tblIndex; i++ )
+					{
+						trHeight += $('#songlist tbody tr:nth-child(' + i + ')').height();
+					}
+					if(trHeight > 50)
+					{
+						$( '#songlistcontainer' ).scrollTo( {left:0, top: trHeight}, 200 );
+					}
+					else
+					{
+						$( '#songlistcontainer' ).scrollTo( {left:0, top:0}, 200 );
+					}
 				}
 				, 50 );
 			}
@@ -577,8 +617,6 @@ streeme = {
 			//otherwise use the browser's html player 
 			else
 			{				
-				//firefox/chrome logging only 
-				//console.log ( url );
 				el = document.getElementById( 'musicplayer' );
 				el.src = ( url );
 				el.preload = 'none';
@@ -623,11 +661,15 @@ streeme = {
 	*/
 	playNextSong : function()
 	{
-		try
+		var nextSongData = $( '#songlist' ).dataTable().fnGetData( streeme.displayPointer + 1 );
+
+		if( nextSongData )
 		{
-			var nextSongData = $( '#songlist' ).dataTable().fnGetData( streeme.displayPointer + 1 )
+			streeme.playSong( nextSongData[ 0 ], nextSongData[ 1 ], nextSongData[ 2 ], nextSongData[ 3 ], nextSongData[ 8 ], 0 );
+			streeme.displayPointer++;
+			return true;
 		}
-		catch( err )
+		else
 		{
 			//attempt to move to the next page
 			try
@@ -652,6 +694,7 @@ streeme = {
 				setTimeout(function()
 				{ 	
 					nextSongData = $( '#songlist' ).dataTable().fnGetData( 0 );
+
 					if( nextSongData )
 					{
 						streeme.playSong( nextSongData[ 0 ], nextSongData[ 1 ], nextSongData[ 2 ], nextSongData[ 3 ], nextSongData[ 8 ], 0 );
@@ -667,23 +710,41 @@ streeme = {
 				}
 
 				//let Javascript get back to work
-				return false;
+				return true;
 			}
 			catch( err )
 			{
-				if( $( '#next' ) )
+				if(streeme.repeat === 'all')
+				{
+					//move to the first
+					$( '#songlist' ).dataTable().fnPageChange( 'first' );
+					
+					//let the page redraw and then update the song pointers
+					setTimeout(function()
+					{ 	
+						nextSongData = $( '#songlist' ).dataTable().fnGetData( 0 );
+
+						if( nextSongData )
+						{
+							streeme.playSong( nextSongData[ 0 ], nextSongData[ 1 ], nextSongData[ 2 ], nextSongData[ 3 ], nextSongData[ 8 ], 0 );
+						}
+						streeme.displayPointer = 0;
+					}
+					, 2000);
+					
+					//scroll back to the top of the container
+					if( $( '#songlistcontainer' ) )
+					{
+						$( '#songlistcontainer' ).scrollTo( 0 );
+					}
+	
+				}
+				else
 				{
 				  $( '#next' ).removeClass( 'nextsong' );
-					$( '#next' ).addClass( 'nextsongdisabled' );
+				  $( '#next' ).addClass( 'nextsongdisabled' );
 				}
-				//firefox and chrome only
-				//console.log ( 'no next songs' );
 			} 
-		}
-		if( nextSongData )
-		{
-			streeme.playSong( nextSongData[ 0 ], nextSongData[ 1 ], nextSongData[ 2 ], nextSongData[ 3 ], nextSongData[ 8 ], 0 );
-			streeme.displayPointer++;
 		}
 	},
 
@@ -692,11 +753,14 @@ streeme = {
 	*/
 	playPreviousSong : function()
 	{
-		try
+		var previousSongData = $( '#songlist' ).dataTable().fnGetData( streeme.displayPointer - 1 );
+			
+		if( previousSongData )
 		{
-			var previousSongData = $( '#songlist' ).dataTable().fnGetData( streeme.displayPointer - 1 )
+			streeme.playSong( previousSongData[ 0 ], previousSongData[ 1 ], previousSongData[ 2 ], previousSongData[ 3 ], previousSongData[ 8 ], 0 );
+			streeme.displayPointer--;
 		}
-		catch( err )
+		else
 		{
 			//attempt to move to the previous page
 			try
@@ -740,19 +804,32 @@ streeme = {
 			}
 			catch( err )
 			{
-				if( $( '#previous' ) )
+				if(streeme.repeat === 'all')
+				{
+					//move to the last page
+					$( '#songlist' ).dataTable().fnPageChange( 'last' );
+					
+					//let the page redraw and then update the song pointers
+					setTimeout(function()
+					{ 	
+						nextSongData = $( '#songlist' ).dataTable().fnGetData();
+
+						if( nextSongData )
+						{
+							var position = nextSongData.length - 1;
+							nextSongData = nextSongData[position];
+							streeme.playSong( nextSongData[ 0 ], nextSongData[ 1 ], nextSongData[ 2 ], nextSongData[ 3 ], nextSongData[ 8 ], 0 );
+						}
+						streeme.displayPointer = position;
+					}
+					, 2000);
+				}
+				else
 				{
 					$( '#previous' ).removeClass( 'previoussong' );
 					$( '#previous' ).addClass( 'previoussongdisabled' );
 				}
-				//firefox and chrome only
-				//console.log ( 'no previous songs' );
-			} 
-		}
-		if( previousSongData )
-		{
-			streeme.playSong( previousSongData[ 0 ], previousSongData[ 1 ], previousSongData[ 2 ], previousSongData[ 3 ], previousSongData[ 8 ], 0 );
-			streeme.displayPointer--;
+			}
 		}
 	},
 	
@@ -796,6 +873,37 @@ streeme = {
 			}
 			
 			streeme.random = true;
+		}
+	},
+	
+	/**
+	* Update the repeat state for the interface
+	*/
+	playRepeat : function()
+	{
+		switch(streeme.repeat)
+		{
+			case 'all':
+				streeme.repeat = 'single';
+				$( '#repeat' ).addClass( 'repeatsongsingle' );  
+				$( '#repeat' ).removeClass( 'repeatsongall' ); 
+				$( '#repeat' ).removeClass( 'repeatsong' );
+				$.cookie( 'repeat', 'all');
+				break;
+			case 'single':
+				streeme.repeat = 'off';
+				$( '#repeat' ).addClass( 'repeatsong' );  
+				$( '#repeat' ).removeClass( 'repeatsongall' ); 
+				$( '#repeat' ).removeClass( 'repeatsongsingle' );
+				$.cookie( 'repeat', 'single');
+				break;
+			case 'off':
+				streeme.repeat = 'all';
+				$( '#repeat' ).addClass( 'repeatsongall' );  
+				$( '#repeat' ).removeClass( 'repeatsong' ); 
+				$( '#repeat' ).removeClass( 'repeatsongsingle' );
+				$.cookie( 'repeat', 'off');
+				break;
 		}
 	},
 	
@@ -939,8 +1047,6 @@ streeme = {
 	*/
 	addpls : function( type, id )
 	{
-		//firefox/chrome logging only 
-		//console.log( streeme.activePlaylist + ' ' + type + ' ' + id );
 		$.ajax
 		(
 			{ 
@@ -966,8 +1072,6 @@ streeme = {
 	*/
 	delpls : function( id )
 	{
-		//firefox/chrome logging only 
-		//console.log( streeme.activePlaylist + ' ' + id );
 		$.ajax
 		(
 			{ 
@@ -995,8 +1099,7 @@ streeme = {
 	{
 		var playlistName = prompt( playlistNameInput, "");
 		if( playlistName == null ) return false;
-		//firefox/chrome logging only 
-		//console.log( playlistName );
+
 		$.ajax
 		(
 			{ 
@@ -1026,8 +1129,6 @@ streeme = {
 	{
 		if (confirm( confirmDelete ))
 
-		//firefox/chrome logging only 
-		//console.log( id );
 		$.ajax
 		(
 			{ 
@@ -1054,8 +1155,6 @@ streeme = {
 	*/
 	refreshPlaylist : function()
 	{
-		//firefox/chrome logging only 
-		//console.log( id );
 		$.ajax
 		(
 			{ 
@@ -1161,8 +1260,6 @@ streeme = {
 				streeme.bitrate = 0;
 				break;
 		}
-		//firefox/chrome logging only 
-		//console.log ( ( streeme.bitrate != 0 ) ? 'music will be downsampled to: ' + streeme.bitrate + 'k' : 'connection supports all audio speeds - playing original' );
 	},
 	
 	/**
@@ -1187,8 +1284,6 @@ streeme = {
 			$.cookie('modify_bitrate', null );
 			streeme.bitrate = 0;
 		}
-		//firefox/chrome logging only 
-		//console.log( streeme.bitrate );
 	},
 
 	/**
@@ -1208,8 +1303,6 @@ streeme = {
 			$.cookie('modify_format', null );
 			streeme.format = false;
 		}
-		//firefox/chrome logging only 
-		//console.log( streeme.format );
 	},
 	
 	/**
@@ -1220,7 +1313,6 @@ streeme = {
 	{
 		streeme.volume = event.jPlayer.status.volume;
 		$.cookie('modify_volume', streeme.volume, { expires: 3000 } );
-		//console.log( streeme.volume );
 	},
 
 	/**
@@ -1249,7 +1341,6 @@ streeme = {
     {
 		var resume_rawdata = $.cookie('resume_desktop');
 		var resume_info = JSON.parse(resume_rawdata);
-		//console.log( resume_info );
 		streeme.displayPointer = resume_info.dp;
 		streeme.playSong( resume_info.si, resume_info.sn, resume_info.an, resume_info.rn, resume_info.ft, resume_info.t );
     },

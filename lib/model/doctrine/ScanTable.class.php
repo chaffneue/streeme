@@ -30,6 +30,8 @@ class ScanTable extends Doctrine_Table
       $scan->save();
       $id = $scan->getId();
       $scan->free();
+      unset($scan);
+      
       if( $id )
       {
         return $id;

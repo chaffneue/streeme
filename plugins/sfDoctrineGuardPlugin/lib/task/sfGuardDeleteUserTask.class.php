@@ -20,6 +20,7 @@ class sfGuardDeleteUserTask extends sfBaseTask
       new sfCommandOption('application', null, sfCommandOption::PARAMETER_OPTIONAL, 'The application name', null),
       new sfCommandOption('env', null, sfCommandOption::PARAMETER_REQUIRED, 'The environment', 'dev'),
       new sfCommandOption( 'connection', null, sfCommandOption::PARAMETER_REQUIRED, 'The connection name', 'doctrine' ),
+      new sfCommandOption( 'no-confirmation', null, sfCommandOption::PARAMETER_REQUIRED, 'The connection name', false ),
     ));
 
     $this->namespace = 'guard';

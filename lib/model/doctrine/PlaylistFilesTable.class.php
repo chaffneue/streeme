@@ -52,6 +52,7 @@ class PlaylistFilesTable extends Doctrine_Table
           $playlist_file->filename = $row[ 'filename' ];
           $playlist_file->save();
           $playlist_file->free();
+          unset($playlist_file);
         }
       }
       return true;
