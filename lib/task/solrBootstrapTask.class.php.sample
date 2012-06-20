@@ -45,7 +45,7 @@ class solrBootstrapTask extends sfLuceneBaseTask
   
       $results = $output = false;
       exec('which nohup', $output, $results);
-      $nohup = $results == 0 ? $output[0] : false;     
+      $nohup = $results == 0 ? $output[0] : false;
     }
     
     $this->addOptions(array(
@@ -163,7 +163,7 @@ EOF;
           sfConfig::get('sf_root_dir').'/log',
           $app,
           $env
-        );    
+        );
       }
       else
       {
@@ -191,7 +191,7 @@ EOF;
       {
         $this->getFilesystem()->execute(sprintf('cd %s',
           sfConfig::get('sf_root_dir')
-        ));      
+        ));
       }
   
       $pid = (int)$op[0];
@@ -211,8 +211,8 @@ EOF;
     }
     if($this->isWindows)
     {
-      $this->logSection("solr", "To stop the SOLR process in Windows, please use the taskmanager and stop the processes manually (java.exe)"); 
-      return;  
+      $this->logSection("solr", "To stop the SOLR process in Windows, please use the taskmanager and stop the processes manually (java.exe)");
+      return;
     }
     else
     {
