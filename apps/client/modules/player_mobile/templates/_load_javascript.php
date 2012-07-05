@@ -17,9 +17,10 @@
 /* Add Functions that Need to Load after Ready Here */
 $(document).ready(function(){
 <?php
-		  $protocol = ( !empty( $_SERVER['HTTPS'] ) ) ? 'https://' : 'http://';
-		  $hostname = str_replace( $_SERVER[ 'SERVER_PORT' ], '', $_SERVER['HTTP_HOST'] );
-		  if ( !empty( $_SERVER['HTTPS'] ) )
+      $is_secure = ( isset($_SERVER['HTTPS']) && strlen($_SERVER['HTTPS']) > 0 && $_SERVER['HTTPS'] != 'off' ) ? true : false;
+      $protocol = ( $is_secure ) ? 'https://' : 'http://';
+      $hostname = str_replace( $_SERVER[ 'SERVER_PORT' ], '', $_SERVER['HTTP_HOST'] );
+      if ( $is_secure )
 		  {
 		    $port = '';
 		  }

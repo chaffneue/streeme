@@ -20,10 +20,10 @@ $(document).ready(function()
 <?php
 	//the load_html5_player partial may load jplayer javascripts using this slot if required
 	echo get_slot( 'javascript_player_loader' );
-	
-  $protocol = ( !empty( $_SERVER['HTTPS'] ) ) ? 'https://' : 'http://';
+	$is_secure = ( isset($_SERVER['HTTPS']) && strlen($_SERVER['HTTPS']) > 0 && $_SERVER['HTTPS'] != 'off' ) ? true : false;
+  $protocol = ( $is_secure ) ? 'https://' : 'http://';
   $hostname = str_replace( $_SERVER[ 'SERVER_PORT' ], '', $_SERVER['HTTP_HOST'] );
-  if ( !empty( $_SERVER['HTTPS'] ) )
+  if ( $is_secure )
   {
 	  $port = '';
   }

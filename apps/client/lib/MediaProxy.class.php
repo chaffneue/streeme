@@ -244,32 +244,15 @@ class MediaProxy
    */
   private function stream_original()
   {
-    //does the user have apache mod XSendFile installed? use that as a first priority
-    //otherwise we can send it using php's PEAR HTTP_Download functionality
-    $mods = apache_get_modules();
-    $flip = array_flip( $mods );
-    $mod_number = (string) $flip[ 'mod_xsendfile' ];
-    if( !empty( $mod_number ) )
-    {
-      $this->log('Sending File using X-Sendfile Module');
-      header("X-Sendfile: $this->filename");
-      header("Content-Type: $this->source_type");
-      header("Content-Disposition: attachment; filename=\"$this->source_basename\"");
-      header("Content-Length: $this->source_file_length" );
-      exit;
-    }
-    else
-    {
-      $this->log('Sending File using Pear HTTP Download');
-      $params = array(
-        'File'                => $this->filename,
-        'ContentType'         => $this->source_type,
-        'BufferSize'          => 32000,
-        'ContentDisposition'  => array( HTTP_DOWNLOAD_INLINE, $this->source_basename ),
-      );
-      
-      $error = HTTP_Download::staticSend( $params, false );
-    }
+    $this->log('Sending File using Pear HTTP Download');
+    $params = array(
+      'File'                => $this->filename,
+      'ContentType'         => $this->source_type,
+      'BufferSize'          => 32000,
+      'ContentDisposition'  => array( HTTP_DOWNLOAD_INLINE, $this->source_basename ),
+    );
+    
+    $error = HTTP_Download::staticSend( $params, false );
   }
   
   /**

@@ -74,6 +74,16 @@ streeme = {
 	 * Default volume 
 	 */
 	volume : 1,
+	
+	/**
+	 * Muted state
+	 */
+	muted: false,
+	
+	/**
+	 * keyboard shortcut pause state
+	 */
+	paused: false,
 
 	/**
 	* The latest song requested by the user
@@ -379,6 +389,16 @@ streeme = {
 			$( '#addplaylist' ).click( streeme.addPlaylist );
 		}
 		
+		/* Keyboard Shortcut Listeners */
+		key('shift+alt+left', function(){ streeme.playPreviousSong() } );
+		key('shift+alt+right', function(){ streeme.playNextSong() } );
+		key('shift+alt+s', function(){ streeme.playRandom() } );
+		key('shift+alt+r', function(){ streeme.playRepeat() } );
+		key('shift+alt+m', function(){ streeme.toggleMute() } );
+		key('shift+alt+p', function(){ streeme.togglePlaylistsWindow() });
+		key('shift+alt+o', function(){ streeme.toggleSettingsWindow() });
+		key('shift+alt+x', function(){ streeme.togglePlayback() });
+		
 		/**************************************************		
 		 * Run initial setup scripts                      *
 		 **************************************************/
@@ -573,6 +593,7 @@ streeme = {
                             supplied: "mp3",
                             volume: streeme.volume,
                             volumechange: streeme.updateVolume,
+                            muted: streeme.muted
                           });				
 						break;
 						
@@ -606,8 +627,18 @@ streeme = {
                             supplied: "oga",
                             volume: streeme.volume,
                             volumechange: streeme.updateVolume,
+                            muted: streeme.muted
                           });				
 						break;
+				}
+				//set the mute state
+				if(streeme.muted === true)
+				{
+					$("#jquery_jplayer_1").jPlayer('mute');
+				}
+				else
+				{
+					$("#jquery_jplayer_1").jPlayer('unmute');
 				}
 				
 				//start the jquery player timer
@@ -1448,6 +1479,68 @@ streeme = {
 		catch( err )
 		{
 			return false;
+		}
+	},
+	
+	toggleMute : function()
+	{
+		if(streeme.muted === true)
+		{
+			if( $( '#jquery_jplayer_1' ).length )
+			{
+				$( '#jquery_jplayer_1' ).jPlayer('unmute');
+			}
+			else
+			{
+				document.getElementById('musicplayer').muted = false;
+			}
+			
+			streeme.muted = false;
+		}
+		else
+		{
+			if( $( '#jquery_jplayer_1' ).length )
+			{
+				$( '#jquery_jplayer_1' ).jPlayer('mute');
+			}
+			else
+			{
+				document.getElementById('musicplayer').muted = true;
+			}
+			
+			streeme.muted = true;
+		}
+	},
+	
+	togglePlayback : function()
+	{
+		if(streeme.paused === true)
+		{
+			if( $( '#jquery_jplayer_1' ).length )
+			{
+				$( '#jquery_jplayer_1' ).jPlayer('play');
+			}
+			else
+			{
+				var el = document.getElementById('musicplayer');
+				el.play();
+			}
+			
+			streeme.paused = false;
+		}
+		else
+		{
+			if( $( '#jquery_jplayer_1' ).length )
+			{
+				$( '#jquery_jplayer_1' ).jPlayer('pause');
+			}
+			else
+			{
+				var el = document.getElementById('musicplayer');
+				el.pause();
+			}
+			
+			streeme.paused = true;
 		}
 	},
 	

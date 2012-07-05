@@ -10,6 +10,7 @@
   use_javascript( '/js/jquery.cookie.min.js' );
   use_javascript( '/js/jquery.md5.min.js' );
   use_javascript( '/js/jquery.colorbox.min.js' );
+  use_javascript( '/js/keymaster.min.js', 'first' );
   use_javascript( '/js/player/desktop/streeme.js' );
   use_javascript( '/js/jQuery.jPlayer.2.0.0/jquery.jplayer.min.js', 'first' );
 ?>
