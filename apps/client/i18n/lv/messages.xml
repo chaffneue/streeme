@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
 <xliff version="1.0">
-  <file source-language="EN" target-language="lv" datatype="plaintext" original="messages" date="2012-01-01T00:00:00Z" product-name="messages">
+  <file source-language="EN" target-language="lv" datatype="plaintext" original="messages" date="2012-07-01T00:00:00Z" product-name="messages">
     <header/>
     <body>
       <trans-unit id="1">
@@ -89,365 +89,618 @@
         <target>Nākamā dziesma</target>
       </trans-unit>
       <trans-unit id="22">
+        <source>Repeat Songs and Playlists</source>
+        <target>Atkārtot dziesmas un dziesmu sarakstus</target>
+      </trans-unit>
+      <trans-unit id="23">
         <source>Random Play On/Off</source>
         <target>Jauktas secības atskaņošana ieslēgta/izslēgta</target>
       </trans-unit>
-      <trans-unit id="23">
+      <trans-unit id="24">
         <source>Add New Playlist&amp;hellip;</source>
         <target>Pievienot jaunu atskaņošanas sarakstu&amp;hellip;</target>
       </trans-unit>
-      <trans-unit id="24">
+      <trans-unit id="25">
         <source>Magnify album art</source>
         <target>Palielināt albuma noformējumu</target>
       </trans-unit>
-      <trans-unit id="25">
+      <trans-unit id="26">
         <source>Browse Genres</source>
         <target>Pārlūkot žanrus</target>
       </trans-unit>
-      <trans-unit id="26">
+      <trans-unit id="27">
         <source>-- Choose a Genre --</source>
         <target>-- Izvēlieties žanru --</target>
       </trans-unit>
-      <trans-unit id="27">
+      <trans-unit id="28">
         <source>Browse Artists</source>
         <target>Pārlūkot izpildītājus</target>
       </trans-unit>
-      <trans-unit id="28">
+      <trans-unit id="29">
         <source>Browse Albums</source>
         <target>Pārlūkot albumus</target>
       </trans-unit>
-      <trans-unit id="29">
+      <trans-unit id="30">
         <source>Play this playlist</source>
         <target>Atskaņot šo atskaņošanas sarakstu</target>
       </trans-unit>
-      <trans-unit id="30">
+      <trans-unit id="31">
         <source>Unload this playlist</source>
         <target>Izņemt šo atskaņošanas sarakstu</target>
       </trans-unit>
-      <trans-unit id="31">
+      <trans-unit id="32">
         <source>Delete this playlist</source>
         <target>Dzēst šo atskaņošanas sarakstu</target>
       </trans-unit>
-      <trans-unit id="32">
+      <trans-unit id="33">
         <source>Track</source>
         <target>Dziesma</target>
       </trans-unit>
-      <trans-unit id="33">
+      <trans-unit id="34">
         <source>Album</source>
         <target>Albums</target>
       </trans-unit>
-      <trans-unit id="34">
+      <trans-unit id="35">
         <source>Artist</source>
         <target>Izpildītājs</target>
       </trans-unit>
-      <trans-unit id="35">
+      <trans-unit id="36">
         <source>Modified</source>
         <target>Pārveidots</target>
       </trans-unit>
-      <trans-unit id="36">
+      <trans-unit id="37">
         <source>Year</source>
         <target>Gads</target>
       </trans-unit>
-      <trans-unit id="37">
+      <trans-unit id="38">
         <source>Length</source>
         <target>Garums</target>
       </trans-unit>
-      <trans-unit id="38">
+      <trans-unit id="39">
         <source>TK#</source>
         <target>Nr. #</target>
       </trans-unit>
-      <trans-unit id="39">
+      <trans-unit id="40">
         <source>Extension</source>
         <target>Paplašinājums</target>
       </trans-unit>
-      <trans-unit id="40">
+      <trans-unit id="41">
         <source>Cancel the Search</source>
         <target>Atcelt meklēšanu</target>
       </trans-unit>
-      <trans-unit id="41">
+      <trans-unit id="42">
         <source>First</source>
         <target>Pirmais</target>
       </trans-unit>
-      <trans-unit id="42">
+      <trans-unit id="43">
         <source>Last</source>
         <target>Pēdējais</target>
       </trans-unit>
-      <trans-unit id="43">
+      <trans-unit id="44">
         <source>Next</source>
         <target>Nākamais</target>
       </trans-unit>
-      <trans-unit id="44">
+      <trans-unit id="45">
         <source>Previous</source>
         <target>Iepriekšējais</target>
       </trans-unit>
-      <trans-unit id="45">
+      <trans-unit id="46">
         <source>No data available in table</source>
         <target>Nav datu tabulas</target>
       </trans-unit>
-      <trans-unit id="46">
+      <trans-unit id="47">
         <source>Showing _START_ to _END_ of _TOTAL_ entries</source>
         <target>Rāda _START_ līdz _END_ no _TOTAL_ ierakstiem</target>
       </trans-unit>
-      <trans-unit id="47">
+      <trans-unit id="48">
         <source>No entries to show</source>
         <target>Nav ierakstu, lai parādītu</target>
       </trans-unit>
-      <trans-unit id="48">
+      <trans-unit id="49">
         <source>(filtered from _MAX_ total entries)</source>
         <target>(izfiltrēts no _MAX_ kopējā ierakstu skaita)</target>
       </trans-unit>
-      <trans-unit id="49">
+      <trans-unit id="50">
         <source>Show _MENU_ songs</source>
         <target>Parādīt _MENU_ dziesmas</target>
       </trans-unit>
-      <trans-unit id="50">
+      <trans-unit id="51">
         <source>Loading...</source>
         <target>Ielādē...</target>
       </trans-unit>
-      <trans-unit id="51">
+      <trans-unit id="52">
         <source>Search:</source>
         <target>Meklēt:</target>
       </trans-unit>
-      <trans-unit id="52">
+      <trans-unit id="53">
         <source>No songs to display</source>
         <target>Nav dziesmas, ko parādīt</target>
       </trans-unit>
-      <trans-unit id="53">
+      <trans-unit id="54">
         <source>Album Art Image for: </source>
         <target>Albuma noformējuma attēls priekš: </target>
       </trans-unit>
-      <trans-unit id="54">
+      <trans-unit id="55">
         <source>Are you sure you want to quit the Streeme desktop application?</source>
         <target>Vai jūs tiešām vēlaties pamest Streeme datora aplikāciju?</target>
       </trans-unit>
-      <trans-unit id="55">
+      <trans-unit id="56">
         <source>Click to add to current playlist</source>
         <target>Noklikšķiniet, lai pievienotu pašreizējam atskaņošanas sarakstam</target>
       </trans-unit>
-      <trans-unit id="56">
+      <trans-unit id="57">
         <source>Click to remove this song from the playlist</source>
         <target>Noklikšķiniet, lai izņemtu šo dziesmu no atskaņošanas saraksta</target>
       </trans-unit>
-      <trans-unit id="57">
+      <trans-unit id="58">
         <source>Item(s) added to playlist</source>
         <target>Vienums(i) pievienots(i) atskaņošanas sarakstam</target>
       </trans-unit>
-      <trans-unit id="58">
+      <trans-unit id="59">
         <source>Error! Did you select a playlist first?</source>
         <target>Kļūda! Vai esat izvēlējies atskaņošanas sarakstu vispirms?</target>
       </trans-unit>
-      <trans-unit id="59">
+      <trans-unit id="60">
         <source>Item deleted from the active playlist</source>
         <target>Vienums dzēsts no aktīvā atskaņošanas saraksta</target>
       </trans-unit>
-      <trans-unit id="60">
+      <trans-unit id="61">
         <source>Error! Streeme reported an error. Song not deleted.</source>
         <target>Kļūda! Streeme ziņoja par kļūdu. Dziesma nav dzēsta.</target>
       </trans-unit>
-      <trans-unit id="61">
+      <trans-unit id="62">
         <source>Please specify a name for the new playlist</source>
         <target>Lūdzu, norādiet nosaukumu jaunajam atskaņošanas sarakstam</target>
       </trans-unit>
-      <trans-unit id="62">
+      <trans-unit id="63">
         <source>Added New Playlist</source>
         <target>Pievienots jauns atskaņošanas saraksts</target>
       </trans-unit>
-      <trans-unit id="63">
+      <trans-unit id="64">
         <source>Error! Playlist not created.</source>
         <target>Kļūda! Atskaņošanas saraksts nav izveidots.</target>
       </trans-unit>
-      <trans-unit id="64">
+      <trans-unit id="65">
         <source>Playlist Deleted</source>
         <target>Atskaņošanas saraksts ir dzēsts</target>
       </trans-unit>
-      <trans-unit id="65">
+      <trans-unit id="66">
         <source>Error! Streeme reported an error. Playlist not deleted.</source>
         <target>Kļūda! Streeme ziņoja par kļūdu. Atskaņošanas saraksts nav dzēsts.</target>
       </trans-unit>
-      <trans-unit id="66">
+      <trans-unit id="67">
         <source>Are you sure you want to delete this item?</source>
         <target>Vai tiešām vēlaties dzēst šo vienumu?</target>
       </trans-unit>
-      <trans-unit id="67">
+      <trans-unit id="68">
         <source>Play this track</source>
         <target>Atskaņot šo dziesmu</target>
       </trans-unit>
-      <trans-unit id="68">
+      <trans-unit id="69">
         <source>Streeme Settings</source>
         <target>Streeme iestatījumi</target>
       </trans-unit>
-      <trans-unit id="69">
+      <trans-unit id="70">
         <source>Target bitrate:</source>
         <target>Mērķa bitātrums:</target>
       </trans-unit>
-      <trans-unit id="70">
+      <trans-unit id="71">
         <source>Play original</source>
         <target>Atskaņot oriģinālu</target>
       </trans-unit>
-      <trans-unit id="71">
+      <trans-unit id="72">
         <source>Auto</source>
         <target>Automātiski</target>
       </trans-unit>
-      <trans-unit id="72">
+      <trans-unit id="73">
         <source>384kbps</source>
         <target>384kbps</target>
       </trans-unit>
-      <trans-unit id="73">
+      <trans-unit id="74">
         <source>320kbps</source>
         <target>320kbps</target>
       </trans-unit>
-      <trans-unit id="74">
+      <trans-unit id="75">
         <source>256kbps</source>
         <target>256kbps</target>
       </trans-unit>
-      <trans-unit id="75">
+      <trans-unit id="76">
         <source>192kbps</source>
         <target>192kbps</target>
       </trans-unit>
-      <trans-unit id="76">
+      <trans-unit id="77">
         <source>128kbps</source>
         <target>128kbps</target>
       </trans-unit>
-      <trans-unit id="77">
+      <trans-unit id="78">
         <source>96kbps</source>
         <target>96kbps</target>
       </trans-unit>
-      <trans-unit id="78">
+      <trans-unit id="79">
         <source>48kbps</source>
         <target>48kbps</target>
       </trans-unit>
-      <trans-unit id="79">
+      <trans-unit id="80">
         <source>32kbps</source>
         <target>32kbps</target>
       </trans-unit>
-      <trans-unit id="80">
+      <trans-unit id="81">
         <source>Target format:</source>
         <target>Mērķa formāts:</target>
       </trans-unit>
-      <trans-unit id="81">
+      <trans-unit id="82">
         <source>None</source>
         <target>Neviens</target>
       </trans-unit>
-      <trans-unit id="82">
+      <trans-unit id="83">
         <source>MP3</source>
         <target>MP3</target>
       </trans-unit>
-      <trans-unit id="83">
+      <trans-unit id="84">
         <source>OGG</source>
         <target>OGG</target>
       </trans-unit>
-      <trans-unit id="84">
+      <trans-unit id="85">
         <source>Streeme Player for Mobile Webkit Enabled Phones and devices</source>
         <target>Streeme atskaņotājs priekš Mobile WebKit ieslēgtiem tālruņiem un ierīcēm.</target>
       </trans-unit>
-      <trans-unit id="85">
+      <trans-unit id="86">
         <source>Artists</source>
         <target>Izpildītāji</target>
       </trans-unit>
-      <trans-unit id="86">
+      <trans-unit id="87">
         <source>Albums</source>
         <target>Albumi</target>
       </trans-unit>
-      <trans-unit id="87">
+      <trans-unit id="88">
         <source>Menu</source>
         <target>Izvēlne</target>
       </trans-unit>
-      <trans-unit id="88">
+      <trans-unit id="89">
         <source>Genres</source>
         <target>Žanri</target>
       </trans-unit>
-      <trans-unit id="89">
+      <trans-unit id="90">
         <source>Songs</source>
         <target>Dziesmas</target>
       </trans-unit>
-      <trans-unit id="90">
+      <trans-unit id="91">
         <source>Player</source>
         <target>Atskaņotājs</target>
       </trans-unit>
-      <trans-unit id="91">
+      <trans-unit id="92">
         <source>No Song Selected</source>
         <target>Neviena dziesma nav izvēlēta</target>
       </trans-unit>
-      <trans-unit id="92">
+      <trans-unit id="93">
         <source>Playlists</source>
         <target>Atskaņošanas saraksti</target>
       </trans-unit>
-      <trans-unit id="93">
+      <trans-unit id="94">
         <source>Playing</source>
         <target>Šobrīd atskaņo</target>
       </trans-unit>
-      <trans-unit id="94">
+      <trans-unit id="95">
         <source>Newest Songs</source>
         <target>Jaunākās dziesmas</target>
       </trans-unit>
-      <trans-unit id="95">
+      <trans-unit id="96">
         <source>Shuffle All Songs</source>
         <target>Jaukt visas dziesmas</target>
       </trans-unit>
-      <trans-unit id="96">
+      <trans-unit id="97">
         <source>Are you sure you want to quit the Streeme mobile application?</source>
         <target>Vai jūs tiešām vēlaties pamest Streeme mobilo aplikāciju?</target>
       </trans-unit>
-      <trans-unit id="97">
+      <trans-unit id="98">
         <source>Please enter the keywords to search</source>
         <target>Lūdzu ievadiet atslēgas vārdus, lai meklētu</target>
       </trans-unit>
-      <trans-unit id="98">
+      <trans-unit id="99">
         <source>All Artists</source>
         <target>Visi izpildītāji</target>
       </trans-unit>
-      <trans-unit id="99">
+      <trans-unit id="100">
         <source>All Albums</source>
         <target>Visi albumi</target>
       </trans-unit>
-      <trans-unit id="100">
+      <trans-unit id="101">
         <source>Genre</source>
         <target>Žanrs</target>
       </trans-unit>
-      <trans-unit id="101">
+      <trans-unit id="102">
         <source>Song</source>
         <target>Dziesma</target>
       </trans-unit>
-      <trans-unit id="102">
+      <trans-unit id="103">
         <source>Playlist</source>
         <target>Atskaņošanas saraksts</target>
       </trans-unit>
-      <trans-unit id="103">
+      <trans-unit id="104">
         <source>Home</source>
         <target>Sākums</target>
       </trans-unit>
-      <trans-unit id="104">
-        <source>You don't have the required permission to access this page.</source>
-        <target>Jums nav vajadzīgo atļauju, lai piekļūt šai lapai.</target>
-      </trans-unit>
       <trans-unit id="105">
-        <source>Streeme: Please sign in</source>
-        <target>Streeme: Autorizācija</target>
+        <source>Streeme: Welcome</source>
+        <target>Streeme: Laipni lūdzam</target>
       </trans-unit>
       <trans-unit id="106">
-        <source>Please sign in to continue</source>
-        <target>Lūdzu, autorizējaties, lai turpinātu</target>
+        <source>Use the following links to setup your application</source>
+        <target>Izmantojiet sekojošās saites, lai iestatītu savu aplikāciju</target>
       </trans-unit>
       <trans-unit id="107">
-        <source>Please Sign In</source>
-        <target>Autorizācija</target>
+        <source>Use the options below to configure your Streeme app on the web. Each of these tools also describe how to do similar operations on the commandline.</source>
+        <target>Izmantojiet opcijas, lai nokonfigurētu savu Streeme app tīmeklī. Katrs no šiem instrumentiem arī paskaidro, kā veikt līdzīgas operācijas komandrindā.</target>
       </trans-unit>
       <trans-unit id="108">
+        <source>Setup Your Database</source>
+        <target>Iestatīt datu bāzi</target>
+      </trans-unit>
+      <trans-unit id="109">
+        <source>Manage Your Users</source>
+        <target>Pārvaldīt lietotājus</target>
+      </trans-unit>
+      <trans-unit id="110">
+        <source>Configure Your Application</source>
+        <target>Konfigurēt aplikāciju</target>
+      </trans-unit>
+      <trans-unit id="111">
+        <source>Run a Media Scan</source>
+        <target>Palaist mediju skenēšanu</target>
+      </trans-unit>
+      <trans-unit id="112">
+        <source>Streeme: Application Configuration</source>
+        <target>Streeme: Aplikācijas konfigurēšana</target>
+      </trans-unit>
+      <trans-unit id="113">
+        <source>Please configure your application preferences</source>
+        <target>Lūdzu, nokonfigurējiet aplikācijas uzstādījumus</target>
+      </trans-unit>
+      <trans-unit id="114">
+        <source>Use this tool to configure your application settings for Streeme. If you're unsure about a setting, please check the &lt;a href="http://code.google.com/p/streeme/wiki/InstallingStreeme#Configure_Streeme"&gt;Streeme wiki&lt;/a&gt; for more details.</source>
+        <target>Izmantojiet šo rīku, lai nokonfigurētu Streeme aplikācijas iestatījumus. Ja neesat pārliecināti par iestatījumiem, lūdzu, pārbaudiet &lt;a href="http://code.google.com/p/streeme/wiki/InstallingStreeme#Configure_Streeme"&gt;Streeme wiki&lt;/a&gt;, lai saņemtu sīkāku informāciju.</target>
+      </trans-unit>
+      <trans-unit id="115">
+        <source>The following form will create or edit the following file, which you may edit at any time using a text editor or by re-running this setup script.</source>
+        <target>Sekojošā forma izveidos vai rediģēs šo failu, kuru jūs varat rediģēt jebkurā laikā, izmantojot teksta redaktoru vai atkārtoti palaižot šo iestatīšanas skriptu.</target>
+      </trans-unit>
+      <trans-unit id="116">
+        <source>Warning: this action will replace your current app.yml file including an custom settings. Proceed with setup?</source>
+        <target>Brīdinājums: šī darbība aizstās pašreizējo app.yml failu ieskaitot pielāgotos iestatījumus. Turpināt iestatīšanu?</target>
+      </trans-unit>
+      <trans-unit id="117">
+        <source>Could not write the config file, please verify that the web server has sufficient access rights to edit apps/client/config/app.yml</source>
+        <target>Nevarēja ierakstīt config failā, lūdzu, pārbaudiet vai web serverim ir pietiekamas piekļuves tiesības rediģēt apps/client/config/app.yml</target>
+      </trans-unit>
+      <trans-unit id="118">
+        <source>Could not clear the application cache, please ensure the web server has sufficient rights to read and write cache and log.</source>
+        <target>Nevarēja iztīrīt aplikācijas kešatmiņu, lūdzu, pārliecinieties vai web serverim ir pietiekamas tiesības, lai lasītu un rakstītu kešatmiņu un log failus.</target>
+      </trans-unit>
+      <trans-unit id="119">
+        <source>The indexer could not be started. If you have strict permissions set on mysql, please run the command "symfony mysql initialize" from the commandline as a privileged user.</source>
+        <target>Indeksāciju nevarēja palaist. Ja jums ir stingri noteiktas atļaujas iekš MySQL, lūdzu, palaidiet komandu "symfony mysql initialize" no komandrindas ar priviliģētu lietotāju.</target>
+      </trans-unit>
+      <trans-unit id="120">
+        <source>Finish Setup</source>
+        <target>Pabeidziet iestatīšanu</target>
+      </trans-unit>
+      <trans-unit id="121">
+        <source>Streeme: Database Configuration</source>
+        <target>Streeme: Datu bāzes konfigurēšana</target>
+      </trans-unit>
+      <trans-unit id="122">
+        <source>Please configure your database connections</source>
+        <target>Lūdzu, nokonfigurējiet datu bāzes savienojumus</target>
+      </trans-unit>
+      <trans-unit id="123">
+        <source>Database Configuration</source>
+        <target>Datu bāzes konfigurēšana</target>
+      </trans-unit>
+      <trans-unit id="124">
+        <source>Set up your database by filling in the form below. We recommend using the SQLite with the default settings. &lt;strong&gt;If you have a large library of 10000 songs or more&lt;/strong&gt;, you should download and install MySQL and fill in the appropriate fields. Streeme supports Sqlite, MySQL and PostgreSQL.</source>
+        <target>Izveidot savu datu bāzi, aizpildot zemāk esošo formu. Mēs iesakām izmantot SQLite ar noklusējuma iestatījumiem. &lt;strong&gt;Ja jums ir liela bibliotēka ar 10000 dziesmām vai vairāk&lt;/strong&gt;, jums vajadzētu lejupielādēt un instalēt MySQL, kā arī aizpildīt attiecīgos laukus. Streeme atbalsta SQLite, MySQL un PostgreSQL.</target>
+      </trans-unit>
+      <trans-unit id="125">
+        <source>This action will completely overwrite any current datbase configurations and re-initialize the database. Proceed with setup?</source>
+        <target>Šī darbība pārrakstīs visu esošo datu bāzes konfigurāciju un atkārtoti inicializēs datu bāzi. Turpināt iestatīšanu?</target>
+      </trans-unit>
+      <trans-unit id="126">
+        <source>Could not write the config file, please verify that the web server has sufficient access rights to edit config/databases.yml</source>
+        <target>Nevarēja ierakstīt config failā, lūdzu, pārbaudiet vai web serverim ir pietiekamas piekļuves tiesības rediģēt config/databases.yml</target>
+      </trans-unit>
+      <trans-unit id="127">
+        <source>The database failed to respond or is misconfigured. Please try your settings again. You can also consult the log/client_dev.log file for more information</source>
+        <target>Datu bāze nav atbildējusi, vai ir nepareizi nokonfigurēta. Lūdzu, mēģiniet iestatīt vēlreiz. Jūs varat aplūkot log/client_dev.log failu, lai iegūtu plašāku informāciju</target>
+      </trans-unit>
+      <trans-unit id="128">
+        <source>Save and Continue</source>
+        <target>Saglabāt un turpināt</target>
+      </trans-unit>
+      <trans-unit id="129">
+        <source>Skip This Step</source>
+        <target>Izlaist šo soli</target>
+      </trans-unit>
+      <trans-unit id="130">
+        <source>Streeme: Media Scan</source>
+        <target>Streeme: Mediju skenēšana</target>
+      </trans-unit>
+      <trans-unit id="131">
+        <source>Use this tool to scan your media</source>
+        <target>Izmantojiet šo rīku, lai skenētu mediju failus</target>
+      </trans-unit>
+      <trans-unit id="132">
+        <source>Scan Your Media</source>
+        <target>Noskenēt mediju failus</target>
+      </trans-unit>
+      <trans-unit id="133">
+        <source>Now that your settings are complete, you may begin scanning your media using the contols below.</source>
+        <target>Tagad, kad iestatīšana ir pabeigta, jūs varat sākt skenēt mediju failus izmantojot kontroles zemāk.</target>
+      </trans-unit>
+      <trans-unit id="134">
+        <source>If the scan fails to work, you may return to the settings start page to try configuring your app again or check the logs for setup errors. You may also run this process using the commandline by issuing the following commands</source>
+        <target>Ja skenēšana nedarbojas, jūs varat atgriezties pie uzstādījumu starta lapas, lai konfigurētu savu app vēlreiz vai arī pārbaudiet uzstādīšanas kļūdas log failos. Jūs varat palaist šo procesu, izmantojot komandrindu, uzdodot šādu komandu</target>
+      </trans-unit>
+      <trans-unit id="135">
+        <source>Media scanned successfully</source>
+        <target>Mediju faili tika noskenēti</target>
+      </trans-unit>
+      <trans-unit id="136">
+        <source>Media could not be scanned</source>
+        <target>Mediju faili netika noskenēti</target>
+      </trans-unit>
+      <trans-unit id="137">
+        <source>Scan media now</source>
+        <target>Skenēt mediju failus</target>
+      </trans-unit>
+      <trans-unit id="138">
+        <source>Streeme: User Management</source>
+        <target>Streeme: Lietotāju pārvaldīšana</target>
+      </trans-unit>
+      <trans-unit id="139">
+        <source>Please configure your user accounts</source>
+        <target>Lūdzu, nokonfigurējiet lietotāju kontus</target>
+      </trans-unit>
+      <trans-unit id="140">
+        <source>Account Configuration</source>
+        <target>Kontu konfigurēšana</target>
+      </trans-unit>
+      <trans-unit id="141">
+        <source>Set up your users in the form below. Note that users do not have separate media libraries in Streeme. Any users you add here will be able to access all of your scanned music, playlists and album art, so use this tool wisely. If you want to install Streeme for separate libraries, consider running another streeme instance on a different set of ports.</source>
+        <target>Izveidot savus lietotājus ar zemāk esošo formu. Ievērojiet, ka lietotājiem nav atsevišķas mediju bibliotēkas iekš Streeme. Izveidotie lietotāji varēs piekļūt visam - jūsu skenētajai mūzikai, dziesmu sarakstiem un albumu noformējumiem, tādēļ izmantojiet šo rīku gudri. Ja jūs vēlaties instalēt Streeme atsevišķām bibliotēkām, apdomājiet iespēju palaist citu Streeme instanci uz citiem portiem.</target>
+      </trans-unit>
+      <trans-unit id="142">
+        <source>The User was not added due to an error. You can consult the log/client_dev.log file for more information</source>
+        <target>Lietotājs netika pievienots kļūdas dēļ. Jūs varat aplūkot log/client_dev.log failu, lai iegūtu plašāku informāciju</target>
+      </trans-unit>
+      <trans-unit id="143">
+        <source>The User was not deleted due to an error. You can consult the log/client_dev.log file for more information</source>
+        <target>Lietotājs netika izdzēsts kļūdas dēļ. Jūs varat aplūkot log/client_dev.log failu, lai iegūtu plašāku informāciju</target>
+      </trans-unit>
+      <trans-unit id="144">
+        <source>Form Invalid. Please ensure cookies are turned on.</source>
+        <target>Nederīga forma. Lūdzu pārliecinieties vai sīkdatnes ir ieslēgtas.</target>
+      </trans-unit>
+      <trans-unit id="145">
+        <source>Media Library Type</source>
+        <target>Mediju bibliotēkas tips</target>
+      </trans-unit>
+      <trans-unit id="146">
+        <source>Itunes XML File Path</source>
+        <target>Itunes XML faila ceļš</target>
+      </trans-unit>
+      <trans-unit id="147">
+        <source>Add Media Folders</source>
+        <target>Pievienot mediju failus</target>
+      </trans-unit>
+      <trans-unit id="148">
+        <source>Add one path to watch per line. If you are using iTunes, you can leave this area blank.</source>
+        <target>Uz vienu rindiņu pievienot vienu pārlūkošanas ceļu. Ja jūs izmantojat iTunes, jūs varat atstāt šo lauku tukšu.</target>
+      </trans-unit>
+      <trans-unit id="149">
+        <source>Use Transcoding?</source>
+        <target>Izmantot pārkodēšanu?</target>
+      </trans-unit>
+      <trans-unit id="150">
+        <source>FFMPEG executable</source>
+        <target>FFMPEG izpildāmā programma</target>
+      </trans-unit>
+      <trans-unit id="151">
+        <source>Items per Page</source>
+        <target>Vienumi vienā lapā</target>
+      </trans-unit>
+      <trans-unit id="152">
+        <source>Enable Palm Pre Support?</source>
+        <target>Iespējot Palm Pre atbalstu?</target>
+      </trans-unit>
+      <trans-unit id="153">
+        <source>Enable indexing (for media libraries over 10k items)</source>
+        <target>Iespējot indeksāciju (mediju bibliotēkām ar vairāk nekā 10K vienumiem)</target>
+      </trans-unit>
+      <trans-unit id="154">
+        <source>Add Setup IPs</source>
+        <target>Pievienot uzstādīšanas IP</target>
+      </trans-unit>
+      <trans-unit id="155">
+        <source>These setup screens may only be accessed by the following IP addresses - excluding 127.0.0.1</source>
+        <target>Šie uzstādīšanas ekrāni ir pieejami tikai ar šādām IP adresēm - izņemot 127.0.0.1</target>
+      </trans-unit>
+      <trans-unit id="156">
+        <source>Database Engine</source>
+        <target>Datu bāzes dzinējs</target>
+      </trans-unit>
+      <trans-unit id="157">
+        <source>Database Hostname/IP</source>
+        <target>Datu bāzes resursdators/IP</target>
+      </trans-unit>
+      <trans-unit id="158">
+        <source>Database Port Number</source>
+        <target>Datu bāzes porta numurs</target>
+      </trans-unit>
+      <trans-unit id="159">
+        <source>Database Name</source>
+        <target>Datu bāzes nosaukums</target>
+      </trans-unit>
+      <trans-unit id="160">
+        <source>Database Username</source>
+        <target>Datu bāzes lietotājvārds</target>
+      </trans-unit>
+      <trans-unit id="161">
+        <source>Database Password</source>
+        <target>Datu bāzes parole</target>
+      </trans-unit>
+      <trans-unit id="162">
+        <source>Database File Path</source>
+        <target>Datu bāzes faila ceļš</target>
+      </trans-unit>
+      <trans-unit id="163">
+        <source>Warning! This action will permanently remove users from the Database</source>
+        <target>Brīdinājums! Šī darbība neatgriezeniski izdzēsīs lietotājus no datu bāzes</target>
+      </trans-unit>
+      <trans-unit id="164">
+        <source>Action</source>
+        <target>Darbība</target>
+      </trans-unit>
+      <trans-unit id="165">
         <source>Username</source>
         <target>Lietotājvārds</target>
       </trans-unit>
-      <trans-unit id="109">
+      <trans-unit id="166">
         <source>Password</source>
         <target>Parole</target>
       </trans-unit>
-      <trans-unit id="110">
+      <trans-unit id="167">
+        <source>Confirm Password</source>
+        <target>Apstipriniet paroli</target>
+      </trans-unit>
+      <trans-unit id="168">
+        <source>You don't have the required permission to access this page.</source>
+        <target>Jums nav vajadzīgo atļauju, lai piekļūtu šai lapai.</target>
+      </trans-unit>
+      <trans-unit id="169">
+        <source>Streeme: Please sign in</source>
+        <target>Streeme: Autorizācija</target>
+      </trans-unit>
+      <trans-unit id="170">
+        <source>Please sign in to continue</source>
+        <target>Lūdzu, autorizējaties, lai turpinātu</target>
+      </trans-unit>
+      <trans-unit id="171">
+        <source>Please Sign In</source>
+        <target>Autorizācija</target>
+      </trans-unit>
+      <trans-unit id="172">
+        <source>Invalid username or password.</source>
+        <target>Nederīgs lietotājvārds vai parole.</target>
+      </trans-unit>
+      <trans-unit id="173">
         <source>Remember me</source>
         <target>Atcerēties mani</target>
       </trans-unit>
-      <trans-unit id="111">
+      <trans-unit id="174">
         <source>Sign in</source>
         <target>Ienākt</target>
       </trans-unit>
     </body>
   </file>
 </xliff>
+
